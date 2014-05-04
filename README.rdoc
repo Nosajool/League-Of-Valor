@@ -1,3 +1,0 @@
-
-
-This is a revival of the old Vion Genesis using PHP and MySQL to now use Ruby on Rails
