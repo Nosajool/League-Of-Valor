@@ -1,14 +1,78 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	  <title><%= full_title(yield(:title)) %></title>
-	  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	  <%= csrf_meta_tags %>
-	</head>
-	<body>
 
-	<%= yield %>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
 
-	</body>
+
+
+    <!-- This is used for making the site be responsive to the device screen size -->
+    <meta name ="viewport" content = "width=device-width, initial-scale=1.0">
+
+
+
+    <!-- Rails linking of stylesheets, javascript, csrf meta tags -->
+    <%= stylesheet_link_tag "application", media: "all",
+                                           "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+
+
+    <!-- IE 9 code -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+
+
+
+
+  <body>
+
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <%= link_to "Vion Genesis", '#', id: "logo" %>
+
+
+        <!-- Gives you 3 lines for the mobile menu -->
+        <button class="navbar-toggle" data-toggle = "collapse" data-target = ".navHeaderCollapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+
+        <!-- Navbar right side menu -->
+        <div class="collapse navbar-collapse navHeaderCollapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "Home",       '#' %></li>
+            <li><%= link_to "Log in",     '#' %></li>
+            <li><%= link_to "Sign up",    '#' %></li>
+            <li><%= link_to "Forums",     '#' %></li>
+            <li><%= link_to "Contact Us", '#' %></lines>
+          </ul>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class="container">
+      <%= yield %>
+    </div>
+
+    <!-- Footer -->
+    <div class="navbar navbar-fixed-bottom navbar-inverse">
+      
+      <div class="container">
+        <p class = "navbar-text pull-left">Site built by Jason Loo</p>
+        <%= link_to "Sign Up Now", '#', class: "navbar-btn btn-success btn pull-right" %>
+      </div>
+    </div>
+
+  </body>
+
+
+
 </html>
