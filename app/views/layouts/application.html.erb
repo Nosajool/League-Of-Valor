@@ -31,6 +31,13 @@
 
 
     <div class="container">
+      <!-- Flash Error messages -->
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
+
+      <!-- Main Code for each page goes here -->
       <%= yield %>
     </div>
 
