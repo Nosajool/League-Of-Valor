@@ -43,6 +43,9 @@ textarea {
 .jumbotron {
   background-color: $contentCol;
   color: white;
+  input{
+    color: black;
+  }
 }
 
 /* typography */
