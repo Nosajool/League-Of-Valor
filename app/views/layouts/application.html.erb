@@ -31,12 +31,25 @@
 
 
     <div class="container">
+      <!-- Flash Error messages -->
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"><%= value %></div>
+      <% end %>
+
+
+      <!-- Main Code for each page goes here -->
       <%= yield %>
     </div>
 
     <%= render 'layouts/footer' %>
   <!-- Add some break lines so that bottom image doesn't get cut off -->
   <br><br><br><br>
+
+
+
+  <div class="container">
+    <%= debug(params) if Rails.env.development? %>
+  </div>
   </body>
 
 
