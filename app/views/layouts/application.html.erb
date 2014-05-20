@@ -45,29 +45,22 @@
 
           <!-- The Left Menu  -->
           <div class="col-xs-2">
-            <div class="jumbotron jumboBG">
-              <div class="jumbotron sidebar">
-               <%= render 'layouts/left' %>                
-              </div>
-
+            <div class="jumbotron sidebar">
+             <%= render 'layouts/left' %>                
             </div>
           </div>
 
           <!-- Center where the page content is -->
           <div class="col-xs-8">
-            <div class="jumbotron jumboBG">
-              <div class="jumbotron">
+            <div class="jumbotron">
                 <%= yield %>
-              </div>
             </div>
           </div>
 
           <!-- The Right Menu -->
           <div class="col-xs-2">
-            <div class="jumbotron jumboBG">
-              <div class="jumbotron sidebar">
-                <%= render 'layouts/right' %>
-              </div>
+            <div class="jumbotron sidebar">
+              <%= render 'layouts/right' %>
             </div>
           </div>
         <% end %>
