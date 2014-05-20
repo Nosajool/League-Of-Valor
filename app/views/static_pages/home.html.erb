@@ -5,20 +5,25 @@
 
 
   <h2>
-  	Reborn from <%= link_to "Vion Gensis V 0.45", root_path %>
+  	Reborn from <%= link_to "Vion Gensis V 0.45", "http://ex5thgen.comyr.com" %>
   </h2>
-  <%= link_to "Log in!", '#', class: "btn btn-large btn-primary" %>
+  <%= link_to "Log in!", signin_path, class: "btn btn-large btn-primary" %>
   <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-success" %>
 </div>
 
-<div class="jumbotron text-center">
-  <%= render 'static_pages/curpatch' %>
+<div class="row">
+  <div class="col-xs-6">
+    <div class="jumbotron">
+      <%= render 'static_pages/curpatch' %>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <div class="jumbotron">
+      <%= render 'static_pages/pastpatch' %>
+    </div>
+  </div>
 </div>
 
 
-<div class="jumbotron text-center">
-  <%= render 'static_pages/pastpatch' %>
-</div>
 
-
-<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+<%= link_to image_tag("rails.png", alt: "Old VGRPG"), 'http://ex5thgen.comyr.com/' %>

@@ -7,6 +7,7 @@ $maroon: #800000;
 $contentCol: #5e5e5e; // Gray
 $grayLighter: #d3d3d3;
 $grayDarker: #a9a9a9;
+$titleCol: #BB0000; // Kind of Red
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -93,19 +94,24 @@ p {
     text-decoration: none;
   }
 }
-/* Left */
-#left { 
-	background-color: black;
-	border: 1px solid #00ck0000;
-	width: 145px;
-	float: left;
-	border-top-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	div {
-		background-color: $contentCol;
-	}
+
+/* Left/Right Menus */
+// Screw you jumbotron paddingpriorities
+.sidebar{
+  text-align: center;
+  padding-left: 0em       !important;
+  padding-right: 0em      !important;
+  padding-top: 0.5em        !important;
+  padding-bottom: 0.5em     !important;
+  div{
+    background-color: $titleCol;
+  }
 }
 
+.jumboBG{
+  background-color: black   !important;
+  padding: 0.5em            !important;
+}
 /* footer */
 
 footer {

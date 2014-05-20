@@ -7,7 +7,7 @@
 
 
     <!-- This is used for making the site be responsive to the device screen size -->
-    <meta name ="viewport" content = "width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 
@@ -35,10 +35,45 @@
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
       <% end %>
+      <div class="row">
+        <% unless signed_in? %>
+          <!-- Insert the Content for the non-signed in users -->
+          <%= yield %>
 
+        <% else %>
+          <!-- For signed in users, they get to see the 3 columns with an auto jumbotron for the middle -->
 
-      <!-- Main Code for each page goes here -->
-      <%= yield %>
+          <!-- The Left Menu  -->
+          <div class="col-xs-2">
+            <div class="jumbotron jumboBG">
+              <div class="jumbotron sidebar">
+               <%= render 'layouts/left' %>                
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Center where the page content is -->
+          <div class="col-xs-8">
+            <div class="jumbotron jumboBG">
+              <div class="jumbotron">
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+
+          <!-- The Right Menu -->
+          <div class="col-xs-2">
+            <div class="jumbotron jumboBG">
+              <div class="jumbotron sidebar">
+                <%= render 'layouts/right' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+      <!-- End of row -->
+      </div>
     </div>
 
     <%= render 'layouts/footer' %>
