@@ -7,6 +7,8 @@ $maroon: #800000;
 $contentCol: #5e5e5e; // Gray
 $grayLighter: #d3d3d3;
 $grayDarker: #a9a9a9;
+$titleCol: #BB0000; // Kind of Red
+$linkCol: #181818; //Another Gray
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -40,7 +42,11 @@ textarea {
   }
 }
 
+
 .jumbotron {
+  border-style:solid;
+  border-width: 0.5em;
+  border-color: black;
   background-color: $contentCol;
   color: white;
   input{
@@ -93,18 +99,44 @@ p {
     text-decoration: none;
   }
 }
-/* Left */
-#left { 
-	background-color: black;
-	border: 1px solid #00ck0000;
-	width: 145px;
-	float: left;
-	border-top-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-	div {
-		background-color: $contentCol;
-	}
+
+/* Left/Right Menus */
+// Screw you jumbotron paddingpriorities
+.sidebar{
+  text-align: center;
+  padding: 0em       !important;
+  margin: 0em        !important;
+  font-size: 0.85em; 
+  font-weight: bold;
+  li{
+    a{
+      // Finally got the link padding issue sorted out
+      padding: 0em;
+    }
+  }
+  a:link, a:visited, a:active {
+    color: $linkCol;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $maroon;
+    text-decoration: underline;
+  }
+  div{
+    background-color: $titleCol;
+    border-bottom-style: solid;
+    border-width: 0.5em;
+    border-color: black;
+  }
 }
+
+
+.notTop{
+  border-top-style: solid;
+}
+
+
 
 /* footer */
 
