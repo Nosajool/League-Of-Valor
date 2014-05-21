@@ -16,7 +16,7 @@
     <!-- Navbar right side menu -->
     <div class="collapse navbar-collapse navHeaderCollapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",       root_path %></li>
+
 
         <!-- Signed in -->
         <% if signed_in? %>
@@ -34,7 +34,8 @@
 
         <!-- Not signed in -->
         <% else %>
-          <li><%= link_to "Log in",     '#' %></li>
+          <li><%= link_to "Home",       root_path %></li>
+          <li><%= link_to "Log in",     signin_path %></li>
           <li><%= link_to "Sign up",    signup_path %></li>
           <li><%= link_to "Forums",     '#' %></li>
            <li class="dropdown">
