@@ -8,6 +8,7 @@ $contentCol: #5e5e5e; // Gray
 $grayLighter: #d3d3d3;
 $grayDarker: #a9a9a9;
 $titleCol: #BB0000; // Kind of Red
+$linkCol: #181818; //Another Gray
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -103,14 +104,29 @@ p {
 .sidebar{
   text-align: center;
   padding: 0em       !important;
+  font-size: 0.85em; 
+  font-weight: bold;
+  a:link, a:visited, a:active {
+    color: $linkCol;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $maroon;
+    text-decoration: underline;
+  }
   div{
     background-color: $titleCol;
-    border-top-style: solid;
     border-bottom-style: solid;
     border-width: 0.5em;
     border-color: black;
   }
 }
+.notTop{
+  border-top-style: solid;
+}
+
+
 
 /* footer */
 

@@ -2,4 +2,6 @@
 
 I decided to attempt to recreate [*Vion Genesis*](http://ex5thgen.comyr.com) using [*Ruby on Rails*](http://rubyonrails.org)
 
-Fix the bottom of the jumbotron padding
+Right Navbar
+Top titleBar
+Link color
