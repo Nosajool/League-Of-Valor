@@ -42,6 +42,7 @@ textarea {
   }
 }
 
+
 .jumbotron {
   border-style:solid;
   border-width: 0.5em;
@@ -104,8 +105,15 @@ p {
 .sidebar{
   text-align: center;
   padding: 0em       !important;
+  margin: 0em        !important;
   font-size: 0.85em; 
   font-weight: bold;
+  li{
+    a{
+      // Finally got the link padding issue sorted out
+      padding: 0em;
+    }
+  }
   a:link, a:visited, a:active {
     color: $linkCol;
     text-decoration: none;
@@ -122,6 +130,8 @@ p {
     border-color: black;
   }
 }
+
+
 .notTop{
   border-top-style: solid;
 }
