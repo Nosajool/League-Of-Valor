@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	# Force all usernames and emails to be lowercase when entered into the database
+	# Force all emails to be lowercase when entered into the database
 	before_save { self.name = name.downcase }
 	before_save { self.email = email.downcase }
 	before_create :create_remember_token
