@@ -3,6 +3,8 @@
       
   <div class="container">
     <p class = "navbar-text pull-left">Site built by Jason Loo</p>
-    <%= link_to "Sign Up Now", '#', class: "navbar-btn btn-success btn pull-right" %>
+    <% unless signed_in? %>
+    	<%= link_to "Sign Up Now", '#', class: "navbar-btn btn-success btn pull-right" %>
+    <% end %>
   </div>
 </div>
