@@ -34,6 +34,11 @@ describe "AuthenticationPages" do
 			it { should have_link('Sign out',    href: signout_path) }
 			it { should_not have_link('Sign in', href: signin_path) }
 
+			describe "trying to access root_url" do
+				before { visit root_path }
+				it { should have_title(user.username) }
+			end
+
 			describe "followed by signout" do
 				before { click_link "Sign out" }
 				it { should have_link('Sign in') }
