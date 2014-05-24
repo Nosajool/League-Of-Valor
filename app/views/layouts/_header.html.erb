@@ -2,7 +2,9 @@
 
 <div class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "Vion Genesis", root_path, id: "logo" %>
+    <!-- Ternary operator op -->
+    <% homeLink = signed_in? ? current_user : root_path %>
+    <%= link_to "Vion Genesis", homeLink, id: "logo" %>
 
 
     <!-- Gives you 3 lines for the mobile menu -->
@@ -20,12 +22,12 @@
 
         <!-- Signed in -->
         <% if signed_in? %>
-          <li><%= link_to "Users", '#' %></li>
+          <li><%= link_to "Users", users_path %></li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", '#' %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
             </ul>
@@ -35,7 +37,7 @@
         <!-- Not signed in -->
         <% else %>
           <li><%= link_to "Home",       root_path %></li>
-          <li><%= link_to "Log in",     signin_path %></li>
+          <li><%= link_to "Sign in",     signin_path %></li>
           <li><%= link_to "Sign up",    signup_path %></li>
           <li><%= link_to "Forums",     '#' %></li>
            <li class="dropdown">
