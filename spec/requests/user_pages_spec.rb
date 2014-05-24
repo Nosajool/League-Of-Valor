@@ -30,7 +30,7 @@ describe "User pages" do
 
 		it "should list each user" do
 			User.all.each do |user|
-				expect(page).to have_selector('li', text: user.username.downcase)
+				expect(page).to have_selector('li', text: user.username)
 			end
 		end
 	end
@@ -115,10 +115,10 @@ describe "User pages" do
 				click_button "Save changes"
 			end
 
-			it { should have_title(new_name.downcase) }
+			it { should have_title(new_name) }
 			it { should have_selector('div.alert.alert-success') }
 			it { should have_link('Sign out', href: signout_path) }
-			specify { expect(user.reload.username).to eq new_name.downcase }
+			specify { expect(user.reload.username).to eq new_name }
 			specify { expect(user.reload.email).to eq new_email }
 		end
 	end

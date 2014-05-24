@@ -35,7 +35,7 @@ describe "AuthenticationPages" do
 			it { should_not have_link('Sign in', href: signin_path) }
 
 			describe "trying to access root_url" do
-				visit root_url
+				before { visit root_path }
 				it { should have_title(user.username) }
 			end
 
