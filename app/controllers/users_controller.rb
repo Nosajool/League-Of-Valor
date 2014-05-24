@@ -38,14 +38,14 @@ class UsersController < ApplicationController
 
 	private
 		def user_params
-			params.require(:user).permit(:name, :email, :password, :password_confirmation)
+			params.require(:user).permit(:username, :email, :password, :password_confirmation)
 		end
 
 		# Before Filters 
 		def signed_in_user
 			unless signed_in?
-				store_location
-				redirect_to signin_url, notice: "Please sign in."
+ 				flash[:danger] = "Please sign in."
+  				redirect_to signin_url
 			end
 		end
 
