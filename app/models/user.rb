@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+ class User < ActiveRecord::Base
 	# Force all emails to be lowercase when entered into the database
 	before_save { self.username = username.downcase }
 	before_save { self.email = email.downcase }

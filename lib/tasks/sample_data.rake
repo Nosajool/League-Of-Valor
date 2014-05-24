@@ -5,7 +5,7 @@ namespace :db do
                  email: "example@railstutorial.org",
                  password: "foobar",
                  password_confirmation: "foobar")
-    99.times do |n|
+    25.times do |n|
       username  = Faker::Internet.user_name
       email = Faker::Internet.safe_email
       password  = "password"
