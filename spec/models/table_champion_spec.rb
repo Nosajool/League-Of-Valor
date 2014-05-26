@@ -22,4 +22,25 @@ describe TableChampion do
 	it { should respond_to(:magic_resist) }
 	it { should respond_to(:role) }
 	it { should respond_to(:catch_rate) }
+
+	it { should be_valid }
+
+	describe "when champ_name is not present" do
+		before { @table_champion.champ_name = " " }
+		it { should_not be_valid }
+	end
+
+	describe "when health is too high" do
+		it "should be invalid" do
+			@table_champion.health = 300
+			expect(@table_champion).not_to be_valid
+		end
+	end
+
+	describe "when given a role not on the list" do
+		it "should be invalid" do
+			@table_champion.role = "Caster"
+			expect(@table_champion).not_to be_valid
+		end
+	end
 end
