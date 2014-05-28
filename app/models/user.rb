@@ -8,7 +8,9 @@
 	# Validate the username. Rails infers that :uniqueness is true when you use { case_sensitive: false }
 	# Ensuring that the username is case insensitive unique ensures that the downcase version is also case
 	# insensitive and unique
-	validates(:username, presence: true, length: { maximum: 50 }, uniqueness: { case_sensitive: false } )
+	validates(:username, presence: true, 
+						 length: { maximum: 50 }, 
+						 uniqueness: { case_sensitive: false } )
 
 	# Validate the email address using regular expressions
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

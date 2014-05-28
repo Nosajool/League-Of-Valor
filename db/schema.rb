@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140524214652) do
+ActiveRecord::Schema.define(version: 20140528050439) do
+
+  create_table "table_champions", force: true do |t|
+    t.string   "champ_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "health"
+    t.integer  "attack_damage"
+    t.integer  "ability_power"
+    t.integer  "armor"
+    t.integer  "magic_resist"
+    t.string   "role"
+    t.integer  "catch_rate"
+    t.integer  "range"
+  end
 
   create_table "users", force: true do |t|
     t.string   "username"

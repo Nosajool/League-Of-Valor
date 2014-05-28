@@ -24,4 +24,4 @@ def secure_token
   end
 end
 
-VionGenesis::Application.config.secret_key_base = secure_token
+LeagueOfValor::Application.config.secret_key_base = secure_token
