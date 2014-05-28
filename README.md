@@ -1,7 +1,4 @@
-# Vion Genesis in Ruby on Rails
-
-I decided to attempt to recreate [*Vion Genesis*](http://ex5thgen.comyr.com) using [*Ruby on Rails*](http://rubyonrails.org)
-
+# League of Valor in Ruby on Rails
 
 **Old VGRPG +LOL**
 Eons => Champions

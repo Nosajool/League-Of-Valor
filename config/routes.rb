@@ -1,4 +1,4 @@
-VionGenesis::Application.routes.draw do
+LeagueOfValor::Application.routes.draw do
   get "table_champions/show"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]

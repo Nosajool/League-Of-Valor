@@ -1,5 +1,5 @@
 def full_title(page_title)
-	base_title = "Vion Genesis"
+	base_title = "League of Valor"
 	if page_title.empty?
 		base_title
 	else
