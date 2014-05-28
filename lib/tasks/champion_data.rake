@@ -16,7 +16,8 @@ namespace :db do
         armor: row[4],
         magic_resist: row[5],
         role: row[6],
-        catch_rate: row[7] } )
+        catch_rate: row[7],
+        range: row[8] } )
       puts "#{row[0]} added"
     end
   end

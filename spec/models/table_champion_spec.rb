@@ -9,7 +9,8 @@ describe TableChampion do
 											 armor: 50,
 											 magic_resist: 65,
 											 role: "Marksman",
-										 	 catch_rate: 1500 )
+										 	 catch_rate: 1500,
+										 	 range: 5 )
 	end
 
 	subject { @table_champion }
@@ -22,6 +23,7 @@ describe TableChampion do
 	it { should respond_to(:magic_resist) }
 	it { should respond_to(:role) }
 	it { should respond_to(:catch_rate) }
+	it { should respond_to(:range) }
 
 	it { should be_valid }
 
@@ -40,6 +42,13 @@ describe TableChampion do
 	describe "when given a role not on the list" do
 		it "should be invalid" do
 			@table_champion.role = "Caster"
+			expect(@table_champion).not_to be_valid
+		end
+	end
+
+	describe "when range is too high" do
+		it "should be invalid" do
+			@table_champion.range = 11
 			expect(@table_champion).not_to be_valid
 		end
 	end

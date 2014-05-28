@@ -21,4 +21,7 @@ class TableChampion < ActiveRecord::Base
 							             			  message: "%{value} is not a valid role" } )
 
 	validates(:catch_rate, 				 presence: true )
+
+	validates(:range,                    presence: true,
+										 inclusion: { in: 1..10 } )
 end
