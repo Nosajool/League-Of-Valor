@@ -4,12 +4,12 @@ describe "Static pages" do
 
   describe "Home page" do
     before { visit root_path }
-    it "should have the content 'Vion Genesis'" do
-      expect(page).to have_content('Vion Genesis')
+    it "should have the content 'League of Valor'" do
+      expect(page).to have_content('League of Valor')
     end
 
     it "should have the base title" do
-      expect(page).to have_title("Vion Genesis")
+      expect(page).to have_title("League of Valor")
     end
 
     it "should not have a custom page title" do
@@ -28,7 +28,7 @@ describe "Static pages" do
     end
 
     it "should have the title 'Help'" do
-      expect(page).to have_title("Vion Genesis | Help")
+      expect(page).to have_title("League of Valor | Help")
     end
   end
 
@@ -39,7 +39,7 @@ describe "Static pages" do
     end
 
     it "should have the title 'About Us'" do
-      expect(page).to have_title("Vion Genesis | About Us")
+      expect(page).to have_title("League of Valor | About Us")
     end
   end
 
@@ -50,7 +50,7 @@ describe "Static pages" do
     end
 
     it "should have the title 'Contact'" do
-      expect(page).to have_title("Vion Genesis | Contact")
+      expect(page).to have_title("League of Valor | Contact")
     end
   end
 end

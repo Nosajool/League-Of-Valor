@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-VionGenesis::Application.load_tasks
+LeagueOfValor::Application.load_tasks

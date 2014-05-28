@@ -1,5 +1,5 @@
 namespace :db do
-  desc "Fill database with sample data"
+  desc "Fill Users with sample data"
   task populate: :environment do
     User.create!(username: "HotshotGG",
                  email: "example@railstutorial.org",

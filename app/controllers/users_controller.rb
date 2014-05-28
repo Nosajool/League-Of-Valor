@@ -42,13 +42,6 @@ class UsersController < ApplicationController
 		end
 
 		# Before Filters 
-		def signed_in_user
-			unless signed_in?
-				store_location
- 				flash[:danger] = "Please sign in."
-  				redirect_to signin_url
-			end
-		end
 
 		def correct_user
 			@user = User.find(params[:id])
