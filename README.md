@@ -68,7 +68,8 @@ Sprites will be based on the ID number
 * Owner ID
 
 **TODO:**
-* Make usernames case insensitive. 
-* Maybe store both a downcase version and the real version of the name. 
-* You log in with username and password, it then compares your loginUsername.downcase with the username.downcase stored in the database. Don't really want to make users use email or id numbers
-* Yeah, kind of a big nuissance right now
+* New name for project. Valoran? Dawn of Demacia
+* Controller for TableChampion
+* Champion Data page using bootstrap tables hover rows condensed
+* Search by ID or search by username using routes
+* Add range to champion table
