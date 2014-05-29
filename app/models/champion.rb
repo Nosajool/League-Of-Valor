@@ -1,4 +1,8 @@
 class Champion < ActiveRecord::Base
+	belongs_to :user
+
+	validates(:user_id,                  presence: true)
+	
 	validates(:experience, 				 presence: true)
 
 	validates(:level,                    presence: true)
