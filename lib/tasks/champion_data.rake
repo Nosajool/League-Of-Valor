@@ -2,7 +2,7 @@ require 'csv'
 
 namespace :db do
 
-  desc "Import CSV Data"
+  desc "Import CSV Data for Champion Stats"
   task :champions => :environment do
 
     csv_file_path = 'app/data/champions.csv'
