@@ -118,4 +118,28 @@ describe "User pages" do
 			specify { expect(user.reload.email).to eq new_email }
 		end
 	end
+
+
+	describe "profile page" do
+		let(:user) { FactoryGirl.create(:user) }
+		let!(:c1) { FactoryGirl.create(:champion, user: user) }
+		let!(:c2) { FactoryGirl.create(:champion, user: user,
+												  table_champion_id: 3,
+												  experience: 100,
+												  level: 5,
+												  position: 3,
+												  skin: 1000000000,
+												  active_skin: 5) }
+
+		before { visit user_path(user) }
+
+		it { should have_content(user.username) }
+		it { should have_title(user.username) }
+
+		describe "champions" do
+			it { should have_content(c1.position) }
+			it { should have_content(c2.position) }
+			it { should have_content(user.champions.count) }
+		end
+	end
 end
