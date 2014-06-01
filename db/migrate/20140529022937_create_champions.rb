@@ -8,6 +8,6 @@ class CreateChampions < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :champions, [:user_id, :created_at]
+    add_index :champions, [:user_id, :table_champion_id, :created_at]
   end
 end

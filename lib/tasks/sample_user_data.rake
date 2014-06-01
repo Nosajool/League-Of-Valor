@@ -16,7 +16,7 @@ namespace :db do
     end
 
     users = User.all(limit: 6)
-    50.times do
+    25.times do
 
       users.each { |user| user.champions.create!(table_champion_id: rand(20),
                                                  experience: rand(200),

@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20140529023134) do
     t.integer  "level"
   end
 
-  add_index "champions", ["user_id", "created_at"], name: "index_champions_on_user_id_and_created_at"
+  add_index "champions", ["user_id", "table_champion_id", "created_at"], name: "index_champions"
 
   create_table "table_champions", force: true do |t|
     t.string   "champ_name"
