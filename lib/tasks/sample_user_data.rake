@@ -18,10 +18,10 @@ namespace :db do
     users = User.all(limit: 6)
     25.times do
 
-      users.each { |user| user.champions.create!(table_champion_id: rand(20),
-                                                 experience: rand(200),
-                                                 position: rand(5),
-                                                 level: rand(200),
+      users.each { |user| user.champions.create!(table_champion_id: 1 + rand(119),
+                                                 experience: 1 + rand(200),
+                                                 position: 1 + rand(5),
+                                                 level: 1 + rand(200),
                                                  skin: 1000000000,
                                                  active_skin: rand(9) ) }
     end
