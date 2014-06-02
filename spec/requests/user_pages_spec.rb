@@ -121,17 +121,30 @@ describe "User pages" do
 
 
 	describe "profile page" do
+		# Needs fixing
 		let(:user) { FactoryGirl.create(:user) }
+		let!(:tc1){ FactoryGirl.create(:table_champion) }
+		let!(:tc2){ FactoryGirl.create(:table_champion, champ_name: "Shyvanna",
+														health: 76,
+														attack_damage: 34,
+														ability_power: 43,
+														armor: 45,
+														magic_resist: 98,
+														role: "Support",
+														catch_rate: 3150,
+														range: 5) }
 		let!(:c1) { FactoryGirl.create(:champion, user: user) }
 		let!(:c2) { FactoryGirl.create(:champion, user: user,
-												  table_champion_id: 3,
+												  table_champion_id: 2,
 												  experience: 100,
 												  level: 5,
 												  position: 3,
 												  skin: 1000000000,
 												  active_skin: 5) }
-
-		before { visit user_path(user) }
+		before do
+			sign_in(user)
+			visit user_path(user)
+		end
 
 		it { should have_content(user.username) }
 		it { should have_title(user.username) }

@@ -3,8 +3,6 @@ class ChampionsController < ApplicationController
 	# Will handle catching champions
 	before_action :signed_in_user
 
-	@table_champion = @champion.table_champion
-
 	def create
 		@champion = current_user.champions.build(champion_params)
 		if @champion.save
