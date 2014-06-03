@@ -4,7 +4,8 @@ namespace :db do
     User.create!(username: "HotshotGG",
                  email: "example@railstutorial.org",
                  password: "foobar",
-                 password_confirmation: "foobar")
+                 password_confirmation: "foobar",
+                 icon: 1)
     25.times do |n|
       username  = Faker::Internet.user_name
       email = Faker::Internet.safe_email
@@ -12,7 +13,8 @@ namespace :db do
       User.create!(username: username,
                    email: email,
                    password: password,
-                   password_confirmation: password)
+                   password_confirmation: password,
+                   icon: 1 + rand(30) )
     end
 
     users = User.all(limit: 6)

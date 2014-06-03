@@ -3,9 +3,12 @@ require 'spec_helper'
 describe User do
 	tuser = "Example User"
 	before do 
-		@user = User.new(username: tuser, email: "user@example.com",
-						 password: "foobar", password_confirmation: "foobar",
-						 duser: tuser.downcase)
+		@user = User.new(username: tuser,
+						 email: "user@example.com",
+						 password: "foobar",
+						 password_confirmation: "foobar",
+						 duser: tuser.downcase, 
+						 icon: 1)
 	end
 
 	subject{ @user }
@@ -17,6 +20,7 @@ describe User do
 	it { should respond_to(:password) }
 	it { should respond_to(:password_confirmation) }
 	it { should respond_to(:remember_token) }
+	it { should respond_to(:icon) }
 	it { should respond_to(:authenticate) }
 
 	it { should respond_to(:champions) }
