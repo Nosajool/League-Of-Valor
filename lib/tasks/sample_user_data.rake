@@ -14,5 +14,16 @@ namespace :db do
                    password: password,
                    password_confirmation: password)
     end
+
+    users = User.all(limit: 6)
+    25.times do
+
+      users.each { |user| user.champions.create!(table_champion_id: 1 + rand(119),
+                                                 experience: 1 + rand(200),
+                                                 position: 1 + rand(5),
+                                                 level: 1 + rand(200),
+                                                 skin: 1000000000,
+                                                 active_skin: rand(9) ) }
+    end
   end
 end

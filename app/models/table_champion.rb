@@ -1,4 +1,5 @@
 class TableChampion < ActiveRecord::Base
+	has_many :champions
 	validates(:champ_name, 				 presence: true)
 
 	validates(:health,                   presence: true,

@@ -5,4 +5,16 @@ FactoryGirl.define do
     password "foobar"
     password_confirmation "foobar"
   end
+
+  factory :champion, class: Champion do
+  	table_champion_id 1
+  	experience 125
+    user
+  	position 3
+  	skin 1000000000
+  	active_skin 2
+    level 5
+  end
+
+
 end

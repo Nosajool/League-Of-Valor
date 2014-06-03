@@ -19,6 +19,8 @@ describe User do
 	it { should respond_to(:remember_token) }
 	it { should respond_to(:authenticate) }
 
+	it { should respond_to(:champions) }
+
 	it { should be_valid }
 
 	describe "when name is not present" do
@@ -103,5 +105,21 @@ describe User do
 	describe "remember token" do
 		before { @user.save }
 		its(:remember_token ) { should_not  be_blank }
+	end
+
+	describe "champion associations" do
+		
+		before { @user.save }
+		let!(:older_champion) do
+			FactoryGirl.create(:champion, user: @user, created_at: 1.day.ago )
+		end
+
+		let!(:newer_champion) do
+			FactoryGirl.create(:champion, user: @user, created_at: 1.hour.ago)
+		end
+
+		it "should have the championsin the right order" do
+			expect(@user.champions.to_a).to eq [newer_champion, older_champion]
+		end
 	end
 end
