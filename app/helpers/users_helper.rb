@@ -1,10 +1,9 @@
 module UsersHelper
 
-	# Returns the Gravatar (http://gravatar.com/) for given user.
-	def gravatar_for(user, options = { size: 50 })
-		gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
+	# Summoner Icon helper
+	def icon_for(user, options = { size: "m" } )
 		size = options[:size]
-		gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
-		image_tag(gravatar_url, alt:user.username, class: "gravatar")		
+		image_tag("icons/icons_#{size}/#{user.icon}.jpg", alt: "Summoner Icon", class: "summoner_icon")
 	end
+
 end
