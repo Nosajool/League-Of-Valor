@@ -15,6 +15,8 @@ class UsersController < ApplicationController
 	end
 	def create
 		@user = User.new(user_params)
+		# Give a default icon to ppl that create new accounts
+		@user.icon = 1
 		if @user.save
 			sign_in @user
 			flash[:success] = "Welcome to Vion Genesis"

@@ -95,7 +95,6 @@ describe "User pages" do
 		describe "page" do
 			it { should have_content("Update your profile") }
 			it { should have_title("Edit user") }
-			it { should have_link('change', href: 'http://gravatar.com/emails') }
 		end
 
 		describe "with invalid information" do
