@@ -11,7 +11,7 @@ FactoryGirl.define do
   	table_champion_id 1
   	experience 125
     user
-  	position 3
+  	position 0
   	skin 1000000000
   	active_skin 2
     level 5

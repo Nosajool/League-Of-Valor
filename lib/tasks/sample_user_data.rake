@@ -18,11 +18,22 @@ namespace :db do
     end
 
     users = User.all(limit: 6)
+    # Set roster champions
+    for x in 1..5 do
+      users.each { |user| 
+        user.champions.create!(table_champion_id: 1 + rand(119),
+                               experience: 1 + rand(200),
+                               position: x,
+                               level: 1 + rand(200),
+                               skin: 1000000000,
+                               active_skin: 0) }
+    end
+    # Create the rest of the champions
     25.times do
 
       users.each { |user| user.champions.create!(table_champion_id: 1 + rand(119),
                                                  experience: 1 + rand(200),
-                                                 position: 1 + rand(5),
+                                                 position: 0,
                                                  level: 1 + rand(200),
                                                  skin: 1000000000,
                                                  active_skin: rand(9) ) }

@@ -9,6 +9,8 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@champions = @user.champions
+		# Give roster champions
+		@roster = @champions.where.not("position = '0'")
 	end
 	def new
 		@user = User.new		
