@@ -16,6 +16,10 @@ class ChampionsController < ApplicationController
 		end
 	end
 
+	def edit
+		@roster = current_user.champions.where.not("position = '0'")
+	end
+
 	private
 		def champion_params
 			params.require(:champion)
