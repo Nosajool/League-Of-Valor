@@ -34,7 +34,10 @@
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
 					  	<% @non_roster.each do |champ| %>
-					  		<li><%= link_to("#{champ.table_champion.champ_name} Level: #{champ.level}",'#') %></li>
+					  		<li><%= link_to("#{champ.table_champion.champ_name} Level: #{champ.level}", change_roster_path(:position => x,
+					  																									   :new_id => champ.id,
+					  																									   :old_id => @roster[x-1].id,
+					  																					                   ) ) %></li>
 					  	<% end %>
 					  </ul>
 					</div>

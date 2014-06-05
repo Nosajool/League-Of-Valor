@@ -2,7 +2,10 @@ LeagueOfValor::Application.routes.draw do
   get "table_champions/show"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
+
   root 'static_pages#home'
+
+  # match 'link',         to: 'controller#action',             via: 'http method'
   match '/signup',        to: 'users#new',                     via: 'get'
   
   match '/signin',        to: 'sessions#new',                  via: 'get'
@@ -17,6 +20,7 @@ LeagueOfValor::Application.routes.draw do
 
 
   match '/roster',        to: 'champions#edit',                via: 'get',              as: 'roster'
+  match '/change_roster',  to: 'champions#change_roster',       via: 'get',             as: 'change_roster'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
