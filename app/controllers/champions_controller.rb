@@ -19,30 +19,46 @@ class ChampionsController < ApplicationController
 	def edit
 		# Can't switch ppl that are in your roster...(Like can't switch from position 1 to 5)
 		@roster = current_user.champions.where.not("position = '0'")
+		@roster.sort! do |a,b|
+			a.position <=> b.position
+		end
 		@non_roster = current_user.champions.where("position = '0'")
 	end
 	def change_roster
 		# Can't swap unless you have 5 champs already...
-		# Ensure that both champions are the current user's
-		if current_user.champions.where(:id => params[:old_id]).nil? || current_user.champions.where(:id => params[:old_id]).nil?
-			flash[:danger] = "You can't change someone else's roster"
+		
+		# Check that both id's exist
+		if Champion.where(:id => params[:old_id]).blank? || Champion.where(:id => params[:new_id]).blank?
+			flash[:danger] = "Champion doesn't exist"
 			redirect_to roster_path
+		else
+			# Ensure that both champions are the current user's
+			if Champion.find(params[:old_id]).user != current_user || Champion.find(params[:new_id]).user != current_user
+				flash[:danger] = "You can't change someone else's roster"
+				redirect_to roster_path
+			else
+				# Ensure that there is a champion at the old position
+				old_position = Champion.find(params[:old_id]).position
+				new_position = params[:position].to_i
+				unless old_position == new_position
+					flash[:danger] = "The champion that you are swapping out is invalid"
+					redirect_to roster_path
+				else
+					@old_champ = Champion.find(params[:old_id])
+					@new_champ = Champion.find(params[:new_id])
+					@old_champ.position = 0
+					@new_champ.position = params[:position]
+					@old_champ.save
+					@new_champ.save
+					flash[:success] = "Roster Positions updated"
+					redirect_to roster_path
+				end
+			end
+
+			
 		end
 
-		# Ensure that there is a champion at the old position
-		if current_user.champions.where(:position => params[:position]).nil?
-			flash[:danger] = "The champion that you are swapping out is invalid"
-			redirect_to roster_path
-		end
-
-		@old_champ = Champion.find(params[:old_id])
-		@new_champ = Champion.find(params[:new_id])
-		@old_champ.position = 0
-		@new_champ.position = params[:position]
-		@old_champ.save
-		@new_champ.save
-		flash[:success] = "Roster Positions updated"
-		redirect_to roster_path
+		
 	end
 
 	private
