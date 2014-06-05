@@ -18,6 +18,7 @@ class ChampionsController < ApplicationController
 
 	def edit
 		@roster = current_user.champions.where.not("position = '0'")
+		@non_roster = current_user.champions.where("position = '0'")
 	end
 
 	private

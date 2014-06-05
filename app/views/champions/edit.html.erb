@@ -1,3 +1,6 @@
+<% provide(:title, "Edit Roster") %>
+<!-- This page needs to be refactored -->
+<h1>Current Roster</h1>
 <div class="roster-table">
 	<table class="roster-table">
 		<tr>
@@ -7,13 +10,36 @@
 		</tr>
 		<tr>
 			<% @roster.each do |roster| %>
-				<td class="roster"><%= roster.table_champion.champ_name %></td>
+				<td id="champ_name" class="roster"><strong><%= roster.table_champion.champ_name %></strong></td>
 			<% end %>
+		</tr>
+		<!-- Stupid space between the champ name and the stats -->
+		<tr><td class="roster"><br></td><td class="roster"></td><td class="roster"></td><td class="roster"></td><td class="roster"></td></tr>
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="champ_stats roster">Level: <%= roster.level %></td>
+			<% end %>		
 		</tr>
 		<tr>
 			<% @roster.each do |roster| %>
-				<td class="roster">Level: <%= roster.level %></td>
+				<td class="champ_stats roster">Role: <%= roster.table_champion.role %></td>
 			<% end %>		
+		</tr>
+		<tr>
+			<% for x in 1..5 %>
+				<td class="roster">
+					<div class="btn-group roster-picker">
+					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					    Position <%= x %> <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+					  	<% @non_roster.each do |champ| %>
+					  		<li><%= link_to("#{champ.table_champion.champ_name} Level: #{champ.level}",'#') %></li>
+					  	<% end %>
+					  </ul>
+					</div>
+				</td>
+			<% end %>
 		</tr>
 	</table>
 </div>

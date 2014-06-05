@@ -1,3 +1,23 @@
 // Place all the styles related to the Champions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.roster-table {
+	width: 100%;
+	border: 1px solid black;
+}
+
+.roster {
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+}
+#champ_name {
+	text-align: center;
+}
+.champ_stats {
+	padding-left: 1em;
+}
+
+.roster-picker {
+	padding-left: 0.8em;
+}
