@@ -4,16 +4,16 @@ class ChampionsController < ApplicationController
 	before_action :signed_in_user
 
 	def create
-		@champion = current_user.champions.build(champion_params)
-		if @champion.save
-			# Change this to the champion name
-			flash[:success] = "You caught a #{@champion.table_champion_id}!"
-			# Change this to the map that you came from
-			redirect_to root_url
-		else
-			# Redirect somewhere else
-			render root_url
-		end
+		# @champion = current_user.champions.build(champion_params)
+		# if @champion.save
+		# 	# Change this to the champion name
+		# 	flash[:success] = "You caught a #{@champion.table_champion_id}!"
+		# 	# Change this to the map that you came from
+		# 	redirect_to root_url
+		# else
+		# 	# Redirect somewhere else
+		# 	render root_url
+		# end
 	end
 
 	def edit
@@ -55,12 +55,29 @@ class ChampionsController < ApplicationController
 			flash[:success] = "Roster Positions updated"
 			redirect_to roster_path
 		end
+	end
 
-		
+	def spawn_champion
+		@champion = current_user.champions.build(spawn_params)
+		if @champion.save
+			flash[:success] = "Champion created!"
+			redirect_to current_user
+		else
+			render current_user
+		end
+	end
+
+	def spawn_champion_page
+		@champion = current_user.champions.build
 	end
 
 	private
+	# Incorporate champion_params to make more secure
 		def champion_params
 			params.require(:champion)
+		end
+
+		def spawn_params
+			params.require(:champion).permit(:table_champion_id, :experience, :position, :skin, :active_skin, :level)
 		end
 end
