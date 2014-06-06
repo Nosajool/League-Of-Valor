@@ -24,38 +24,36 @@ class ChampionsController < ApplicationController
 		end
 		@non_roster = current_user.champions.where("position = '0'")
 	end
+
+	def bench
+		@bench = current_user.champions.where("position = '0'")
+	end
+	
 	def change_roster
 		# Can't swap unless you have 5 champs already...
-		
+		old_position = Champion.find(params[:old_id]).position
+		new_position = params[:position].to_i
 		# Check that both id's exist
 		if Champion.where(:id => params[:old_id]).blank? || Champion.where(:id => params[:new_id]).blank?
 			flash[:danger] = "Champion doesn't exist"
 			redirect_to roster_path
-		else
 			# Ensure that both champions are the current user's
-			if Champion.find(params[:old_id]).user != current_user || Champion.find(params[:new_id]).user != current_user
-				flash[:danger] = "You can't change someone else's roster"
-				redirect_to roster_path
-			else
-				# Ensure that there is a champion at the old position
-				old_position = Champion.find(params[:old_id]).position
-				new_position = params[:position].to_i
-				unless old_position == new_position
-					flash[:danger] = "The champion that you are swapping out is invalid"
-					redirect_to roster_path
-				else
-					@old_champ = Champion.find(params[:old_id])
-					@new_champ = Champion.find(params[:new_id])
-					@old_champ.position = 0
-					@new_champ.position = params[:position]
-					@old_champ.save
-					@new_champ.save
-					flash[:success] = "Roster Positions updated"
-					redirect_to roster_path
-				end
-			end
-
-			
+		elsif Champion.find(params[:old_id]).user != current_user || Champion.find(params[:new_id]).user != current_user
+			flash[:danger] = "You can't change someone else's roster"
+			redirect_to roster_path
+		elsif old_position != new_position
+			# Ensure that there is a champion at the old position
+			flash[:danger] = "The champion that you are swapping out is invalid"
+			redirect_to roster_path
+		else
+			@old_champ = Champion.find(params[:old_id])
+			@new_champ = Champion.find(params[:new_id])
+			@old_champ.position = 0
+			@new_champ.position = params[:position]
+			@old_champ.save
+			@new_champ.save
+			flash[:success] = "Roster Positions updated"
+			redirect_to roster_path
 		end
 
 		

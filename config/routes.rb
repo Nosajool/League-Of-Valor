@@ -5,22 +5,23 @@ LeagueOfValor::Application.routes.draw do
 
   root 'static_pages#home'
 
-  # match 'link',         to: 'controller#action',             via: 'http method'
-  match '/signup',        to: 'users#new',                     via: 'get'
-  
-  match '/signin',        to: 'sessions#new',                  via: 'get'
-  match '/signout',       to: 'sessions#destroy',              via: 'delete'
-
-  match '/help',          to: 'static_pages#help',             via: 'get'
-  match '/about',         to: 'static_pages#about',            via: 'get'
-  match '/contact',       to: 'static_pages#contact',          via: 'get'
+  # match 'link',            to: 'controller#action',             via: 'http method'
+  match '/signup',           to: 'users#new',                     via: 'get'
+     
+  match '/signin',           to: 'sessions#new',                  via: 'get'
+  match '/signout',          to: 'sessions#destroy',              via: 'delete'
+   
+  match '/help',             to: 'static_pages#help',             via: 'get'
+  match '/about',            to: 'static_pages#about',            via: 'get'
+  match '/contact',          to: 'static_pages#contact',          via: 'get'
 
   # as: 'champions' lets us use champions_path for link_to
-  match '/champions',     to: 'table_champions#index',         via: 'get',              as: 'champions'
+  match '/champions',        to: 'table_champions#index',         via: 'get',              as: 'champions'
 
 
-  match '/roster',        to: 'champions#edit',                via: 'get',              as: 'roster'
-  match '/change_roster',  to: 'champions#change_roster',       via: 'get',             as: 'change_roster'
+  match '/roster',           to: 'champions#edit',                via: 'get',              as: 'roster'
+  match '/change_roster',    to: 'champions#change_roster',       via: 'get',              as: 'change_roster'
+  match '/bench',            to: 'champions#bench',               via: 'get',              as: 'bench'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

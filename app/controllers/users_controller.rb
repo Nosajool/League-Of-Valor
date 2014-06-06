@@ -9,8 +9,11 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@champions = @user.champions
-		# Give roster champions
-		@roster = @champions.where.not("position = '0'")
+		# Give roster champions in order
+		@roster = current_user.champions.where.not("position = '0'")
+		@roster.sort! do |a,b|
+			a.position <=> b.position
+		end
 	end
 	def new
 		@user = User.new		
