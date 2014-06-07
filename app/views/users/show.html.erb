@@ -9,25 +9,27 @@
     </section>
   </aside>
 </div>
-<div class="roster-table">
-	<table class="roster-table">
-		<tr>
-			<% @roster.each do |roster| %>
-				<td class="roster"><%= champ_face_for(roster.table_champion.id, size: "m") %></td>
-			<% end %>
-		</tr>
-		<tr>
-			<% @roster.each do |roster| %>
-				<td class="roster"><%= roster.table_champion.champ_name %></td>
-			<% end %>
-		</tr>
-		<tr>
-			<% @roster.each do |roster| %>
-				<td class="roster">Level: <%= roster.level %></td>
-			<% end %>		
-		</tr>
-	</table>
-</div>
+<% if @user.champions.any? %>
+	<div class="roster-table">
+		<table class="roster-table">
+			<tr>
+				<% @roster.each do |roster| %>
+					<td class="roster"><%= champ_face_for(roster.table_champion.id, size: "m") %></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% @roster.each do |roster| %>
+					<td class="roster"><%= roster.table_champion.champ_name %></td>
+				<% end %>
+			</tr>
+			<tr>
+				<% @roster.each do |roster| %>
+					<td class="roster">Level: <%= roster.level %></td>
+				<% end %>		
+			</tr>
+		</table>
+	</div>
+<% end %>
 <div class="row">
 	<% if @user.champions.any? %>
 	<h3><%= @user.champions.count %> Champions</h3>

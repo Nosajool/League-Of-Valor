@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@champions = @user.champions
 		# Give roster champions in order
-		@roster = current_user.champions.where.not("position = '0'")
+		@roster = @champions.where.not("position = '0'")
 		@roster.sort! do |a,b|
 			a.position <=> b.position
 		end
