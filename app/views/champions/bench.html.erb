@@ -3,18 +3,20 @@
 
 <div class="row">
 	<% if @bench.any? %>
-	<h3><%= @bench.count %> Champions</h3>
-	<table class="table table-hover table-condensed">
-		<tr class = "dark-hover">
-			<th>Champion Name</th>
-			<th>Level</th>
-		</tr>
-		<% @bench.each do |champ| %>
-			<tr class ="dark-hover">
-				<td><%= champ.table_champion.champ_name %></td>
-				<td><%= champ.level %></td>
+		<h3><%= @bench.count %> Champions</h3>
+		<table class="table table-hover table-condensed">
+			<tr class = "dark-hover">
+				<th>Champion Name</th>
+				<th>Level</th>
 			</tr>
-		<% end %>
-	</table>
+			<% @bench.each do |champ| %>
+				<tr class ="dark-hover">
+					<td><%= champ.table_champion.champ_name %></td>
+					<td><%= champ.level %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<h3>You have an empty bench. Go catch more champions.</h3>
 	<% end %>
 </div>

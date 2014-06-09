@@ -10,9 +10,21 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@champions = @user.champions
 		# Give roster champions in order
-		@roster = @champions.where.not("position = '0'")
-		@roster.sort! do |a,b|
-			a.position <=> b.position
+		@roster = []
+		# Fill @roster array with empty champions
+		for x in 0..4
+			if @user.champions.where("position = #{x+1}").exists?
+				# So it turns out that .where() returns an array of ActiveRecord::Relation).
+				# In order to get the single object, must use .first
+				@roster << @user.champions.includes(:table_champion).where("position = #{x+1}").first
+			else
+				@roster << Champion.new(:table_champion_id=>119,
+											 :experience=>0, 
+											 :position=>x+1, 
+											 :skin=>1111111111,
+											 :active_skin=>0,
+											 :level=>1)
+			end
 		end
 	end
 	def new
