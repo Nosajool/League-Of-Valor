@@ -13,10 +13,10 @@ class UsersController < ApplicationController
 		@roster = []
 		# Fill @roster array with empty champions
 		for x in 0..4
-			if @user.champions.where("position = #{x+1}").exists?
+			if @user.champions.where("position == #{x+1}").exists?
 				# So it turns out that .where() returns an array of ActiveRecord::Relation).
 				# In order to get the single object, must use .first
-				@roster << @user.champions.where("position = #{x+1}").first
+				@roster << @user.champions.where("position == #{x+1}").first
 			else
 				@roster << Champion.new(:table_champion_id=>999,
 											 :experience=>0, 

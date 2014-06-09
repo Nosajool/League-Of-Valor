@@ -133,8 +133,8 @@ describe "User pages" do
 		it { should have_link('Sign out') }
 
 		describe "champions" do
-			it { should have_content(c1.position) }
-			it { should have_content(c2.position) }
+			it { should have_content(c1.level) }
+			it { should have_content(c2.level) }
 			it { should have_content(user.champions.count) }
 		end
 	end

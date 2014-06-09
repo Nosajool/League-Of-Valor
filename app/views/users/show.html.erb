@@ -32,13 +32,15 @@
 <% end %>
 <div class="row">
 	<% if @user.champions.any? %>
-	<h3><%= @user.champions.count %> Champions</h3>
+	<h3><%= @user.champions.count %> Champions 
+		<% if current_user.id == @user.id %>
+			<%= link_to("Change Roster", roster_path) %>
+		<% end %>
+	</h3>
 	<table class="table table-hover table-condensed">
 		<tr class = "dark-hover">
 			<th>Champion Name</th>
 			<th>Level</th>
-			<th>Position</th>
-			<th>Active Skin</th>
 		</tr>
 		<%= render @champions %>
 	</table>
