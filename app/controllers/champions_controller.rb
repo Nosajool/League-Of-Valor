@@ -25,9 +25,9 @@ class ChampionsController < ApplicationController
 			if current_user.champions.where("position = #{x+1}").exists?
 				# So it turns out that .where() returns an array of ActiveRecord::Relation).
 				# In order to get the single object, must use .first
-				@roster << current_user.champions.includes(:table_champion).where("position = #{x+1}").first
+				@roster << current_user.champions.where("position = #{x+1}").first
 			else
-				@roster << Champion.new(:table_champion_id=>119,
+				@roster << Champion.new(:table_champion_id=>999,
 											 :experience=>0, 
 											 :position=>x+1, 
 											 :skin=>1111111111,
@@ -35,10 +35,6 @@ class ChampionsController < ApplicationController
 											 :level=>1)
 			end
 		end
-		# @roster = current_user.champions.includes(:table_champion).where("position != 0").limit(5)
-		# @roster.sort! do |a,b|
-		# 	a.position <=> b.position
-		# end
 		@non_roster = current_user.champions.where("position = '0'")
 	end
 
