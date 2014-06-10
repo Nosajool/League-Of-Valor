@@ -49,7 +49,8 @@
 					  	<!-- Take out the id and position after testing -->
 					  		<li><%= link_to("#{champ.table_champion.champ_name} Level: #{champ.level} ID: #{champ.id} Position: #{champ.position}", change_roster_path(:position => x,
 					  							   :new_id => champ.id,
-					  							   :old_id => @roster[x-1].id ) ) %></li>
+					  							   :old_id => @roster[x-1].id,
+					  							   :empty => @roster[x-1].table_champion.id ) ) %></li>
 					  	<% end %>
 					  </ul>
 					</div>

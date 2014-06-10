@@ -48,30 +48,53 @@ class ChampionsController < ApplicationController
 	
 	def change_roster
 		# Can't swap unless you have 5 champs already...
-		old_position = Champion.find(params[:old_id]).position
 		new_position = params[:position].to_i
-		# Check that both id's exist
-		if Champion.where(:id => params[:old_id]).blank? || Champion.where(:id => params[:new_id]).blank?
-			flash[:danger] = "Champion doesn't exist"
+		# Bheck if the new id exists
+		if Champion.where(:id =>params[:new_id]).blank?
+			flash[:danger] = "Second champion doesn't exist"
 			redirect_to roster_path
-			# Ensure that both champions are the current user's
-		elsif Champion.find(params[:old_id]).user != current_user || Champion.find(params[:new_id]).user != current_user
-			flash[:danger] = "You can't change someone else's roster"
+
+		# Check if the second champion is yours
+		elsif Champion.find(params[:new_id]).user != current_user
+			flash[:danger] = "You don't own the second champion"
 			redirect_to roster_path
-		elsif old_position != new_position
-			# Ensure that there is a champion at the old position
-			flash[:danger] = "The champion that you are swapping out is invalid"
-			redirect_to roster_path
-		else
-			@old_champ = Champion.find(params[:old_id])
+
+		# Check to see if the first champion is empty
+		elsif params[:empty].to_i == 999
 			@new_champ = Champion.find(params[:new_id])
-			@old_champ.position = 0
 			@new_champ.position = params[:position]
-			@old_champ.save
 			@new_champ.save
-			flash[:success] = "Roster Positions updated"
+			flash[:success] = "Position updated"
+			redirect_to roster_path
+
+		# Check that the old id exist
+		elsif Champion.where(:id => params[:old_id]).blank?
+			flash[:danger] = "First champion doesn't exist"
+			redirect_to roster_path
+
+		# Ensure that the first champions is the current user's
+		elsif Champion.find(params[:old_id]).user != current_user
+			flash[:danger] = "You don't own the first champion"
 			redirect_to roster_path
 		end
+
+		# Ensure that there is a champion at the old position
+		# old_position = Champion.find(params[:old_id]).position.to_i
+		z = params[:position].to_i
+		x = Champion.where("position == ?",z).first.id
+		y = params[:old_id].to_i
+		if x != y
+			flash[:danger] = "#{x} #{x.class} #{y} #{y.class} #{z}"
+			redirect_to roster_path
+		else
+			flash[:success] = "#{x} #{x.class} #{y} #{y.class} #{z}"
+			redirect_to roster_path
+			@old_champ = Champion.find(params[:old_id])
+			@new_champ = Champion.find(params[:new_id])
+			@old_champ.update(position: 0)
+			@new_champ.update(position: params[:position])
+		end
+
 	end
 
 	def spawn_champion
