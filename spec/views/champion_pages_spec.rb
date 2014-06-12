@@ -25,11 +25,19 @@ describe "Champion Pages" do
 		describe "signed in" do
 			before do
 				sign_in FactoryGirl.create(:user)
+				let!(:c1) { FactoryGirl.create(:champion,
+										   user: user,
+										   position: 1
+										   table_champion_id: 7) }
 				visit roster_path
 			end
 
 			it { should have_title('Edit Roster') }
 			it { should have_content('Current Roster') }
+			# Table Champion ID 7 = Morgana
+			it { should have_content('Morgana') }
+			# Since there are 4 swaps, shoud have empty champions
+			it { should have_content('No Champion') }
 		end
 		describe "not signed in" do
 			before { visit roster_path }

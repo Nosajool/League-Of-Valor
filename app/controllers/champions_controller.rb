@@ -91,7 +91,7 @@ class ChampionsController < ApplicationController
 	def spawn_champion
 		@champion = current_user.champions.build(spawn_params)
 		if @champion.save
-			flash[:success] = "Champion created!"
+			flash[:success] = "Champion id:#{@champion.id} Level:#{@champion.level} Position: #{@champion.position} User id: #{current_user.id}"
 			redirect_to current_user
 		else
 			flash[:danger] = "Messed up. Probably the skin code"

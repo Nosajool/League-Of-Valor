@@ -1,7 +1,16 @@
 # About Project
-League of Legends themed rpg.
+League of Legends themed rpg using Ruby on Rails.
 
 [Wiki](https://github.com/Nosajool/League-Of-Valor/wiki)
 
-Fix the flash message thing
-Change to [Select Tags](http://guides.rubyonrails.org/form_helpers.html#making-select-boxes-with-ease)
+## Running the Test Suite
+
+`bundle exec rspec spec/`
+
+**spec/views:** All UI tests of the pages
+
+**spec/models:** Database validation tests
+
+**spec/controllers:** Logic and user scenarios
+
+**spec/support:** Helper functions for tests
