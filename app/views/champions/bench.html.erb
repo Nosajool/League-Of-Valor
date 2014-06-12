@@ -1,0 +1,67 @@
+<% provide(:title, "Bench") %>
+<h1>Bench</h1>
+
+
+<div class="row">
+	<% if @roster.any? %>
+		<h3>Active Roster</h3>
+		<table class="table table-hover table-condensed">
+			<tr class = "dark-hover">
+				<th>Champion</th>
+				<th>Level</th>
+				<th>Attack Damage</th>
+				<th>Ability Power</th>
+				<th>Armor</th>
+				<th>Magic Resist</th>
+				<th>Range</th>
+				<th>Role</th>
+			</tr>
+			<% @roster.each do |champ| %>
+				<tr class ="dark-hover">
+					<td><%= champ.table_champion.champ_name %></td>
+					<td><%= champ.level %></td>
+					<td><%= champ.table_champion.attack_damage %></td>
+					<td><%= champ.table_champion.ability_power %></td>
+					<td><%= champ.table_champion.armor %></td>
+					<td><%= champ.table_champion.magic_resist %></td>
+					<td><%= champ.table_champion.range %></td>
+					<td><%= champ.table_champion.role %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<h3>You have an empty roster. Go catch more champions.</h3>
+	<% end %>
+</div>
+
+<div class="row">
+	<% if @bench.any? %>
+		<h3><%= @bench.count %> benched champions <%= link_to("Change Roster", roster_path) %></h3>
+		<table class="table table-hover table-condensed">
+			<tr class = "dark-hover">
+				<th>Champion</th>
+				<th>Level</th>
+				<th>Attack Damage</th>
+				<th>Ability Power</th>
+				<th>Armor</th>
+				<th>Magic Resist</th>
+				<th>Range</th>
+				<th>Role</th>
+			</tr>
+			<% @bench.each do |champ| %>
+				<tr class ="dark-hover">
+					<td><%= champ.table_champion.champ_name %></td>
+					<td><%= champ.level %></td>
+					<td><%= champ.table_champion.attack_damage %></td>
+					<td><%= champ.table_champion.ability_power %></td>
+					<td><%= champ.table_champion.armor %></td>
+					<td><%= champ.table_champion.magic_resist %></td>
+					<td><%= champ.table_champion.range %></td>
+					<td><%= champ.table_champion.role %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<h3>You have an empty bench. Go catch more champions.</h3>
+	<% end %>
+</div>

@@ -1,0 +1,54 @@
+<% provide(:title, "Edit Roster") %>
+<!-- This page needs to be refactored -->
+<h1>Current Roster</h1>
+<div class="roster-table">
+	<table class="roster-table">
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="roster"><%= champ_face_for(roster.table_champion.id, size: "m") %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @roster.each do |roster| %>
+				<td id="champ_name" class="roster"><strong><%= roster.table_champion.champ_name %></strong></td>
+			<% end %>
+		</tr>
+		<!-- Stupid space between the champ name and the stats -->
+		<tr><td class="roster"><br></td><td class="roster"></td><td class="roster"></td><td class="roster"></td><td class="roster"></td></tr>
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="champ_stats roster">Level: <%= roster.level %></td>
+			<% end %>		
+		</tr>
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="champ_stats roster">Role: <%= roster.table_champion.role %></td>
+			<% end %>		
+		</tr>
+	    <% if Rails.env.development? %>
+			<tr>
+				<% @roster.each do |roster| %>
+					<td class="champ_stats roster">ID: <%= roster.id %></td>
+				<% end %>	
+			</tr>
+			<tr>
+				<% @roster.each do |roster| %>
+					<td class="champ_stats roster">Position: <%= roster.position %></td>
+				<% end %>	
+			</tr>
+		<% end %>
+		<tr>
+			<% for x in 1..5 %>
+				<%= form_tag url_for(:controller => 'champions', :action => 'change_roster'), :method => "post"  do %>
+					<td class="roster roster-picker">
+					    <%= select_tag(:new_id, options_for_select(non_roster_hash(@non_roster))) %>
+					  	<%= hidden_field_tag(:old_id, @roster[x-1].id) %>
+					  	<%= hidden_field_tag(:position, x) %>
+					  	<%= hidden_field_tag(:empty, @roster[x-1].table_champion.id) %>
+						<%= submit_tag("Swap", class: "btn btn-default") %>
+					</td>
+				<% end %>
+			<% end %>
+		</tr>
+	</table>
+</div>
