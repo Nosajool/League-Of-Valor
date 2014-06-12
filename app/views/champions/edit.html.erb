@@ -39,22 +39,15 @@
 		<% end %>
 		<tr>
 			<% for x in 1..5 %>
-				<td class="roster">
-					<div class="btn-group roster-picker">
-					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					    Position <%= x %> <span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu scrollable-menu" role="menu">
-					  	<% @non_roster.each do |champ| %>
-					  	<!-- Take out the id and position after testing -->
-					  		<li><%= link_to("#{champ.table_champion.champ_name} Level: #{champ.level} ID: #{champ.id} Position: #{champ.position}", change_roster_path(:position => x,
-					  							   :new_id => champ.id,
-					  							   :old_id => @roster[x-1].id,
-					  							   :empty => @roster[x-1].table_champion.id ) ) %></li>
-					  	<% end %>
-					  </ul>
-					</div>
-				</td>
+				<%= form_tag url_for(:controller => 'champions', :action => 'change_roster'), :method => "post"  do %>
+					<td class="roster roster-picker">
+					    <%= select_tag(:new_id, options_for_select(non_roster_hash(@non_roster))) %>
+					  	<%= hidden_field_tag(:old_id, @roster[x-1].id) %>
+					  	<%= hidden_field_tag(:position, x) %>
+					  	<%= hidden_field_tag(:empty, @roster[x-1].table_champion.id) %>
+						<%= submit_tag("Swap", class: "btn btn-default") %>
+					</td>
+				<% end %>
 			<% end %>
 		</tr>
 	</table>

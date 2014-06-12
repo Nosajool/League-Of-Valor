@@ -5,6 +5,10 @@
 	<p>
 		Testing layouts on this page
 	</p>
+	<% yo = ["hi","bye","lol"] %>
+	<%= form_tag do %>
+		<%= select_tag(:lalala, options_for_select(yo)) %>
+	<% end %>
 </div>
 
 <div class="row">

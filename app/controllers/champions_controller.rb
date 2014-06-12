@@ -20,6 +20,7 @@ class ChampionsController < ApplicationController
 		# Can't switch ppl that are in your roster...(Like can't switch from position 1 to 5)
 		@champion_count = current_user.champions.count
 		@roster = []
+		@swap = Champion.new
 		# Fill @roster array with empty champions
 		for x in 0..4
 			if current_user.champions.where("position == #{x+1}").exists?
@@ -76,23 +77,13 @@ class ChampionsController < ApplicationController
 		elsif Champion.find(params[:old_id]).user != current_user
 			flash[:danger] = "You don't own the first champion"
 			redirect_to roster_path
-		end
-
-		# Ensure that there is a champion at the old position
-		# old_position = Champion.find(params[:old_id]).position.to_i
-		z = params[:position].to_i
-		x = Champion.where("position == ?",z).first.id
-		y = params[:old_id].to_i
-		if x != y
-			flash[:danger] = "#{x} #{x.class} #{y} #{y.class} #{z}"
-			redirect_to roster_path
 		else
-			flash[:success] = "#{x} #{x.class} #{y} #{y.class} #{z}"
-			redirect_to roster_path
 			@old_champ = Champion.find(params[:old_id])
 			@new_champ = Champion.find(params[:new_id])
 			@old_champ.update(position: 0)
 			@new_champ.update(position: params[:position])
+			flash[:success] = "#{@old_champ.table_champion.champ_name} was swapped out for #{@new_champ.table_champion.champ_name}"
+			redirect_to roster_path
 		end
 
 	end
