@@ -24,3 +24,20 @@ CSV.foreach(csv_file_path) do |row|
     range: row[8] } )
   puts "#{row[0]} added"
 end
+
+
+# The empty table champion
+TableChampion.create!({
+    id: 999,
+    champ_name: "No Champion",
+    health: 1,
+    attack_damage: 1,
+    ability_power: 1,
+    armor: 1,
+    magic_resist: 1,
+    role: "Marksman",
+    catch_rate: 1,
+    range: 1 
+})
+
+puts "placeholder champion added"

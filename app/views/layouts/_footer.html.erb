@@ -2,7 +2,7 @@
 <div class="navbar navbar-fixed-bottom navbar-inverse">
       
   <div class="container">
-    <p class = "navbar-text pull-left">Site built by Jason Loo</p>
+    <p class = "navbar-text pull-left">Total Users: <%= @total_users %></p>
     <% unless signed_in? %>
     	<%= link_to "Sign Up Now", '#', class: "navbar-btn btn-success btn pull-right" %>
     <% end %>
