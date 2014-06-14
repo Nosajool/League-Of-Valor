@@ -2,7 +2,9 @@
 League of Legends themed rpg using Ruby on Rails.
 
 [Wiki](https://github.com/Nosajool/League-Of-Valor/wiki)
-
+[Setting up rails with postgres](https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres
+s)
+[for windows](http://stackoverflow.com/questions/7086654/installing-postgres-on-windows-for-use-with-ruby-on-rails)
 ## Running the Test Suite
 
 `bundle exec rspec spec/`
