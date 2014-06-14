@@ -8,21 +8,27 @@
 <%= form_for(@champion, :url => {:action => "spawn_champion"}, :method => "post" ) do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 	<%= f.label :table_champion_id %>
-	<%= f.text_field :table_champion_id %>
-
-	<%= f.label :experience %>
+	<div class="black_text">
+		<%= f.select(:table_champion_id, options_for_select(champ_list_hash)) %>
+	</div>
+	<%= f.label :experience, "Experience > 0" %>
 	<%= f.text_field :experience %>
 
 	<%= f.label :position %>
-	<%= f.text_field :position %>
+	<div class="black_text">
+		<%= f.select(:position, options_for_select((0..5).to_a.map{|pos| ["#{pos}",pos] } ) ) %>
+	</div>
 
-	<%= f.label :skin %>
+
+	<%= f.label :skin, "Skin ########## where # = 0,1" %>
 	<%= f.text_field :skin %>
 
 	<%= f.label :active_skin %>
-	<%= f.text_field :active_skin %>
+	<div class="black_text">
+		<%= f.select(:active_skin, options_for_select((0..9).to_a.map{|active_skin| ["#{active_skin}", active_skin] } ) ) %>
+	</div>
 
-	<%= f.label :level %>
+	<%= f.label :level, "Level > 0" %>
 	<%= f.text_field :level %>
 	
 	<%= f.submit "Create Champion", class: "btn btn-large btn-primary" %>
