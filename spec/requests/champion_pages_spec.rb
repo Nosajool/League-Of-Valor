@@ -23,12 +23,13 @@ describe "Champion Pages" do
 
 	describe "Roster Page" do
 		describe "signed in" do
+			let(:user) { FactoryGirl.create(:user) }
+			let!(:c1) { FactoryGirl.create(:champion,
+									   user: user,
+									   position: 1,
+									   table_champion_id: 7) }
 			before do
-				sign_in FactoryGirl.create(:user)
-				let!(:c1) { FactoryGirl.create(:champion,
-										   user: user,
-										   position: 1
-										   table_champion_id: 7) }
+				sign_in(user)
 				visit roster_path
 			end
 
