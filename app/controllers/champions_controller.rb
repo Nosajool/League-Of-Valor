@@ -108,6 +108,7 @@ class ChampionsController < ApplicationController
 		@champions.sort_by! do |champion|
 			champion.level
 		end
+		@champions.reverse!
 	end
 
 	private
