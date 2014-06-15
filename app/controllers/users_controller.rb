@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 		@user.icon = 1
 		if @user.save
 			sign_in @user
-			flash[:success] = "Welcome to Vion Genesis"
+			flash[:success] = "Welcome to League of Valor"
 			redirect_to @user
 		else
 			render 'new'
