@@ -17,7 +17,7 @@
 
 
 	<div class="notTop">Profiles</div>
-	<li><%= link_to "My Profile",              '#' %></li>
+	<li><%= link_to "My Profile",              current_user %></li>
 	<li><%= link_to "Account Settings",        edit_user_path(current_user) %></li>
 	<li><%= link_to "View a Profile",          '#' %></li>
 </ul>
