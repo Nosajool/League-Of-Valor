@@ -104,11 +104,12 @@ class ChampionsController < ApplicationController
 	end
 
 	def rankings
-		@champions = Champion.all
+		@champions = Champion.reorder("level DESC").page(params[:page]).per_page(30)
 		@champions.sort_by! do |champion|
 			champion.level
 		end
 		@champions.reverse!
+		# @champions = @champions.paginate(page: params[:page])
 	end
 
 	private

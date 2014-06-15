@@ -2,6 +2,8 @@
 
 <h1>Rankings</h1>
 
+<%= will_paginate %>
+
 <div class="row">
 	<% if @champions.any? %>
 		<table class="table table-hover table-condensed">
@@ -23,5 +25,4 @@
 	<% end %>
 </div>
 
-
-
+<%= will_paginate %>
