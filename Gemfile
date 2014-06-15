@@ -7,7 +7,7 @@ gem 'sprockets', '2.11.0'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'faker', '1.1.2'
 gem 'will_paginate', '3.0.4'
-gem 'bootstrap-will_paginate', '0.0.9'
+gem 'will_paginate-bootstrap'
 gem 'pg'
 
 group :development, :test do

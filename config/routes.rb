@@ -24,6 +24,7 @@ LeagueOfValor::Application.routes.draw do
   match '/bench',            to: 'champions#bench',               via: 'get',              as: 'bench'
   match '/spawn_champion',   to: 'champions#spawn_champion_page', via: 'get',              as: 'spawn_champion'
   match '/spawn_champion_action', to: 'champions#spawn_champion', via: 'post'
+  match '/rankings_champions',    to: 'champions#rankings',       via: 'get',              as: 'champion_ranking'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -103,6 +103,15 @@ class ChampionsController < ApplicationController
 		@champion = current_user.champions.build
 	end
 
+	def rankings
+		@champions = Champion.reorder("level DESC").page(params[:page]).per_page(30)
+		@champions.sort_by! do |champion|
+			champion.level
+		end
+		@champions.reverse!
+		# @champions = @champions.paginate(page: params[:page])
+	end
+
 	private
 	# Incorporate champion_params to make more secure
 		def champion_params
