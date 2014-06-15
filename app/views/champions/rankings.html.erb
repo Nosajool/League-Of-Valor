@@ -14,7 +14,7 @@
 				<tr class ="dark-hover">
 					<td><%= champ.table_champion.champ_name %></td>
 					<td><%= champ.level %></td>
-					<td><%= champ.user.username %></td>
+					<td><%= link_to(champ.user.username, champ.user) %></td>
 				</tr>
 			<% end %>
 		</table>
