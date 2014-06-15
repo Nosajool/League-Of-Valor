@@ -103,6 +103,13 @@ class ChampionsController < ApplicationController
 		@champion = current_user.champions.build
 	end
 
+	def rankings
+		@champions = Champion.all
+		@champions.sort_by! do |champion|
+			champion.level
+		end
+	end
+
 	private
 	# Incorporate champion_params to make more secure
 		def champion_params
