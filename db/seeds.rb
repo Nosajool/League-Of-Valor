@@ -8,9 +8,9 @@
 
 require 'csv'
 
-
+puts "Inputting Table Champion Data"
 csv_file_path = 'app/data/champions.csv'
-
+# Champion Table Data
 CSV.foreach(csv_file_path) do |row|
   TableChampion.create!( {
     champ_name: row[0],
@@ -25,7 +25,6 @@ CSV.foreach(csv_file_path) do |row|
   puts "#{row[0]} added"
 end
 
-
 # The empty table champion
 TableChampion.create!({
     id: 999,
@@ -39,5 +38,18 @@ TableChampion.create!({
     catch_rate: 1,
     range: 1 
 })
-
+puts
 puts "placeholder champion added"
+puts
+
+puts "Inputting Map Data"
+# Map Data
+File.open("app/data/maps.txt").each do |line|
+    utfGood = line.encode( line.encoding, "binary", :invalid => :replace, :undef => :replace)
+    stuff = utfGood.split("\t")
+    Map.create!({
+        map_name: stuff[0].chomp,
+        description: stuff[1].chomp
+    })
+    puts "#{stuff[0]} added"
+end
