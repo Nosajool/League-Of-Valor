@@ -54,3 +54,17 @@ File.open("app/data/maps.txt").each do |line|
     puts "#{stuff[0]} added"
 end
 
+# Map Champion Data
+
+puts
+puts "Inputting Map Champion Data"
+
+map_champion_data = 'app/data/map_champions.csv'
+CSV.foreach(map_champion_data) do |row|
+    a = Map.find(row[0])
+    a.map_champions.create!( {
+    champ_id: row[1],
+    probability: row[2]
+    })
+  puts "#{row[1]} added with probability #{row[2]}"
+end
