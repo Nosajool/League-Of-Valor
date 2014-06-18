@@ -9,9 +9,9 @@
 require 'csv'
 
 puts "Inputting Table Champion Data"
-csv_file_path = 'app/data/champions.csv'
+table_champion_data = 'app/data/champions.csv'
 # Champion Table Data
-CSV.foreach(csv_file_path) do |row|
+CSV.foreach(table_champion_data) do |row|
   TableChampion.create!( {
     champ_name: row[0],
     health: row[1],
@@ -53,3 +53,4 @@ File.open("app/data/maps.txt").each do |line|
     })
     puts "#{stuff[0]} added"
 end
+
