@@ -1,0 +1,7 @@
+<h1>Maps</h1>
+<% @maps.each do |map| %>
+	<%= map_picture_for(map.id) %>
+	<br>
+	<%= map.map_name %>
+	<br>
+<% end %>

@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140603042255) do
+ActiveRecord::Schema.define(version: 20140617050750) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "champions", force: true do |t|
     t.integer  "table_champion_id"
@@ -25,7 +28,24 @@ ActiveRecord::Schema.define(version: 20140603042255) do
     t.integer  "level"
   end
 
-  add_index "champions", ["user_id", "table_champion_id", "created_at"], name: "index_champions"
+  add_index "champions", ["user_id", "table_champion_id", "created_at"], name: "index_champions", using: :btree
+
+  create_table "map_champions", force: true do |t|
+    t.integer  "map_id"
+    t.integer  "champ_id"
+    t.integer  "probability"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "map_champions", ["map_id"], name: "index_map_champions_on_map_id", using: :btree
+
+  create_table "maps", force: true do |t|
+    t.string   "map_name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "table_champions", force: true do |t|
     t.string   "champ_name"
@@ -52,8 +72,8 @@ ActiveRecord::Schema.define(version: 20140603042255) do
     t.integer  "icon"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

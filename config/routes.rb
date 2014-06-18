@@ -1,5 +1,4 @@
 LeagueOfValor::Application.routes.draw do
-  get "table_champions/show"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -25,6 +24,11 @@ LeagueOfValor::Application.routes.draw do
   match '/spawn_champion',   to: 'champions#spawn_champion_page', via: 'get',              as: 'spawn_champion'
   match '/spawn_champion_action', to: 'champions#spawn_champion', via: 'post'
   match '/rankings_champions',    to: 'champions#rankings',       via: 'get',              as: 'champion_ranking'
+
+  resources :maps, only: [:index, :show]
+  match '/catch',           to: 'maps#catch',                    via: 'post'
+  # match '/maps',             to: 'maps#index',                    via: 'get',              as: 'maps'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
