@@ -26,6 +26,7 @@ LeagueOfValor::Application.routes.draw do
   match '/rankings_champions',    to: 'champions#rankings',       via: 'get',              as: 'champion_ranking'
 
   resources :maps, only: [:index, :show]
+  match '/catch',           to: 'maps#catch',                    via: 'post'
   # match '/maps',             to: 'maps#index',                    via: 'get',              as: 'maps'
 
   # The priority is based upon order of creation: first created -> highest priority.

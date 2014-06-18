@@ -12,10 +12,16 @@
 <br>
 <!-- add a  class for this instead of the 15 em -->
 <div style="padding-left: 15em">
-Attack Damage: <%= @random_champ.attack_damage %><br>
-Ability Power: <%= @random_champ.ability_power %><br>
-Armor: <%= @random_champ.armor %><br>
-Magic Resist: <%= @random_champ.magic_resist %><br>
-Range: <%= @random_champ.range %><br>
-Role: <%= @random_champ.role %><br>
+	Attack Damage: <%= @random_champ.attack_damage %><br>
+	Ability Power: <%= @random_champ.ability_power %><br>
+	Armor: <%= @random_champ.armor %><br>
+	Magic Resist: <%= @random_champ.magic_resist %><br>
+	Range: <%= @random_champ.range %><br>
+	Role: <%= @random_champ.role %><br>
 </div>
+
+<br>
+<%= form_tag url_for(:controller => 'maps', :action => 'catch'), :method => "post"  do %>
+  	<%= hidden_field_tag(:champ_id, @random_champ.id) %>
+	<%= submit_tag("Catch the #{@random_champ.champ_name}", class: "btn btn-success") %>
+<% end %>

@@ -17,8 +17,31 @@ class MapsController < ApplicationController
   		end
   	end
 
+	def catch
+		@champion = current_user.champions.build(champion_hash(params[:champ_id]))
+		champ_name = TableChampion.find(params[:champ_id]).champ_name
+		if @champion.save
+			flash[:success] = "Congratulations, the level 1 #{champ_name} has been added to your bench!"
+			redirect_to current_user
+		else
+			flash[:danger] = "Did not catch"
+			redirect_to current_user
+		end
+  	end
+
   	private
   		def rand_num
   			1 + rand(100)
+  		end
+
+  		def champion_hash(id)
+  			champ = Hash.new
+  			champ[:level] = 1
+  			champ[:position] = 0
+  			champ[:experience] = 1
+  			champ[:skin] = 1000000000
+  			champ[:active_skin] = 0
+  			champ[:table_champion_id] = id
+  			champ
   		end
 end
