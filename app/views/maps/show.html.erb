@@ -3,3 +3,7 @@
 <%= map_picture_for(@map.id) %>
 <br><br>
 <%= @map.description %>
+<br><br><br>
+You encountered a level 5 <%= @random_champ.champ_name %>
+<br>
+<%= champ_face_for(@random_champ.id, size: "m") %>
