@@ -10,12 +10,11 @@ class MapsController < ApplicationController
   		@map_champions = @map.map_champions
   		num = rand_num
   		@map_champions.each do |champ|
-  			if rand_num < champ.probability
+  			if num < champ.probability
   				@random_champ = TableChampion.find(champ.champ_id)
   				break
   			end
   		end
-
   	end
 
   	private

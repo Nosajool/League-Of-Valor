@@ -4,6 +4,18 @@
 <br><br>
 <%= @map.description %>
 <br><br><br>
-You encountered a level 5 <%= @random_champ.champ_name %>
+<div class="text-center">
+	You encountered a level 1 <%= @random_champ.champ_name %>
+	<br><br>
+	<%= champ_face_for(@random_champ.id, size: "m") %><br>
+</div>
 <br>
-<%= champ_face_for(@random_champ.id, size: "m") %>
+<!-- add a  class for this instead of the 15 em -->
+<div style="padding-left: 15em">
+Attack Damage: <%= @random_champ.attack_damage %><br>
+Ability Power: <%= @random_champ.ability_power %><br>
+Armor: <%= @random_champ.armor %><br>
+Magic Resist: <%= @random_champ.magic_resist %><br>
+Range: <%= @random_champ.range %><br>
+Role: <%= @random_champ.role %><br>
+</div>
