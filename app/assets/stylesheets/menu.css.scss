@@ -2,13 +2,16 @@
 
 /* mixins, variables, etc. */
 
+$backgroundCol: #0d1721;
+$contentCol: #0b2a48;
+$contentTextCol: #eeeeec;
+$sidebarTitleCol: #0b2a48;
+$sidebarLinkHoverCol: #060e1f;
 $grayMediumLight: #eaeaea;
-$maroon: #800000;
-$contentCol: #5e5e5e; // Gray
 $grayLighter: #d3d3d3;
 $grayDarker: #a9a9a9;
-$titleCol: #BB0000; // Kind of Red
-$linkCol: #181818; //Another Gray
+
+$linkCol: #70B8FF; //Another Gray
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -24,7 +27,7 @@ html {
 
 body {
   padding-top: 60px;
-  background-color: $maroon;
+  background-color: $backgroundCol;
 }
 
 section {
@@ -43,15 +46,21 @@ textarea {
 }
 
 
-.jumbotron {
+.mainArea {
   border-style:solid;
-  border-width: 0.5em;
+  border-width: 0.1em;
   border-color: black;
   background-color: $contentCol;
-  color: white;
+  color: $contentTextCol;
   input{
     color: black;
   }
+}
+
+/* Overrides negative margins until I can figure out how to disable it */
+.row {
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 /* typography */
@@ -84,6 +93,13 @@ p {
 
 /* header */
 
+.navbar_logo {
+  /*margin-top: center;*/
+  /*margin-bottom: center;*/
+  display: table-cell;
+  vertical-align: middle;
+}
+
 #logo {
   float: left;
   margin-right: 10px;
@@ -91,7 +107,8 @@ p {
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  margin-top: center;
+  margin-bottom: center;
   font-weight: bold;
   line-height: 1;
   &:hover {
@@ -101,16 +118,14 @@ p {
 }
 
 /* Left/Right Menus */
-// Screw you jumbotron paddingpriorities
+/* Screw you jumbotron padding priorities */
 .sidebar{
   text-align: center;
-  padding: 0em       !important;
-  margin: 0em        !important;
   font-size: 0.85em; 
   font-weight: bold;
   li{
     a{
-      // Finally got the link padding issue sorted out
+      /* Finally got the link padding issue sorted out */
       padding: 0em;
     }
   }
@@ -120,14 +135,14 @@ p {
   }
 
   a:hover {
-    color: $maroon;
+    color: $sidebarLinkHoverCol;
     text-decoration: underline;
   }
   div{
-    background-color: $titleCol;
+    background-color: $sidebarTitleCol;
     border-bottom-style: solid;
-    border-width: 0.5em;
-    border-color: black;
+    border-width: 0.3em;
+    border-color: $backgroundCol;
   }
 }
 
@@ -230,6 +245,10 @@ aside {
   }
 }
 
+.mapImage {
+  width: 100%;
+}
+
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -304,10 +323,6 @@ aside {
 .summoner_icon {
   float: left;
   margin-right: 10px;
-}
-
-.champion_face {
-  
 }
 
 .black_text {
