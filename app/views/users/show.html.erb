@@ -9,6 +9,9 @@
         #
         <%= @user.id %>
       </h1>
+      <% unless @user.id == current_user.id %>
+      	<%= link_to("Battle #{@user.username}", champ_select_path(@user.id), class:"btn btn-warning btn-lg") %>
+      <% end %>
     </section>
   </aside>
 </div>
