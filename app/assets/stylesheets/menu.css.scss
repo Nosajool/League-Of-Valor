@@ -93,13 +93,6 @@ p {
 
 /* header */
 
-.navbar_logo {
-  /*margin-top: center;*/
-  /*margin-bottom: center;*/
-  display: table-cell;
-  vertical-align: middle;
-}
-
 #logo {
   float: left;
   margin-right: 10px;
@@ -107,10 +100,9 @@ p {
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  margin-top: center;
-  margin-bottom: center;
+  position: absolute;
+  top: 20%;
   font-weight: bold;
-  line-height: 1;
   &:hover {
     color: white;
     text-decoration: none;
