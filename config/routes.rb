@@ -5,31 +5,31 @@ LeagueOfValor::Application.routes.draw do
   root 'static_pages#home'
 
   # match 'link',            to: 'controller#action',             via: 'http method'
-  match '/signup',           to: 'users#new',                     via: 'get'
+  get '/signup',             to: 'users#new'
      
-  match '/signin',           to: 'sessions#new',                  via: 'get'
+  get '/signin',             to: 'sessions#new'
   match '/signout',          to: 'sessions#destroy',              via: 'delete'
    
-  match '/help',             to: 'static_pages#help',             via: 'get'
-  match '/about',            to: 'static_pages#about',            via: 'get'
-  match '/contact',          to: 'static_pages#contact',          via: 'get'
+  get '/help',               to: 'static_pages#help'
+  get '/about',              to: 'static_pages#about'
+  get '/contact',            to: 'static_pages#contact'
 
   # as: 'champions' lets us use champions_path for link_to
-  match '/champions',        to: 'table_champions#index',         via: 'get',              as: 'champions'
+  get '/champions',          to: 'table_champions#index',                                  as: 'champions'
 
 
-  match '/roster',           to: 'champions#edit',                via: 'get',              as: 'roster'
+  get   '/roster',           to: 'champions#edit',                                         as: 'roster'
   match '/change_roster',    to: 'champions#change_roster',       via: 'post',             as: 'change_roster'
-  match '/bench',            to: 'champions#bench',               via: 'get',              as: 'bench'
-  match '/spawn_champion',   to: 'champions#spawn_champion_page', via: 'get',              as: 'spawn_champion'
-  match '/spawn_champion_action', to: 'champions#spawn_champion', via: 'post'
-  match '/rankings_champions',    to: 'champions#rankings',       via: 'get',              as: 'champion_ranking'
+  get '/bench',              to: 'champions#bench',                                        as: 'bench'
+  get '/spawn_champion',     to: 'champions#spawn_page',                                   as: 'spawn_champion'
+  match '/spawn_champion_action', to: 'champions#spawn', via: 'post'
+  get '/rankings_champions',      to: 'champions#rankings',                                as: 'champion_ranking'
 
   resources :maps, only: [:index, :show]
   match '/catch',           to: 'maps#catch',                    via: 'post'
 
-  get "battle/battle"
-  get "battle/setup"
+  get '/battle',            to: 'battle#battle',                                           as: 'battle'
+  get '/champion_select/:opp_id',   to: 'battle#setup',                                            as: 'champ_select' #champ_select_path(23)
 
 
 
