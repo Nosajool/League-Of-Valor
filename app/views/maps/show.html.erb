@@ -7,7 +7,10 @@
 <div class="text-center">
 	You encountered a level 1 <%= @random_champ.champ_name %>
 	<br><br>
-	<%= champ_face_for(@random_champ.id, size: "m") %><br>
+	<div class="champ_face_catch">
+		<%= champ_face_for(@random_champ.id, size: "m") %>
+	</div>
+	<br>
 </div>
 <br>
 <!-- add a  class for this instead of the 15 em -->
