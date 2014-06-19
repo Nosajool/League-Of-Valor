@@ -44,26 +44,21 @@
           <!-- For signed in users, they get to see the 3 columns with an auto jumbotron for the middle -->
 
           <!-- The Left Menu  -->
-          <div class="col-xs-2">
-            <div class="jumbotron sidebar">
-             <%= render 'layouts/left' %>                
-            </div>
+          <div class="col-md-2">
+            <div class="mainArea sidebar">
+             <%= render 'layouts/left' %>  
+            </div>              
           </div>
 
           <!-- Center where the page content is -->
-          <div class="col-xs-8">
-            <div class="jumbotron">
+          <div class="col-md-10">
+            <div class="mainArea">
                 <%= yield %>
             </div>
           </div>
 
-          <!-- The Right Menu -->
-          <div class="col-xs-2">
-            <div class="jumbotron sidebar">
-              <%= render 'layouts/right' %>
-            </div>
-          </div>
         <% end %>
+
 
       <!-- End of row -->
       </div>
