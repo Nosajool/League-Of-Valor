@@ -30,6 +30,7 @@ LeagueOfValor::Application.routes.draw do
 
   get '/battle',                  to: 'battle#battle',                                          as: 'battle'
   get '/champion_select/:opp_id', to: 'battle#setup',                                           as: 'champ_select' #champ_select_path(23)
+  # Redirect /champion_select to view a profile
 
 
 

@@ -1,2 +1,51 @@
-<h1>Battle#setup</h1>
-<p>Find me in app/views/battle/setup.html.erb</p>
+<h1>Champion Select</h1>
+Would you like to make a <%= link_to("Roster Change?", roster_path) %>
+<br>
+
+<%= "On Summoner's Rift, #{current_user.username} and #{@opponent.username} came to battle." %>
+
+<h3>
+	<%= current_user.username %>
+</h3>
+<div class="roster-table">
+	<table class="roster-table">
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="roster"><%= champ_face_for(roster.table_champion.id, size: "m") %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="roster"><%= roster.table_champion.champ_name %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="roster">Level: <%= roster.level %></td>
+			<% end %>		
+		</tr>
+	</table>
+</div>
+
+<h3>
+	<%= @opponent.username %>
+</h3>
+<div class="roster-table">
+	<table class="roster-table">
+		<tr>
+			<% @opp_roster.each do |roster| %>
+				<td class="roster"><%= champ_face_for(roster.table_champion.id, size: "m") %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @opp_roster.each do |roster| %>
+				<td class="roster"><%= roster.table_champion.champ_name %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @opp_roster.each do |roster| %>
+				<td class="roster">Level: <%= roster.level %></td>
+			<% end %>		
+		</tr>
+	</table>
+</div>
