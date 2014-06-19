@@ -9,9 +9,6 @@
 	<div class="notTop">City States</div>
 	<li><%= link_to "Admin Spawn Champion",     spawn_champion_path %></li>
 	<li><%= link_to "Maps List",                maps_path %></li>
-	<% @total_maps.each do |map| %>
-		<li><%= link_to map.map_name,           map %></li>
-	<% end %>
 
 	<div class="notTop">Essentials</div>
 	<li><%= link_to "Active Roster",          roster_path %></li>
