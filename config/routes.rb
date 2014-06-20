@@ -15,21 +15,21 @@ LeagueOfValor::Application.routes.draw do
   get '/contact',                 to: 'static_pages#contact'
 
   # as: 'champions' lets us use champions_path for link_to
-  get '/champions',               to: 'table_champions#index',                                  as: 'champions'
+  get '/champions',               to: 'table_champions#index',         as: 'champions'
       
       
-  get   '/roster',                to: 'champions#edit',                                         as: 'roster'
-  match '/change_roster',         to: 'champions#change_roster',       via: 'post',             as: 'change_roster'
-  get '/bench',                   to: 'champions#bench',                                        as: 'bench'
-  get '/spawn_champion',          to: 'champions#spawn_page',                                   as: 'spawn_champion'
-  match '/spawn_champion_action', to: 'champions#spawn',               via: 'post'
-  get '/rankings_champions',      to: 'champions#rankings',                                     as: 'champion_ranking'
+  get   '/roster',                to: 'champions#edit',                as: 'roster'
+  post '/change_roster',          to: 'champions#change_roster',       as: 'change_roster'
+  get '/bench',                   to: 'champions#bench',               as: 'bench'
+  get '/spawn_champion',          to: 'champions#spawn_page',          as: 'spawn_champion'
+  post '/spawn_champion_action',  to: 'champions#spawn'
+  get '/rankings_champions',      to: 'champions#rankings',            as: 'champion_ranking'
 
   resources :maps, only: [:index, :show]
-  match '/catch',                 to: 'maps#catch',                    via: 'post'
+  post '/catch',                  to: 'maps#catch'
 
-  get '/battle',                  to: 'battle#battle',                                          as: 'battle'
-  get '/champion_select/:opp_id', to: 'battle#setup',                                           as: 'champ_select' #champ_select_path(23)
+  post '/battle',                 to: 'battle#battle',                 as: 'battle'
+  get '/champion_select/:opp_id', to: 'battle#setup',                  as: 'champ_select' #champ_select_path(23)
   # Redirect /champion_select to view a profile
 
 

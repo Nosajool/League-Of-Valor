@@ -1,5 +1,7 @@
 class BattleController < ApplicationController
   def battle
+  	flash[:success] = "test"
+  	redirect_to current_user
   end
 
   def setup

@@ -49,3 +49,9 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 		</tr>
 	</table>
 </div>
+
+
+<%= form_tag url_for(:controller => 'battle', :action => 'battle'), :method => "post"  do %>
+  	<%= hidden_field_tag(:opp_id, @opponent.id) %>
+	<%= submit_tag("Enter the Rift", class: "btn btn-success") %>
+<% end %>
