@@ -18,13 +18,15 @@ class BattleController < ApplicationController
     end
 
     user_health = Array.new
+    opp_health = Array.new
     roster.each do |champ|
-      user_health
-
-    user_attach_damage = Array.new
-
-
-
+      user_health << champ.table_champion.health + (champ.table_champion.health*0.005*champ.level).round
+    end
+    opp_roster.each do |champ|
+      opp_health << champ.table_champion.health
+    end
+    # Pause, learning Riot Games API to retrieve champion data
+    # Need to learn Json/Javascript before continueing
   end
 
   def setup
