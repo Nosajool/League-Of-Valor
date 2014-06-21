@@ -166,6 +166,7 @@ DEPENDENCIES
   faker (= 1.1.2)
   jbuilder (= 1.0.2)
   jquery-rails (= 3.0.4)
+  json
   pg
   rails (= 4.0.2)
   rails_12factor
