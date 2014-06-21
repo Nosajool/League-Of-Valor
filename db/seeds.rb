@@ -1,14 +1,18 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 require 'csv'
+require 'json'
 
 puts "Inputting Table Champion Data"
+# champion_stats_data = 'app/data/champion_stats.json'
+# file = File.read(champion_stats_data)
+# champions = JSON.parse(file)["data"]
+# champions.each do |key,val|
+#     TableChampion.create!({
+#         champ_name: val["name"],
+#         attack_damage: val["stats"]["attackdamage"]
+#         } )
+#     puts "#{val["name"]} added to the Champion table"
+# end
+
 table_champion_data = 'app/data/champions.csv'
 # Champion Table Data
 CSV.foreach(table_champion_data) do |row|
