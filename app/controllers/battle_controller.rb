@@ -17,13 +17,13 @@ class BattleController < ApplicationController
       redirect_to champ_select_path(opponent.id)
     end
 
-    user_health = Array.new
-    opp_health = Array.new
+    user_hp = Array.new
+    opp_hp = Array.new
     roster.each do |champ|
-      user_health << champ.table_champion.health + (champ.table_champion.health*0.005*champ.level).round
+      user_hp << champ.table_champion.hp + (champ.table_champion.hp*0.005*champ.level).round
     end
     opp_roster.each do |champ|
-      opp_health << champ.table_champion.health
+      opp_hp << champ.table_champion.hp
     end
     # Pause, learning Riot Games API to retrieve champion data
     # Need to learn Json/Javascript before continueing

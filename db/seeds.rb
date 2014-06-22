@@ -2,45 +2,52 @@ require 'csv'
 require 'json'
 
 puts "Inputting Table Champion Data"
-# champion_stats_data = 'app/data/champion_stats.json'
-# file = File.read(champion_stats_data)
-# champions = JSON.parse(file)["data"]
-# champions.each do |key,val|
-#     TableChampion.create!({
-#         champ_name: val["name"],
-#         attack_damage: val["stats"]["attackdamage"]
-#         } )
-#     puts "#{val["name"]} added to the Champion table"
-# end
-
-table_champion_data = 'app/data/champions.csv'
-# Champion Table Data
-CSV.foreach(table_champion_data) do |row|
-  TableChampion.create!( {
-    champ_name: row[0],
-    health: row[1],
-    attack_damage: row[2],
-    ability_power: row[3],
-    armor: row[4],
-    magic_resist: row[5],
-    role: row[6],
-    catch_rate: row[7],
-    range: row[8] } )
-  puts "#{row[0]} added"
+champion_stats_data = 'app/data/champion_stats.json'
+file = File.read(champion_stats_data)
+champions = JSON.parse(file)["data"]
+champions.each do |key,val|
+    TableChampion.create!({
+        name: val["name"],
+        hp: val["stats"]["hp"],
+        attack_damage: val["stats"]["attackdamage"],
+        armor: val["stats"]["armor"],
+        magic_resist: val["stats"]["spellblock"],
+        attack_range: val["stats"]["attackrange"],
+        riot_id: val["id"],
+        key: val["key"],
+        title: val["title"],
+        f_role: val["tags"][0],
+        s_role: val["tags"][1],
+        lore: val["lore"],
+        hp_per_level: val["stats"]["hpperlevel"],
+        attack_damage_per_level: val["stats"]["attackdamageperlevel"],
+        armor_per_level: val["stats"]["armorperlevel"],
+        magic_resist_per_level: val["stats"]["spellblockperlevel"],
+        movespeed: val["stats"]["movespeed"]
+        } )
+    puts "#{val["name"]} added to the Champion table"
 end
 
 # The empty table champion
 TableChampion.create!({
     id: 999,
-    champ_name: "No Champion",
-    health: 1,
-    attack_damage: 1,
-    ability_power: 1,
-    armor: 1,
-    magic_resist: 1,
-    role: "Marksman",
-    catch_rate: 1,
-    range: 1 
+    name: "Empty",
+    hp: 0,
+    attack_damage: 0,
+    armor: 0,
+    magic_resist: 0,
+    attack_range: 1,
+    riot_id: 999,
+    key: "Empty",
+    title: "the Empty One",
+    f_role: "None",
+    s_role: "None",
+    lore: "The empty champion was born somewhere in Valoran.",
+    hp_per_level: 0,
+    attack_damage_per_level: 0,
+    armor_per_level: 0,
+    magic_resist_per_level: 0,
+    movespeed: 0
 })
 puts
 puts "placeholder champion added"

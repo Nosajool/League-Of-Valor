@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621232328) do
+ActiveRecord::Schema.define(version: 20140622013721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,11 +53,10 @@ ActiveRecord::Schema.define(version: 20140621232328) do
     t.datetime "updated_at"
     t.integer  "hp"
     t.integer  "attack_damage"
-    t.integer  "ability_power"
     t.integer  "armor"
     t.integer  "magic_resist"
     t.integer  "attack_range"
-    t.integer  "riot_champ_id"
+    t.integer  "riot_id"
     t.string   "key"
     t.text     "title"
     t.string   "f_role"
@@ -65,7 +64,6 @@ ActiveRecord::Schema.define(version: 20140621232328) do
     t.text     "lore"
     t.integer  "hp_per_level"
     t.float    "attack_damage_per_level"
-    t.float    "ability_power_per_level"
     t.float    "armor_per_level"
     t.float    "magic_resist_per_level"
     t.integer  "movespeed"

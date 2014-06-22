@@ -37,7 +37,7 @@ class ChampionsController < ApplicationController
 			end
 		end
 		@non_roster = current_user.champions.where("position = '0'")
-		@non_roster.sort_by! { |champ| champ.table_champion.champ_name }
+		@non_roster.sort_by! { |champ| champ.table_champion.name }
 	end
 
 	def bench
@@ -82,7 +82,7 @@ class ChampionsController < ApplicationController
 			@new_champ = Champion.find(params[:new_id])
 			@old_champ.update(position: 0)
 			@new_champ.update(position: params[:position])
-			flash[:success] = "#{@old_champ.table_champion.champ_name} was swapped out for #{@new_champ.table_champion.champ_name}"
+			flash[:success] = "#{@old_champ.table_champion.name} was swapped out for #{@new_champ.table_champion.name}"
 			redirect_to roster_path
 		end
 
