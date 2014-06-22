@@ -9,10 +9,10 @@ class MapsController < ApplicationController
   		# Should get array of champions available on this map
   		@map_champions = @map.map_champions
   		num = rand_num
-  		@map_champions.each do |champ|
-  			if num < champ.probability
+  		@map_champions.each do |map_champ|
+  			if num <= map_champ.probability
           # Change this to find by the Key
-  				@random_champ = TableChampion.find(champ.champ_id)
+  				@random_champ = TableChampion.where(key: map_champ.key).first
   				break
   			end
   		end

@@ -2,8 +2,16 @@
 League of Legends themed rpg using Ruby on Rails.
 
 [Wiki](https://github.com/Nosajool/League-Of-Valor/wiki)
+
+# Data sources
+[Riot Games API](https://developer.riotgames.com/)
+[League of Legends Wiki](http://leagueoflegends.wikia.com/wiki/League_of_Legends_Wiki)
+
+## Other Links
+
 [Setting up rails with postgres](https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres
 s)
+
 [for windows](http://stackoverflow.com/questions/7086654/installing-postgres-on-windows-for-use-with-ruby-on-rails)
 
 ## Things you need to help

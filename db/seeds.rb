@@ -69,13 +69,14 @@ end
 
 puts
 puts "Inputting Map Champion Data"
-
-map_champion_data = 'app/data/map_champions.csv'
-CSV.foreach(map_champion_data) do |row|
-    a = Map.find(row[0])
-    a.map_champions.create!( {
-    champ_id: row[1],
-    probability: row[2]
-    })
-  puts "#{row[1]} added with probability #{row[2]}"
+map_champion_data = 'app/data/map_champions.json'
+file = File.read(map_champion_data)
+champions = JSON.parse(file)
+champions.each do |val|
+    a = Map.find(val["mapid"])
+    a.map_champions.create!({
+        key: val["key"],
+        probability: val["prob"]
+    } )
+    puts "#{val["key"]} added with probability #{val["prob"]}"
 end

@@ -3,19 +3,6 @@ class ChampionsController < ApplicationController
 	# Will handle catching champions
 	before_action :signed_in_user
 
-	def create
-		# @champion = current_user.champions.build(champion_params)
-		# if @champion.save
-		# 	# Change this to the champion name
-		# 	flash[:success] = "You caught a #{@champion.table_champion_id}!"
-		# 	# Change this to the map that you came from
-		# 	redirect_to root_url
-		# else
-		# 	# Redirect somewhere else
-		# 	render root_url
-		# end
-	end
-
 	def edit
 		# Can't switch ppl that are in your roster...(Like can't switch from position 1 to 5)
 		@champion_count = current_user.champions.count
@@ -23,10 +10,10 @@ class ChampionsController < ApplicationController
 		@swap = Champion.new
 		# Fill @roster array with empty champions
 		for x in 0..4
-			if current_user.champions.where("position = #{x+1}").exists?
+			if current_user.champions.where(position: (x+1)).exists?
 				# So it turns out that .where() returns an array of ActiveRecord::Relation).
 				# In order to get the single object, must use .first
-				@roster << current_user.champions.where("position = #{x+1}").first
+				@roster << current_user.champions.where(position: (x+1)).first
 			else
 				@roster << Champion.new(:table_champion_id=>999,
 											 :experience=>0, 
@@ -36,15 +23,16 @@ class ChampionsController < ApplicationController
 											 :level=>1)
 			end
 		end
-		@non_roster = current_user.champions.where("position = '0'")
+		@non_roster = current_user.champions.where(position: 0)
 		@non_roster.sort_by! { |champ| champ.table_champion.name }
 	end
 
 	def bench
-		@bench = current_user.champions.where("position = '0'")
+		@bench = current_user.champions.where(position: 0)
 		@bench.sort_by! { |champ| champ.level }
 		@bench.reverse!
-		@roster = current_user.champions.where("position != '0'")
+		@roster = current_user.champions.where.not(position: 0)
+		@roster.sort_by! { |champ| champ.position }
 	end
 	
 	def change_roster

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140622013721) do
+ActiveRecord::Schema.define(version: 20140622175853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 20140622013721) do
 
   create_table "map_champions", force: true do |t|
     t.integer  "map_id"
-    t.integer  "champ_id"
     t.integer  "probability"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key"
   end
 
   add_index "map_champions", ["map_id"], name: "index_map_champions_on_map_id", using: :btree
@@ -68,6 +68,8 @@ ActiveRecord::Schema.define(version: 20140622013721) do
     t.float    "magic_resist_per_level"
     t.integer  "movespeed"
   end
+
+  add_index "table_champions", ["key"], name: "index_table_champions_on_key", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

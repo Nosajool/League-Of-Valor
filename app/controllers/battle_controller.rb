@@ -42,8 +42,8 @@ class BattleController < ApplicationController
       roster = []
       # Fill @roster array with empty champions
       for x in 0..4
-        if user.champions.where("position = #{x+1}").exists?
-          roster << user.champions.where("position = #{x+1}").first
+        if user.champions.where(position: (x+1)).exists?
+          roster << user.champions.where(position: (x+1)).first
         end
       end
       roster

@@ -2,33 +2,55 @@ require 'spec_helper'
 
 describe TableChampion do
 	before do
-		@table_champion = TableChampion.new( champ_name: "Warwick",
-											 health: 40,
+		@table_champion = TableChampion.new( name: "Miss Fortune",
+											 hp: 400,
 											 attack_damage: 85,
-											 ability_power: 75,
 											 armor: 50,
 											 magic_resist: 65,
-											 role: "Marksman",
-										 	 catch_rate: 1500,
-										 	 range: 5 )
+											 attack_range: 550,
+											 riot_id: 4,
+											 key: "MissFortune",
+											 title: "the Odd One",
+											 f_role: "Assassin",
+											 s_role: "Tank",
+											 lore: "One day, Miss Fortune was doing something when hi",
+											 hp_per_level: 34,
+											 attack_damage_per_level: 3.2,
+											 armor_per_level: 2.2,
+											 magic_resist_per_level: 1.4,
+											 movespeed: 330 )
 	end
 
 	subject { @table_champion }
 
-	it { should respond_to(:champ_name) }
-	it { should respond_to(:health) }
+	it { should respond_to(:id) }
+	it { should respond_to(:name) }
+	it { should respond_to(:hp) }
 	it { should respond_to(:attack_damage) }
-	it { should respond_to(:ability_power) }
 	it { should respond_to(:armor) }
 	it { should respond_to(:magic_resist) }
-	it { should respond_to(:role) }
-	it { should respond_to(:catch_rate) }
-	it { should respond_to(:range) }
+	it { should respond_to(:attack_range) }
+	it { should respond_to(:riot_id) }
+	it { should respond_to(:key) }
+	it { should respond_to(:title) }
+	it { should respond_to(:f_role) }
+	it { should respond_to(:s_role) }
+	it { should respond_to(:lore) }
+	it { should respond_to(:hp_per_level) }
+	it { should respond_to(:attack_damage_per_level) }
+	it { should respond_to(:armor_per_level) }
+	it { should respond_to(:magic_resist_per_level) }
+	it { should respond_to(:movespeed) }
+
+	it { should_not respond_to(:ability_power) }
+	it { should_not respond_to(:role) }
+	it { should_not respond_to(:range) }
+	it { should_not respond_to(:catch_rate) }
 
 	it { should be_valid }
 
 	describe "when champ_name is not present" do
-		before { @table_champion.champ_name = " " }
+		before { @table_champion.name = " " }
 		it { should_not be_valid }
 	end
 
