@@ -1,0 +1,30 @@
+<% provide(:title, "#{@table_champion.name}") %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= champ_face_for(@table_champion.riot_id) %>
+        <%= @table_champion.name %>
+      </h1>
+      <h2>
+        <%= @table_champion.title %>
+      </h2>
+    </section>
+  </aside>
+</div>
+<h1>Base Statistics</h1>
+<ul>
+	<li>Health: <%= @table_champion.hp %></li>
+	<li>Health per level: <%= @table_champion.hp_per_level %></li>
+	<li>Attack Damage: <%= @table_champion.attack_damage %></li>
+	<li>Attack Damage per level: <%= @table_champion.attack_damage_per_level %></li>
+	<li>Armor: <%= @table_champion.armor %></li>
+	<li>Armor per level: <%= @table_champion.armor_per_level %></li>
+	<li>Magic Resist: <%= @table_champion.magic_resist %></li>
+	<li>Magic Resist per level: <%= @table_champion.magic_resist_per_level %></li>
+	<li>Attack Range: <%= @table_champion.attack_range %></li>
+	<li>Movespeed: <%= @table_champion.movespeed %></li>
+	<li>Primary Role: <%= @table_champion.f_role %></li>
+	<li>Secondary Role: <%= @table_champion.s_role %></li>
+</ul>
+<%= (@table_champion.lore).html_safe %>

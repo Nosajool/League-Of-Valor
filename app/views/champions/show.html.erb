@@ -13,6 +13,7 @@
   </aside>
 </div>
 <ul>
+  <li><%= link_to("Base Stats", champion_stat_path(@champion.table_champion.id)) %></li>
 	<li>Level: <%= @champion.level %></li>
 	<li>Experience: <%= @champion.experience %></li>
 	<li>Owner: <%= link_to(@champion.user.username, @champion.user) %></li>

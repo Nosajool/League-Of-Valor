@@ -15,6 +15,7 @@ LeagueOfValor::Application.routes.draw do
   get '/contact',                 to: 'static_pages#contact'
 
   # as: 'champions' lets us use champions_path for link_to
+  resources :champion_stats, controller: 'table_champions', only: :show
   get '/champions',               to: 'table_champions#index',         as: 'champions'
       
   resources :champions, only: :show
