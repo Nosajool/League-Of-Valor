@@ -4,9 +4,9 @@ describe TableChampion do
 	before do
 		@table_champion = TableChampion.new( name: "Miss Fortune",
 											 hp: 400,
-											 attack_damage: 85,
-											 armor: 50,
-											 magic_resist: 65,
+											 attack_damage: 36,
+											 armor: 24,
+											 magic_resist: 20,
 											 attack_range: 550,
 											 riot_id: 4,
 											 key: "MissFortune",
@@ -54,24 +54,73 @@ describe TableChampion do
 		it { should_not be_valid }
 	end
 
-	describe "when health is too high" do
+	describe "when riot id is not present" do
+		before { @table_champion.riot_id = " " }
+		it { should_not be_valid }
+	end
+
+	describe "when key is not present" do
+		before { @table_champion.key = " "}
+		it { should_not be_valid }
+	end
+
+	describe "when title is missing" do
+		before { @table_champion.title = " " }
+		it { should_not be_valid }
+	end
+
+	describe "when lore is not present" do
+		before { @table_champion.lore = " " }
+		it { should_not be_valid }
+	end
+
+	describe "when base health is too high" do
 		it "should be invalid" do
-			@table_champion.health = 300
+			@table_champion.hp = 850
 			expect(@table_champion).not_to be_valid
 		end
 	end
 
-	describe "when given a role not on the list" do
+	describe "when base attack damage is too high" do
 		it "should be invalid" do
-			@table_champion.role = "Caster"
+			@table_champion.attack_damage = 70
 			expect(@table_champion).not_to be_valid
 		end
 	end
 
-	describe "when range is too high" do
+	describe "when base armor is too high" do
 		it "should be invalid" do
-			@table_champion.range = 11
+			@table_champion.armor = 40
 			expect(@table_champion).not_to be_valid
 		end
 	end
+
+	describe "when base magic resist is too high" do
+		it "should be invalid" do
+			@table_champion.magic_resist = 40
+			expect(@table_champion).not_to be_valid
+		end
+	end
+
+	describe "when attack range is too high" do
+		it "should be invalid" do
+			@table_champion.attack_range = 1000
+			expect(@table_champion).not_to be_valid
+		end
+	end
+
+	describe "when movespeed is too high" do
+		it "should be invalid" do
+			@table_champion.movespeed = 400
+			expect(@table_champion).not_to be_valid
+		end
+	end
+
+	describe "when primary role is invalid" do
+		it "should be invalid" do
+			@table_champion.f_role = "Caster"
+			expect(@table_champion).not_to be_valid
+		end
+	end
+
 end
