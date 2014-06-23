@@ -5,7 +5,7 @@
 <h3>Admins only</h3>
 
 
-<%= form_for(@champion, :url => {:action => "spawn_champion"}, :method => "post" ) do |f| %>
+<%= form_for(@champion, :url => {:action => "spawn"}, :method => "post" ) do |f| %>
 	<%= render 'shared/error_messages', object: f.object %>
 	<%= f.label :table_champion_id %>
 	<div class="black_text">

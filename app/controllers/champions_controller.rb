@@ -88,7 +88,7 @@ class ChampionsController < ApplicationController
 
 	end
 
-	def spawn_champion
+	def spawn
 		@champion = current_user.champions.build(spawn_params)
 		if @champion.save
 			flash[:success] = "Champion id:#{@champion.id} Level:#{@champion.level} Position: #{@champion.position} User id: #{current_user.id}"
@@ -99,7 +99,7 @@ class ChampionsController < ApplicationController
 		end
 	end
 
-	def spawn_champion_page
+	def spawn_page
 		@champion = current_user.champions.build
 	end
 
