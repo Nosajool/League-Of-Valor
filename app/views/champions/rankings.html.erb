@@ -14,7 +14,7 @@
 			</tr>
 			<% @champions.each do |champ| %>
 				<tr class ="dark-hover">
-					<td><%= champ.table_champion.name %></td>
+					<td><%= link_to(champ.table_champion.name, champ) %></td>
 					<td><%= champ.level %></td>
 					<td><%= link_to(champ.user.username, champ.user) %></td>
 				</tr>
