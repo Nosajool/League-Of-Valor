@@ -16,7 +16,7 @@ module ChampionsHelper
 	end
 
 	# Champ Face Helper
-	def champ_face_for(champ_id)
-		image_tag("champ_faces/#{champ_id}_Web_0.jpg", alt: "Champion Face", class: "champion_face")		
+	def champ_face_for(riot_id)
+		image_tag("champ_faces/#{riot_id}_Web_0.jpg", alt: "Champion Face", class: "champion_face")		
 	end
 end

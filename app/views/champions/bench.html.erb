@@ -18,7 +18,7 @@
 			</tr>
 			<% @roster.each do |champ| %>
 				<tr class ="dark-hover">
-					<td><%= champ.table_champion.name %></td>
+					<td><%= link_to(champ.table_champion.name, champ) %></td>
 					<td><%= champ.level %></td>
 					<td><%= champ.table_champion.attack_damage %></td>
 					<td><%= champ.table_champion.armor %></td>
@@ -50,7 +50,7 @@
 			</tr>
 			<% @bench.each do |champ| %>
 				<tr class ="dark-hover">
-					<td><%= champ.table_champion.name %></td>
+					<td><%= link_to(champ.table_champion.name, champ) %></td>
 					<td><%= champ.level %></td>
 					<td><%= champ.table_champion.attack_damage %></td>
 					<td><%= champ.table_champion.armor %></td>

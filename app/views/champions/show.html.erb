@@ -3,7 +3,7 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= champ_face_for(@champion.id) %>
+        <%= champ_face_for(@champion.table_champion.riot_id) %>
         <%= @champion.table_champion.name %>
       </h1>
       <h2>
@@ -15,7 +15,7 @@
 <ul>
 	<li>Level: <%= @champion.level %></li>
 	<li>Experience: <%= @champion.experience %></li>
-	<li>Owner: <%= @champion.user.username %></li>
+	<li>Owner: <%= link_to(@champion.user.username, @champion.user) %></li>
 	<li>Health: <%= (@champion.table_champion.hp + @champion.level * @champion.table_champion.hp_per_level) %></li>
 	<li>Attack Damage: <%= @champion.table_champion.attack_damage + @champion.level * @champion.table_champion.attack_damage_per_level %></li>
 	<li>Armor: <%= @champion.table_champion.armor + @champion.level * @champion.table_champion.armor_per_level %></li>
