@@ -3,6 +3,10 @@ class ChampionsController < ApplicationController
 	# Will handle catching champions
 	before_action :signed_in_user
 
+	def show
+		@champion = Champion.find(params[:id])
+	end
+
 	def edit
 		# Can't switch ppl that are in your roster...(Like can't switch from position 1 to 5)
 		@champion_count = current_user.champions.count
