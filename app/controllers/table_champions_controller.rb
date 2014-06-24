@@ -5,4 +5,8 @@ class TableChampionsController < ApplicationController
 		@table_champions = TableChampion.where.not(id: 999)
 		@table_champions.sort_by! { |champ| champ.id }
 	end
+
+	def show
+		@table_champion = TableChampion.find(params[:id])
+	end
 end

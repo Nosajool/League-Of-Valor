@@ -25,7 +25,7 @@
 			</tr>
 			<tr>
 				<% @roster.each do |roster| %>
-					<td class="roster"><%= roster.table_champion.name %></td>
+					<td class="roster"><%= link_to(roster.table_champion.name, roster) %></td>
 				<% end %>
 			</tr>
 			<tr>

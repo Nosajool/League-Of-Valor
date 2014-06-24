@@ -8,6 +8,7 @@ $contentTextCol: #eeeeec;
 $sidebarTitleCol: #0b2a48;
 $sidebarLinkHoverCol: #060e1f;
 $grayMediumLight: #eaeaea;
+$footerTextCol: #999999; //another gray
 $grayLighter: #d3d3d3;
 $grayDarker: #a9a9a9;
 
@@ -169,6 +170,10 @@ footer {
       margin-left: 10px;
     }
   }
+}
+
+.riot-notice {
+  color: $footerTextCol;
 }
 
 /* miscellaneous */

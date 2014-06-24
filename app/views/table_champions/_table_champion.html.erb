@@ -1,6 +1,6 @@
 <tr class = "dark-hover">
 	<td><%= table_champion.id %></td>
-	<td><%= table_champion.name %></td>
+	<td><%= link_to(table_champion.name, champion_stat_path(table_champion.id)) %></td>
 	<td><%= table_champion.key %></td>
 	<td><%= table_champion.hp %></td>
 	<td><%= table_champion.attack_damage %></td>
