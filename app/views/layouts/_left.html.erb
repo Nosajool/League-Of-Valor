@@ -7,7 +7,6 @@
 	<li><%= link_to "FAQ",                     '#' %></li>
 
 	<div class="notTop">City States</div>
-	<li><%= link_to "Admin Spawn Champion",     spawn_champion_path %></li>
 	<li><%= link_to "Maps List",                maps_path %></li>
 
 	<div class="notTop">Essentials</div>
@@ -28,5 +27,10 @@
 	<li><%= link_to "Champion Rankings",       champion_ranking_path %></li>
 	<li><%= link_to "Buff Holders",            '#' %></li>
 	<li><%= link_to "ELO Rankings",            '#' %></li>
+
+	<% if Rails.env.development? %>
+		<div class="notTop">Admin</div>
+		<li><%= link_to "Admin Spawn Champion", spawn_champion_path %></li>
+	<% end %>
 
 </ul>

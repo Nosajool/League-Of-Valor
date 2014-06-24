@@ -2,6 +2,7 @@ class ChampionsController < ApplicationController
 	# Under Construction
 	# Will handle catching champions
 	before_action :signed_in_user
+	before_action :admin_user, only: [:spawn, :spawn_page]
 
 	def show
 		@champion = Champion.find(params[:id])
@@ -88,7 +89,7 @@ class ChampionsController < ApplicationController
 		else
 			flash[:danger] = "Messed up. Probably the skin code"
 			redirect_to current_user
-		end
+		end		
 	end
 
 	def spawn_page
