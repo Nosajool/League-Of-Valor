@@ -5,6 +5,7 @@
 $grayMediumLight: #eaeaea;
 $maroon: #800000;
 $contentCol: #5e5e5e; // Gray
+$footerTextCol: #999999; //another gray
 $grayLighter: #d3d3d3;
 $grayDarker: #a9a9a9;
 $titleCol: #BB0000; // Kind of Red
@@ -162,6 +163,10 @@ footer {
       margin-left: 10px;
     }
   }
+}
+
+.riot-notice {
+  color: $footerTextCol;
 }
 
 /* miscellaneous */
