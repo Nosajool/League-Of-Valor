@@ -1,12 +1,12 @@
 require 'csv'
 require 'json'
 
-puts "Inputting Table Champion Data"
+puts "Inputting Table Champion Data and Skin Data"
 champion_stats_data = 'app/data/champion_stats.json'
 file = File.read(champion_stats_data)
 champions = JSON.parse(file)["data"]
 champions.each do |key,val|
-    TableChampion.create!({
+    x = TableChampion.create!({
         name: val["name"],
         hp: val["stats"]["hp"],
         attack_damage: val["stats"]["attackdamage"],
@@ -24,8 +24,16 @@ champions.each do |key,val|
         armor_per_level: val["stats"]["armorperlevel"],
         magic_resist_per_level: val["stats"]["spellblockperlevel"],
         movespeed: val["stats"]["movespeed"]
-        } )
+    } )
     puts "#{val["name"]} added to the Champion table"
+    val["skins"].each do |a|
+        x.skins.create!({
+            table_champion_id: x.id,
+            num: a["num"],
+            name: a["name"]
+        } )
+        puts "#{a["name"]} added to the list of Skins"
+    end
 end
 
 # The empty table champion
