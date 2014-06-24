@@ -2,14 +2,20 @@
 	<div>Info</div>
 	<li><%= link_to "Updates",                 '#' %></li>
 	<li><%= link_to "Statistics",              '#' %></li>
-	<li><%= link_to "Settings",                '#' %></li>
 	<li><%= link_to "Champion Base Stats",     champions_path %></li>
+	<li><%= link_to "Rules",                   '#' %></li>
+	<li><%= link_to "FAQ",                     '#' %></li>
+
+	<div class="notTop">City States</div>
+	<li><%= link_to "Admin Spawn Champion",     spawn_champion_path %></li>
+	<li><%= link_to "Maps List",                maps_path %></li>
 
 	<div class="notTop">Essentials</div>
 	<li><%= link_to "Active Roster",          roster_path %></li>
 	<li><%= link_to "Assign Pros",            '#' %></li>
 
 	<div class="notTop">Something</div>
+	<li><%= link_to "View a Profile",          '#' %></li>
 	<li><%= link_to "Bench",                 bench_path %></li>
 
 	<div class="notTop">Extras</div>
@@ -23,8 +29,4 @@
 	<li><%= link_to "Buff Holders",            '#' %></li>
 	<li><%= link_to "ELO Rankings",            '#' %></li>
 
-	<div class="notTop">Log out</div>
-	<li><%= link_to "Log out",                 signout_path, method: "delete" %></li>
 </ul>
-
-
