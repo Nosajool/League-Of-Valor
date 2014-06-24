@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Skin do
+describe SkinsController do
 
 end
