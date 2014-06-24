@@ -19,4 +19,23 @@ module ChampionsHelper
 	def champ_face_for(riot_id)
 		image_tag("champ_faces/#{riot_id}_Web_0.jpg", alt: "Champion Face", class: "champion_face")		
 	end
+
+
+	# Champion Statistics. Will calculate all stat boost (pros, buffs, roles) using the following methods
+
+	def champ_hp(champion)
+		health = champion.table_champion.hp + champion.level * champion.table_champion.hp_per_level
+	end
+
+	def champ_ad(champion)
+		attack = champion.table_champion.attack_damage + champion.level * champion.table_champion.attack_damage_per_level
+	end
+
+	def champ_armor(champion)
+		armor = champion.table_champion.armor + champion.level * champion.table_champion.armor_per_level
+	end
+
+	def champ_mr(champion)
+		magic_resist = champion.table_champion.magic_resist + champion.level * champion.table_champion.magic_resist_per_level		
+	end
 end

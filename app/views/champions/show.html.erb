@@ -17,10 +17,10 @@
 	<li>Level: <%= @champion.level %></li>
 	<li>Experience: <%= @champion.experience %></li>
 	<li>Owner: <%= link_to(@champion.user.username, @champion.user) %></li>
-	<li>Health: <%= (@champion.table_champion.hp + @champion.level * @champion.table_champion.hp_per_level) %></li>
-	<li>Attack Damage: <%= @champion.table_champion.attack_damage + @champion.level * @champion.table_champion.attack_damage_per_level %></li>
-	<li>Armor: <%= @champion.table_champion.armor + @champion.level * @champion.table_champion.armor_per_level %></li>
-	<li>Magic Resist: <%= @champion.table_champion.magic_resist + @champion.level * @champion.table_champion.magic_resist_per_level %></li>
+	<li>Health: <%= champ_hp(@champion) %></li>
+	<li>Attack Damage: <%= champ_ad(@champion) %></li>
+	<li>Armor: <%= champ_armor(@champion) %></li>
+	<li>Magic Resist: <%= champ_mr(@champion) %></li>
 	<li>Movespeed: <%= @champion.table_champion.movespeed %></li>
 	<li>Attack Range: <%= @champion.table_champion.attack_range %></li>
 </ul>
