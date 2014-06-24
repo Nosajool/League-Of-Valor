@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140617050750) do
+ActiveRecord::Schema.define(version: 20140622175853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 20140617050750) do
 
   create_table "map_champions", force: true do |t|
     t.integer  "map_id"
-    t.integer  "champ_id"
     t.integer  "probability"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "key"
   end
 
   add_index "map_champions", ["map_id"], name: "index_map_champions_on_map_id", using: :btree
@@ -48,18 +48,28 @@ ActiveRecord::Schema.define(version: 20140617050750) do
   end
 
   create_table "table_champions", force: true do |t|
-    t.string   "champ_name"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "health"
+    t.integer  "hp"
     t.integer  "attack_damage"
-    t.integer  "ability_power"
     t.integer  "armor"
     t.integer  "magic_resist"
-    t.string   "role"
-    t.integer  "catch_rate"
-    t.integer  "range"
+    t.integer  "attack_range"
+    t.integer  "riot_id"
+    t.string   "key"
+    t.text     "title"
+    t.string   "f_role"
+    t.string   "s_role"
+    t.text     "lore"
+    t.integer  "hp_per_level"
+    t.float    "attack_damage_per_level"
+    t.float    "armor_per_level"
+    t.float    "magic_resist_per_level"
+    t.integer  "movespeed"
   end
+
+  add_index "table_champions", ["key"], name: "index_table_champions_on_key", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username"

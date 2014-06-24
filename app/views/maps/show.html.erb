@@ -5,10 +5,10 @@
 <%= @map.description %>
 <br><br><br>
 <div class="text-center">
-	You encountered a level 1 <%= @random_champ.champ_name %>
+	You encountered a level 1 <%= @random_champ.name %>
 	<br><br>
 	<div class="champ_face_catch">
-		<%= champ_face_for(@random_champ.id, size: "m") %>
+		<%= champ_face_for(@random_champ.riot_id) %><br>
 	</div>
 	<br>
 </div>
@@ -16,16 +16,16 @@
 <div class="span12">
 	<div class="map-champion-stats">
 		Attack Damage: <%= @random_champ.attack_damage %><br>
-		Ability Power: <%= @random_champ.ability_power %><br>
-		Armor: <%= @random_champ.armor %><br>
-		Magic Resist: <%= @random_champ.magic_resist %><br>
-		Range: <%= @random_champ.range %><br>
-		Role: <%= @random_champ.role %><br>
+	Armor: <%= @random_champ.armor %><br>
+	Magic Resist: <%= @random_champ.magic_resist %><br>
+	Range: <%= @random_champ.attack_range %><br>
+	Role 1: <%= @random_champ.f_role %><br>
+	Role 2: <%= @random_champ.s_role %>
 	</div>
 </div>
 
 <br>
 <%= form_tag url_for(:controller => 'maps', :action => 'catch'), :method => "post"  do %>
   	<%= hidden_field_tag(:champ_id, @random_champ.id) %>
-	<%= submit_tag("Catch the #{@random_champ.champ_name}", class: "btn btn-success") %>
+	<%= submit_tag("Catch the #{@random_champ.name}", class: "btn btn-success") %>
 <% end %>

@@ -11,12 +11,12 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 	<table class="roster-table">
 		<tr>
 			<% @roster.each do |roster| %>
-				<td class="roster"><%= champ_face_for(roster.table_champion.id, size: "m") %></td>
+				<td class="roster"><%= champ_face_for(roster.table_champion.riot_id) %></td>
 			<% end %>
 		</tr>
 		<tr>
 			<% @roster.each do |roster| %>
-				<td class="roster"><%= roster.table_champion.champ_name %></td>
+				<td class="roster"><%= roster.table_champion.name %></td>
 			<% end %>
 		</tr>
 		<tr>
@@ -34,12 +34,12 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 	<table class="roster-table">
 		<tr>
 			<% @opp_roster.each do |roster| %>
-				<td class="roster"><%= champ_face_for(roster.table_champion.id, size: "m") %></td>
+				<td class="roster"><%= champ_face_for(roster.table_champion.riot_id) %></td>
 			<% end %>
 		</tr>
 		<tr>
 			<% @opp_roster.each do |roster| %>
-				<td class="roster"><%= roster.table_champion.champ_name %></td>
+				<td class="roster"><%= roster.table_champion.name %></td>
 			<% end %>
 		</tr>
 		<tr>

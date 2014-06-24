@@ -9,9 +9,10 @@ class MapsController < ApplicationController
   		# Should get array of champions available on this map
   		@map_champions = @map.map_champions
   		num = rand_num
-  		@map_champions.each do |champ|
-  			if num < champ.probability
-  				@random_champ = TableChampion.find(champ.champ_id)
+  		@map_champions.each do |map_champ|
+  			if num <= map_champ.probability
+          # Change this to find by the Key
+  				@random_champ = TableChampion.where(key: map_champ.key).first
   				break
   			end
   		end
@@ -19,7 +20,7 @@ class MapsController < ApplicationController
 
 	def catch
 		@champion = current_user.champions.build(champion_hash(params[:champ_id]))
-		champ_name = TableChampion.find(params[:champ_id]).champ_name
+		champ_name = TableChampion.find(params[:champ_id]).name
 		if @champion.save
 			flash[:success] = "Congratulations, the level 1 #{champ_name} has been added to your bench!"
 			redirect_to current_user
