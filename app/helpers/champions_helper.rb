@@ -15,9 +15,21 @@ module ChampionsHelper
 		champs_hash
 	end
 
-	# Champ Face Helper
-	def champ_face_for(riot_id)
-		image_tag("champ_faces/#{riot_id}_Web_0.jpg", alt: "Champion Face", class: "champion_face")		
+	# Images
+	def champ_img_square(champion)
+		image_tag("champions/#{champion.table_champion.key}_Square_0.png", alt: "Champion Face", class: "champion_face")		
+	end
+
+	def champ_img_square_table(table_champion)
+		image_tag("champions/#{table_champion.key}_Square_0.png", alt: "Champion Face", class: "champion_face")	
+	end
+
+	def champ_img_battle(champion)
+		image_tag("champions/#{champion.table_champion.key}_#{champion.active_skin}.jpg")
+	end
+
+	def champ_img_splash(champion)
+		image_tag("champions/#{champion.table_champion.key}_Splash_#{champion.active_skin}.jpg")
 	end
 
 

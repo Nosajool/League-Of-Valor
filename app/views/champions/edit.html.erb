@@ -5,7 +5,7 @@
 	<table class="roster-table">
 		<tr>
 			<% @roster.each do |roster| %>
-				<td class="roster"><%= champ_face_for(roster.table_champion.riot_id) %></td>
+				<td class="roster"><%= champ_img_square(roster) %></td>
 			<% end %>
 		</tr>
 		<tr>

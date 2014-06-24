@@ -3,7 +3,7 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= champ_face_for(@champion.table_champion.riot_id) %>
+        <%= champ_img_splash(@champion) %>
         <%= @champion.table_champion.name %>
       </h1>
       <h2>
@@ -23,5 +23,9 @@
 	<li>Magic Resist: <%= champ_mr(@champion) %></li>
 	<li>Movespeed: <%= @champion.table_champion.movespeed %></li>
 	<li>Attack Range: <%= @champion.table_champion.attack_range %></li>
+  <% if Rails.env.development? %>
+    <li>Skin Code: <%= @champion.skin %></li>
+    <li>Active Skin: <%= @champion.active_skin %></li>
+  <% end %>
 </ul>
 <%= (@champion.table_champion.lore).html_safe %>
