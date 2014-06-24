@@ -8,7 +8,7 @@
 	You encountered a level 1 <%= @random_champ.name %>
 	<br><br>
 	<div class="champ_face_catch">
-		<%= champ_face_for(@random_champ.riot_id) %><br>
+		<%= champ_img_square_table(@random_champ) %><br>
 	</div>
 	<br>
 </div>
@@ -16,11 +16,11 @@
 <div class="span12">
 	<div class="map-champion-stats">
 		Attack Damage: <%= @random_champ.attack_damage %><br>
-	Armor: <%= @random_champ.armor %><br>
-	Magic Resist: <%= @random_champ.magic_resist %><br>
-	Range: <%= @random_champ.attack_range %><br>
-	Role 1: <%= @random_champ.f_role %><br>
-	Role 2: <%= @random_champ.s_role %>
+		Armor: <%= @random_champ.armor %><br>
+		Magic Resist: <%= @random_champ.magic_resist %><br>
+		Range: <%= @random_champ.attack_range %><br>
+		Role 1: <%= @random_champ.f_role %><br>
+		Role 2: <%= @random_champ.s_role %>
 	</div>
 </div>
 

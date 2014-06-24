@@ -11,7 +11,7 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 	<table class="roster-table">
 		<tr>
 			<% @roster.each do |roster| %>
-				<td class="roster"><%= champ_face_for(roster.table_champion.riot_id) %></td>
+				<td class="roster"><%= champ_img_battle(roster) %></td>
 			<% end %>
 		</tr>
 		<tr>
@@ -34,7 +34,7 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 	<table class="roster-table">
 		<tr>
 			<% @opp_roster.each do |roster| %>
-				<td class="roster"><%= champ_face_for(roster.table_champion.riot_id) %></td>
+				<td class="roster"><%= champ_img_battle(roster) %></td>
 			<% end %>
 		</tr>
 		<tr>
