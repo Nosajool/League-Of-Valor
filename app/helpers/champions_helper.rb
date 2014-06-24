@@ -17,19 +17,23 @@ module ChampionsHelper
 
 	# Images
 	def champ_img_square(champion)
-		image_tag("champions/#{champion.table_champion.key}_Square_0.png", alt: "Champion Face", class: "champion_face")		
+		key = champion.table_champion.key
+		image_tag("champions/#{key}/#{key}_Square_0.png", alt: "Champion Face", class: "champion_face")		
 	end
 
 	def champ_img_square_table(table_champion)
-		image_tag("champions/#{table_champion.key}_Square_0.png", alt: "Champion Face", class: "champion_face")	
+		key = table_champion.key
+		image_tag("champions/#{key}/#{key}_Square_0.png", alt: "Champion Face", class: "champion_face")	
 	end
 
 	def champ_img_battle(champion)
-		image_tag("champions/#{champion.table_champion.key}_#{champion.active_skin}.jpg")
+		key = champion.table_champion.key
+		image_tag("champions/#{key}/#{key}_#{champion.active_skin}.jpg")
 	end
 
 	def champ_img_splash(champion)
-		image_tag("champions/#{champion.table_champion.key}_Splash_#{champion.active_skin}.jpg")
+		key = champion.table_champion.key
+		image_tag("champions/#{key}/#{key}_Splash_#{champion.active_skin}.jpg")
 	end
 
 
