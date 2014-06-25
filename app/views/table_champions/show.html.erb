@@ -1,30 +1,68 @@
 <% provide(:title, "#{@table_champion.name}") %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= champ_img_square_table(@table_champion) %>
-        <%= @table_champion.name %>
-      </h1>
-      <h2>
-        <%= @table_champion.title %>
-      </h2>
-    </section>
-  </aside>
+<br/>
+
+<div class="table_champion_profile">
+	<div class="champion_profile_picture">
+		<%= table_champ_img_square(@table_champion) %>
+	</div>
+    <h1><%= @table_champion.name %></h1>
+    <h2><%= @table_champion.title %></h2>
 </div>
-<h1>Base Statistics</h1>
-<ul>
-	<li>Health: <%= @table_champion.hp %></li>
-	<li>Health per level: <%= @table_champion.hp_per_level %></li>
-	<li>Attack Damage: <%= @table_champion.attack_damage %></li>
-	<li>Attack Damage per level: <%= @table_champion.attack_damage_per_level %></li>
-	<li>Armor: <%= @table_champion.armor %></li>
-	<li>Armor per level: <%= @table_champion.armor_per_level %></li>
-	<li>Magic Resist: <%= @table_champion.magic_resist %></li>
-	<li>Magic Resist per level: <%= @table_champion.magic_resist_per_level %></li>
-	<li>Attack Range: <%= @table_champion.attack_range %></li>
-	<li>Movespeed: <%= @table_champion.movespeed %></li>
-	<li>Primary Role: <%= @table_champion.f_role %></li>
-	<li>Secondary Role: <%= @table_champion.s_role %></li>
-</ul>
-<%= (@table_champion.lore).html_safe %>
+
+<div class="table_champion_statistics row">
+	<h3>Base Statistics</h3>
+	<table class="table table-hover table-condensed">
+		<tr class = "dark-hover">
+			<td>Health</td>
+			<td><%= @table_champion.hp %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Health per level</td>
+			<td><%= @table_champion.hp_per_level %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Attack Damage</td>
+			<td><%= @table_champion.attack_damage %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Attack Damage per level</td>
+			<td><%= @table_champion.attack_damage_per_level %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Armor</td>
+			<td><%= @table_champion.armor %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Armor per level</td>
+			<td><%= @table_champion.armor_per_level %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Magic Resist</td>
+			<td><%= @table_champion.magic_resist %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Magic Resist per level</td>
+			<td><%= @table_champion.magic_resist_per_level %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Attack Range</td>
+			<td><%= @table_champion.attack_range %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Movespeed</td>
+			<td><%= @table_champion.movespeed %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Primary Role</td>
+			<td><%= @table_champion.f_role %></td>
+		</tr>
+		<tr class = "dark-hover">
+			<td>Secondary Role</td>
+			<td><%= @table_champion.s_role %></td>
+		</tr>
+	</table>
+</div>
+
+<div class="table_champion_description row">
+	<%= (@table_champion.lore).html_safe %>
+</div>

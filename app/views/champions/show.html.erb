@@ -1,31 +1,74 @@
 <% provide(:title, "##{@champion.id} #{@champion.table_champion.name}") %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= champ_img_splash(@champion) %>
-        <%= skin_title(@champion) %>
-      </h1>
-      <h2>
-        <%= @champion.table_champion.title %>
-      </h2>
-    </section>
-  </aside>
+<br />
+
+<div class="table_champion_profile">
+  <div class="champion_banner_picture">
+    <%= champ_img_splash(@champion) %>
+  </div>
+  <h1><%= skin_title(@champion) %></h1>
+  <h2><%= @champion.table_champion.title %></h2>
 </div>
-<ul>
-  <li><%= link_to("Base Stats", champion_stat_path(@champion.table_champion.id)) %></li>
-	<li>Level: <%= @champion.level %></li>
-	<li>Experience: <%= @champion.experience %></li>
-	<li>Owner: <%= link_to(@champion.user.username, @champion.user) %></li>
-	<li>Health: <%= champ_hp(@champion) %></li>
-	<li>Attack Damage: <%= champ_ad(@champion) %></li>
-	<li>Armor: <%= champ_armor(@champion) %></li>
-	<li>Magic Resist: <%= champ_mr(@champion) %></li>
-	<li>Movespeed: <%= @champion.table_champion.movespeed %></li>
-	<li>Attack Range: <%= @champion.table_champion.attack_range %></li>
-  <% if Rails.env.development? %>
-    <li>Skin Code: <%= @champion.skin %></li>
-    <li>Active Skin: <%= @champion.active_skin %></li>
-  <% end %>
-</ul>
-<%= (@champion.table_champion.lore).html_safe %>
+
+<div class="table_champion_statistics row">
+  <h3>Statistics</h3>
+  <table class="table table-hover table-condensed">
+    <tr class = "dark-hover">
+      <td>Base Champion</td>
+      <td><%= link_to(@champion.table_champion.name, champion_stat_path(@champion.table_champion.id)) %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Level</td>
+      <td><%= @champion.level %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Experience</td>
+      <td><%= @champion.experience %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Owner</td>
+      <td><%= link_to(@champion.user.username, @champion.user) %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Health</td>
+      <td><%= champ_hp(@champion) %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Attack Damage</td>
+      <td><%= champ_ad(@champion) %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Armor</td>
+      <td><%= champ_armor(@champion) %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Magic Resist</td>
+      <td><%= champ_mr(@champion) %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Movespeed</td>
+      <td><%= @champion.table_champion.movespeed %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Movespeed</td>
+      <td><%= @champion.table_champion.movespeed %></td>
+    </tr>
+    <tr class = "dark-hover">
+      <td>Attack Range</td>
+      <td><%= @champion.table_champion.attack_range %></td>
+    </tr>
+    <% if Rails.env.development? %>
+      <tr class = "dark-hover">
+        <td>Skin Code</td>
+        <td><%= @champion.skin %></td>
+      </tr>
+      <tr class = "dark-hover">
+        <td>Active Skin</td>
+        <td><%= @champion.active_skin %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<div class="table_champion_description row">
+  <%= (@champion.table_champion.lore).html_safe %>
+</div>
