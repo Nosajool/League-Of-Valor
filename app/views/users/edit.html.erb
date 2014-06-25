@@ -6,21 +6,21 @@
     <%= form_for(@user) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :email %>
-      <%= f.text_field :email %>
-
       <%= f.label :password %>
       <%= f.password_field :password %>
 
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
+      <%= f.label :icon, "Summonner Icon" %>
+      <div class="black_text">
+        <%= f.select(:icon, options_for_select(icon_hash)) %>
+      </div>
+
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
     <br>
 
     <%= icon_for(@user, size: "s") %>
-    <!-- Change Summoner Icon Button -->
-    <a href="#">Change Summoner Icon</a>
   </div>
 </div>
