@@ -21,7 +21,7 @@
 	<li>Attack Damage: <%= champ_ad(@champion) %></li>
 	<li>Armor: <%= champ_armor(@champion) %></li>
 	<li>Magic Resist: <%= champ_mr(@champion) %></li>
-	<li>Movespeed: <%= @champion.table_champion.movespeed %></li>
+	<li>Movespeed: <%= champ_ms(@champion) %></li>
 	<li>Attack Range: <%= @champion.table_champion.attack_range %></li>
   <% if Rails.env.development? %>
     <li>Skin Code: <%= @champion.skin %></li>
