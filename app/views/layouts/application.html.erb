@@ -41,17 +41,9 @@
           <%= yield %>
 
         <% else %>
-          <!-- For signed in users, they get to see the 3 columns with an auto jumbotron for the middle -->
-
-          <!-- The Left Menu  -->
-          <div class="col-sm-3 col-md-3 col-lg-2">
-            <div class="mainArea sidebar">
-             <%= render 'layouts/left' %>  
-            </div>              
-          </div>
 
           <!-- Center where the page content is -->
-          <div class="col-sm-9 col-md-9 col-lg-10">
+          <div class="col-sm-12">
             <div class="mainArea">
                 <%= yield %>
             </div>
