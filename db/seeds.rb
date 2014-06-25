@@ -88,3 +88,28 @@ champions.each do |val|
     } )
     puts "#{val["key"]} added with probability #{val["prob"]}"
 end
+
+# Role Data
+puts
+puts "Input Role Data"
+role_data = 'app/data/roles.json'
+file = File.read(role_data)
+roles = JSON.parse(file)
+roles.each do |role|
+    Role.create!({
+        name: role["role"],
+        hp_base: role["hp_base"],
+        hp_per: role["hp_per"],
+        ad_base: role["ad_base"],
+        ad_per: role["ad_per"],
+        ap_base: role["ap_base"],
+        ap_per: role["ap_per"],
+        ar_base: role["ar_base"],
+        ar_per: role["ar_per"],
+        mr_base: role["mr_base"],
+        mr_per: role["mr_per"],
+        ms_base: role["ms_base"],
+        ms_per: role["ms_per"]
+    })
+    puts "#{role["role"]} added to the Role Table"
+end

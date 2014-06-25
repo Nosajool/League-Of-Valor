@@ -54,11 +54,11 @@
 		</tr>
 		<tr class = "dark-hover">
 			<td>Primary Role</td>
-			<td><%= @table_champion.f_role %></td>
+			<td><%= link_to(@table_champion.f_role, @f_role) %></td>
 		</tr>
 		<tr class = "dark-hover">
 			<td>Secondary Role</td>
-			<td><%= @table_champion.s_role %></td>
+			<td><%= link_to(@table_champion.s_role, @s_role) %></td>
 		</tr>
 	</table>
 </div>

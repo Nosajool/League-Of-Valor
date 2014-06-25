@@ -1,4 +1,5 @@
 LeagueOfValor::Application.routes.draw do
+  get "roles/index"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
@@ -16,6 +17,7 @@ LeagueOfValor::Application.routes.draw do
 
   # as: 'champions' lets us use champions_path for link_to
   resources :champion_stats, controller: 'table_champions', only: :show
+  # #show is now: champion_stat_path(table_champion.id)
   get '/champions',               to: 'table_champions#index',         as: 'champions'
       
   resources :champions, only: :show
@@ -32,6 +34,9 @@ LeagueOfValor::Application.routes.draw do
   post '/battle',                 to: 'battle#battle',                 as: 'battle'
   get '/champion_select/:opp_id', to: 'battle#setup',                  as: 'champ_select' #champ_select_path(23)
   # Redirect /champion_select to view a profile
+
+  resources :roles, only: [:index, :show]
+
 
 
 
