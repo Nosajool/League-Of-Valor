@@ -24,7 +24,7 @@
 	<li>Magic Resist per level: <%= @table_champion.magic_resist_per_level %></li>
 	<li>Attack Range: <%= @table_champion.attack_range %></li>
 	<li>Movespeed: <%= @table_champion.movespeed %></li>
-	<li>Primary Role: <%= @table_champion.f_role %></li>
-	<li>Secondary Role: <%= @table_champion.s_role %></li>
+	<li>Primary Role: <%= link_to(@table_champion.f_role, @f_role) %></li>
+	<li>Secondary Role: <%= link_to(@table_champion.s_role, @s_role) %></li>
 </ul>
 <%= (@table_champion.lore).html_safe %>
