@@ -19,10 +19,22 @@
 	width: 100%;
 }
 
-.champ_face_catch {
+.champion_banner {
+	width: 100%;
+}
+
+.champion_profile_picture {
 	margin-left: auto;
 	margin-right: auto;
 	width: 25%;
+	min-width: 120px;
+}
+
+.champion_banner_picture {
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	min-width: 240px;
 }
 
 .champ_stats {

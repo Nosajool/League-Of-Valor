@@ -62,6 +62,7 @@ textarea {
 .row {
   margin-left: 2%;
   margin-right: 2%;
+  margin-bottom: 2em;
 }
 
 /* typography */
@@ -193,33 +194,6 @@ footer {
   @include box_sizing;
 }
 
-/* sidebar */
-
-aside {
-  section {
-    padding: 10px 0;
-    border-top: 1px solid $grayLighter;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
-}
-
-
-
 .stats {
   overflow: auto;
   a {
@@ -284,10 +258,8 @@ input {
 
 .users {
   list-style: none;
-  margin: 0;
   li {
     overflow: auto;
-    padding: 10px 0;
     border-top: 1px solid $grayLighter;
     &:last-child {
       border-bottom: 1px solid $grayLighter;
@@ -332,3 +304,10 @@ aside {
 .black_text {
   color: black;
 }
+
+// Pagination
+
+.pagination {
+  margin-left: 2%;
+}
+
