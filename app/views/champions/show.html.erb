@@ -22,11 +22,11 @@
     </tr>
     <tr class = "dark-hover">
       <td>Primary Role</td>
-      <td><%= @champion.table_champion.f_role %></td>
+      <td><%= link_to(@champion.table_champion.f_role, @f_role) %></td>
     </tr>
     <tr class = "dark-hover">
       <td>Secondary Role</td>
-      <td><%= @champion.table_champion.s_role %></td>
+      <td><%= link_to(@champion.table_champion.s_role, @s_role) %></td>
     </tr>
     <tr class = "dark-hover">
       <td>Experience</td>

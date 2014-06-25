@@ -6,6 +6,8 @@ class ChampionsController < ApplicationController
 
 	def show
 		@champion = Champion.find(params[:id])
+		@f_role = Role.where(name: @champion.table_champion.f_role).first
+		@s_role = Role.where(name: @champion.table_champion.s_role).first
 	end
 
 	def edit
