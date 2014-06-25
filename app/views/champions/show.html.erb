@@ -17,8 +17,11 @@
 	<li>Level: <%= @champion.level %></li>
 	<li>Experience: <%= @champion.experience %></li>
 	<li>Owner: <%= link_to(@champion.user.username, @champion.user) %></li>
+  <li>Primary Role: <%= @champion.table_champion.f_role %></li>
+  <li>Secondary Role: <%= @champion.table_champion.s_role %></li>
 	<li>Health: <%= champ_hp(@champion) %></li>
 	<li>Attack Damage: <%= champ_ad(@champion) %></li>
+  <li>Ability Power: <%= champ_ap(@champion) %></li>
 	<li>Armor: <%= champ_armor(@champion) %></li>
 	<li>Magic Resist: <%= champ_mr(@champion) %></li>
 	<li>Movespeed: <%= champ_ms(@champion) %></li>
