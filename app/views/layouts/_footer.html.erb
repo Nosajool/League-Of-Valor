@@ -1,10 +1,14 @@
  <!-- Footer -->
 <div class="navbar navbar-fixed-bottom navbar-inverse">
       
-  <div class="container">
-    <p class = "navbar-text pull-left">Total Users: <%= @total_users %></p>
-    <div class = "riot-notice">
-    	League of Valor isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+  <div class="container-fluid">
+  	<div class="col-xm-12 col-sm-3 col-md-2">
+    	<p id="total-users">Total Users: <%= @total_users %></p>
+    </div>
+    <div class="col-xm-12 col-sm-9 col-md-10">
+    	<p class = "riot-notice">
+    		League of Valor isn’t endorsed by Riot Games and doesn’t reflect the views or opinions of Riot Games or anyone officially involved in producing or managing League of Legends. League of Legends and Riot Games are trademarks or registered trademarks of Riot Games, Inc. League of Legends © Riot Games, Inc.
+    	</p>
 	</div>
     <% unless signed_in? %>
     	<%= link_to "Sign Up Now", '#', class: "navbar-btn btn-success btn pull-right" %>

@@ -7,8 +7,8 @@ $contentCol: #0b2a48;
 $contentTextCol: #eeeeec;
 $sidebarTitleCol: #0b2a48;
 $sidebarLinkHoverCol: #060e1f;
-$grayMediumLight: #eaeaea;
-$footerTextCol: #999999; //another gray
+$footerTextCol: #555753; //another gray
+$footerTextHighlightCol: #eeeeec;
 $grayLighter: #d3d3d3;
 $grayDarker: #a9a9a9;
 
@@ -151,7 +151,6 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
   color: $grayLighter;
   a {
     color: gray;
@@ -174,6 +173,14 @@ footer {
 
 .riot-notice {
   color: $footerTextCol;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}
+
+#total-users {
+  color: $footerTextHighlightCol;
+  font-size: 1.2em;
+  margin-top: 0.7em;
 }
 
 /* miscellaneous */
