@@ -24,7 +24,7 @@ class BattleChampion
 			@range = champ_range(champion)
 		end
 
-		def check_dead
+		def is_dead
 			@dead = true if @hp <= 0
 			@dead
 		end
