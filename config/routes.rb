@@ -1,13 +1,14 @@
 LeagueOfValor::Application.routes.draw do
-  get "roles/index"
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
 
   root 'static_pages#home'
 
   # match 'link',                 to: 'controller#action',             via: 'http method'
+  resources :users
+  get '/change_password/:id',         to: 'users#change_password',        as: 'change_password'
+  patch '/change_password_update/:id', to: 'users#change_password_update'
   get '/signup',                  to: 'users#new'
-          
+  
+  resources :sessions, only: [:new, :create, :destroy]      
   get '/signin',                  to: 'sessions#new'
   match '/signout',               to: 'sessions#destroy',              via: 'delete'
         
