@@ -7,9 +7,9 @@ class BattleChampion
 	attr_reader :ms
 	attr_reader :level
 	attr_reader :experience
-	attr_reader :position
 	attr_reader :name
-	
+	attr_reader :range
+
 		def initialize(champion)
 			@hp = champ_hp(champion)
 			@ad = champ_ad(champion)
@@ -20,8 +20,8 @@ class BattleChampion
 			@level = champion.level
 			@dead = false
 			@experience = champion.experience
-			@position = champion.position
 			@name = skin_title(champion)
+			@range = champ_range(champion)
 		end
 
 		def check_dead
