@@ -13,10 +13,16 @@ class Battle
 			@champ_speeds.each do |x|
 				if(x < 5)
 					# x is @team's champions
-					@team.champions[x].attack(@opp_team.targets)
+					target = @team.champions[x].attack(@opp_team.targets,x)
+					unless(target == 0)
+						# attack was successful
+					end
 				else
 					# x is @opp_team's champions
-					@opp_team.champions[x-5].attack(@team.targets)
+					target = @opp_team.champions[x-5].attack(@team.targets,x-5)
+					unless(target == 0)
+						# attack was successful
+					end
 				end
 
 				break if check_battle_end

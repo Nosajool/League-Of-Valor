@@ -10,10 +10,23 @@ class BattleTeam
 		@standing = true
 	end
 
-	# Does not return anything
-	def attack(opp_targets)
-		# TODO
-		alive_team = targets
+	# Returns an integer between 0-5 of who they attack
+	def attack(opp_targets,position)
+
+		# First check if your range can go past your champion front line
+		in_front = targets[0...position].count(true)
+		if (@champions[position].range < in_front)
+			# There are no champions in range for you to hit
+			return 0
+		end
+
+		opp_in_front = opp_targets.count(true)
+		num_enemies_can_hit = @champions[position].range - in_front
+
+		if num_enemies_can_hit >= opp_in_front
+			num_enemies_can_hit = opp_in_front
+		end
+		target = randomized_target(num_enemies_can_hit)
 		
 	end
 
@@ -45,5 +58,48 @@ class BattleTeam
 		speed_arr
 	end
 	private
-	
+		# Returns an integer from 1-5
+		def randomized_target(target_size)
+			x = 1 + rand(100)
+			case target_size
+			when 1
+				return 1
+			when 2
+				if (x <= 70)
+					return 1
+				else
+					return 2
+				end
+			when 3
+				if(x <= 55)
+					return 1
+				elsif(x <= 85)
+					return 2
+				else
+					return 3
+				end
+			when 4
+				if(x <= 50)
+					return 1
+				elsif(x <= 70)
+					return 2
+				elsif(x <= 80)
+					return 3
+				else
+					return 4
+				end
+			when 5
+				if(x <= 50)
+					return 1
+				elsif(x <= 75)
+					return 2
+				elsif(x <= 90)
+					return 3
+				elsif(x <= 98)
+					return 4
+				else
+					return 5
+				end					
+			end
+		end
 end
