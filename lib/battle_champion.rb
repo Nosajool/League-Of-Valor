@@ -28,4 +28,12 @@ class BattleChampion
 			@dead = true if @hp <= 0
 			@dead
 		end
+
+		def take_physical_damage(opp_ad)
+			
+		end
+
+		def take_magic_damage(opp_ap)
+			
+		end
 end

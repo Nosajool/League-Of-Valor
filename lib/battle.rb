@@ -9,24 +9,51 @@ class Battle
 
 	# Does not return anyting
 	def battle
+		cooldown = 0
+		turn = 0
 		while(!@battle_end)
 			@champ_speeds.each do |x|
+				# x is @team's champions
 				if(x < 5)
-					# x is @team's champions
-					target = @team.champions[x].attack(@opp_team.targets,x)
-					unless(target == 10)
-						# attack was successful
+					# Ability power attack
+					if(cooldown == 0)
+						target = @team.champions[x].attack(@opp_team.targets,x)
+						unless(target == 10)
+							# Handle ability attack
+						end
+						break if check_battle_end
+					else
+						
+						target = @team.champions[x].attack(@opp_team.targets,x)
+						unless(target == 10)
+							# attack was successful
+							# TODO Handle an auto attack
+						end
+						break if check_battle_end
 					end
+
 				else
-					# x is @opp_team's champions
-					target = @opp_team.champions[x-5].attack(@team.targets,x-5)
-					unless(target == 10)
-						# attack was successful
+					if(cooldown == 0)
+						target = @opp_team.champions[x-5].attack(@team.targets,x-5)
+						unless(target == 10)
+							# Handle ability attack
+						end
+						break if check_battle_end
+					else
+						# x is @opp_team's champions
+						target = @opp_team.champions[x-5].attack(@team.targets,x-5)
+						unless(target == 10)
+							# Handle auto attack
+						end
+						break if check_battle_end
 					end
 				end
 
 				break if check_battle_end
 			end
+			turn = turn + 1
+			cooldown = cooldown + 1
+			cooldown = 0 if cooldown == 3
 			break if check_battle_end
 		end
 	end

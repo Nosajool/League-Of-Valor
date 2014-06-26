@@ -42,6 +42,22 @@ class BattleTeam
 		
 	end
 
+	def get_ad(array_position)
+		return @champions[array_position].ad
+	end
+
+	def get_ap(array_position)
+		return @champions[array_position].ap
+	end
+
+	def physical_attack(ad,defender)
+		@champions[defender].take_physical_damage(ad)
+	end
+
+	def magic_attack(ap,defender)
+		@champions[defender].take_magic_damage(ap)
+	end
+
 	# Returns an array of size 5 of bool
 	def targets
 		targets = Array.new
