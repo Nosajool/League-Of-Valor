@@ -6,12 +6,17 @@ class BattleTeam
 		@champ3 = BattleChampion.new(roster[2])
 		@champ4 = BattleChampion.new(roster[3])
 		@champ5 = BattleChampion.new(roster[4])
-		@defeated = false
+		@standing = true
 	end
 
 	def check_defeat
-		@defeated = true if(@champ1.check_dead && @champ2.check_dead && @champ3.check_dead && @champ4.check_dead && @champ4.check_dead)
-		@defeated
+		@standing = false if(@champ1.check_dead && @champ2.check_dead && @champ3.check_dead && @champ4.check_dead && @champ4.check_dead)
+		@standing
+	end
+
+	def team_speed
+		speed_arr = Array.new
+		speed_arr << @champ1.ms << @champ2.ms << @champ3.ms << @champ4.ms << @champ5.ms
 	end
 	private
 	

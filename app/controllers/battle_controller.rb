@@ -1,7 +1,7 @@
 class BattleController < ApplicationController
   def battle
     opponent = User.find(params[:opp_id])
-    
+
     roster = getRoster(current_user)
     opp_roster = getRoster(opponent)
 
@@ -9,6 +9,7 @@ class BattleController < ApplicationController
 
     team = setup_team(roster)
     opp_team = setup_team(opp_roster)
+    all_champions =
 
   end
 
@@ -43,13 +44,4 @@ class BattleController < ApplicationController
         redirect_to champ_select_path(opponent.id)
       end
     end
-
-    def setup_team(roster)
-      team = Array.new
-      roster.each do |champ|
-        team << BattleChampion.new(champ)
-      end
-      team
-    end
-
 end
