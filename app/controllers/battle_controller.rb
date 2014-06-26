@@ -1,32 +1,15 @@
 class BattleController < ApplicationController
   def battle
     opponent = User.find(params[:opp_id])
-
+    
     roster = getRoster(current_user)
-    roster_count = roster.count
-    if(roster_count < 1 || roster_count > 5)
-      flash[:error] = "Invalid User Roster"
-      redirect_to champ_select_path(opponent.id)
-    end
-
-
     opp_roster = getRoster(opponent)
-    opp_roster_count = opp_roster.count
-    if(opp_roster_count <1 || opp_roster_count >5)
-      flash[:error] = "Sorry, your opponent does not have a valid roster"
-      redirect_to champ_select_path(opponent.id)
-    end
 
-    user_hp = Array.new
-    opp_hp = Array.new
-    roster.each do |champ|
-      user_hp << champ.table_champion.hp + (champ.table_champion.hp*005.0*champ.level).round
-    end
-    opp_roster.each do |champ|
-      opp_hp << champ.table_champion.hp
-    end
-    # Pause, learning Riot Games API to retrieve champion data
-    # Need to learn Json/Javascript before continueing
+    valid_rosters(roster,opp_roster)
+
+    team = setup_team(roster)
+    opp_team = setup_team(opp_roster)
+
   end
 
   def setup
@@ -47,6 +30,26 @@ class BattleController < ApplicationController
         end
       end
       roster
+    end
+
+    def valid_rosters(roster, opp_roster)
+      roster_count = roster.count
+      opp_roster_count = opp_roster.count
+      if(roster_count < 1 || roster_count > 5)
+        flash[:error] = "Invalid User Roster"
+        redirect_to champ_select_path(opponent.id)
+      elsif(opp_roster_count < 1 || opp_roster_count > 5)
+        flash[:error] = "Sorry, your opponent does not have a valid roster"
+        redirect_to champ_select_path(opponent.id)
+      end
+    end
+
+    def setup_team(roster)
+      team = Array.new
+      roster.each do |champ|
+        team << BattleChampion.new(champ)
+      end
+      team
     end
 
 end

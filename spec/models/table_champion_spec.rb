@@ -49,7 +49,7 @@ describe TableChampion do
 
 	it { should be_valid }
 
-	describe "when champ_name is not present" do
+	describe "when champ name is not present" do
 		before { @table_champion.name = " " }
 		it { should_not be_valid }
 	end
