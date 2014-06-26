@@ -1,26 +1,16 @@
 <% provide(:title, "Edit user") %>
 <h1>Update your profile</h1>
+<%= icon_for(@user, size: "m") %>
+<br>
 
-<div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
+<%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "Confirm Password" %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.label :icon, "Summonner Icon" %>
-      <div class="black_text">
-        <%= f.select(:icon, options_for_select(icon_hash)) %>
-      </div>
-
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
-    <br>
-
-    <%= icon_for(@user, size: "s") %>
+  <%= f.label :icon, "Summonner Icon" %>
+  <div class="black_text">
+    <%= f.select(:icon, options_for_select(icon_hash)) %>
   </div>
-</div>
+
+  <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+<% end %>
+<%= link_to("Change Password", change_password_path(@user.id)) %>
