@@ -10,14 +10,14 @@ class BattleTeam
 		@standing = true
 	end
 
-	# Returns an integer between 0-5 of who they attack
+	# Returns an integer between 0-4 of who they attack or 10 if can't hit anything
 	def attack(opp_targets,position)
 
 		# First check if your range can go past your champion front line
 		in_front = targets[0...position].count(true)
 		if (@champions[position].range < in_front)
 			# There are no champions in range for you to hit
-			return 0
+			return 10
 		end
 
 		opp_in_front = opp_targets.count(true)
@@ -26,7 +26,19 @@ class BattleTeam
 		if num_enemies_can_hit >= opp_in_front
 			num_enemies_can_hit = opp_in_front
 		end
-		target = randomized_target(num_enemies_can_hit)
+
+		target_num = randomized_target(num_enemies_can_hit)
+		b = 0
+		c = 0
+		opp_targets.each do |a|
+			if a
+				b = b + 1;
+			end
+			if b == target_num
+				return c
+			end
+			c = c + 1
+		end
 		
 	end
 

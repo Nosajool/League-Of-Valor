@@ -28,9 +28,4 @@ class BattleChampion
 			@dead = true if @hp <= 0
 			@dead
 		end
-
-		def method_name
-			
-		end
-	private
 end

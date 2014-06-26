@@ -14,13 +14,13 @@ class Battle
 				if(x < 5)
 					# x is @team's champions
 					target = @team.champions[x].attack(@opp_team.targets,x)
-					unless(target == 0)
+					unless(target == 10)
 						# attack was successful
 					end
 				else
 					# x is @opp_team's champions
 					target = @opp_team.champions[x-5].attack(@team.targets,x-5)
-					unless(target == 0)
+					unless(target == 10)
 						# attack was successful
 					end
 				end
