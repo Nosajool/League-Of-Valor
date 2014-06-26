@@ -20,7 +20,7 @@ class BattleController < ApplicationController
     user_hp = Array.new
     opp_hp = Array.new
     roster.each do |champ|
-      user_hp << champ.table_champion.hp + (champ.table_champion.hp*0.005*champ.level).round
+      user_hp << champ.table_champion.hp + (champ.table_champion.hp*005.0*champ.level).round
     end
     opp_roster.each do |champ|
       opp_hp << champ.table_champion.hp
