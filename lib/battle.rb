@@ -5,6 +5,7 @@ class Battle
 		@opp_team = BattleTeam.new(opp_roster)
 		@champ_speeds = speed_order
 		@battle_end = false
+		create_battle_record(roster,opp_roster)
 	end
 
 	# Does not return anyting
@@ -85,5 +86,23 @@ class Battle
 				@battle_end = true
 			end
 			@battle_end
+		end
+
+		def create_battle_record
+			x = Battle.create!({
+			    user_id: roster[0].user.id,
+			    opp_id: opp_roster[0].user.id,
+			    champ1: roster[0].id,
+			    champ2: roster[1].id,
+			    champ3: roster[2].id,
+			    champ4: roster[3].id,
+			    champ5: roster[4].id,
+			    champ6: opp_roster[0].id,
+			    champ7: opp_roster[1].id,
+			    champ8: opp_roster[2].id,
+			    champ9: opp_roster[3].id,
+			    champ10: opp_roster[4].id
+			})
+			@battle_id = x.id		
 		end
 end
