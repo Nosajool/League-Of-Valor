@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-	before_action :signed_in_user, only: [:show, :index, :edit, :update]
-	before_action :correct_user,   only: [:edit, :update]
+	before_action :signed_in_user, only: [:show, :index, :edit, :update, :change_password, :change_password_update]
+	before_action :correct_user,   only: [:edit, :update, :change_password, :change_password_update]
 
 	def index
 		@users = User.paginate(page: params[:page])
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if @user.update_attributes(user_params)
+		if @user.update_attributes(update_params)
 			flash[:success] = "Profile updated"
 			redirect_to @user
 		else
@@ -55,10 +55,30 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def change_password
+	end
+
+	def change_password_update
+		if @user.update_attributes(change_password_params)
+			flash[:success] = "Password changed"
+			redirect_to @user
+		else
+			render 'change_password', id: @user.id
+		end
+	end
+
 
 	private
 		def user_params
 			params.require(:user).permit(:username, :email, :password, :password_confirmation)
+		end
+
+		def update_params
+			params.require(:user).permit(:icon)
+		end
+
+		def change_password_params
+			params.require(:user).permit(:password, :password_confirmation)
 		end
 
 		# Before Filters 
