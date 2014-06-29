@@ -22,14 +22,14 @@ class Battle
 						unless(target == 10)
 							# Handle ability attack
 							champ_ap = @team.get_ap(x)
-							@opp_team.magic_attack(champ_ap,target)
+							damage = @opp_team.magic_attack(champ_ap,target)
 						end
 						break if check_battle_end
 					else
 						unless(target == 10)
 							# Handle physical attack
 							champ_ad = @team.get_ad(x)
-							@opp_team.physical_attack(champ_ad,target)
+							damage = @opp_team.physical_attack(champ_ad,target)
 						end
 						break if check_battle_end
 					end
@@ -40,7 +40,7 @@ class Battle
 						unless(target == 10)
 							# Handle ability attack
 							champ_ap = @opp_team.get_ap(x-5)
-							@team.magic_attack(champ_ap,target)
+							damage = @team.magic_attack(champ_ap,target)
 						end
 						break if check_battle_end
 					else
@@ -48,7 +48,7 @@ class Battle
 						unless(target == 10)
 							# Handle auto attack
 							champ_ad = @opp_team.get_ad(x-5)
-							@team.physical_attack(champ_ad,target)
+							damage = @team.physical_attack(champ_ad,target)
 						end
 						break if check_battle_end
 					end

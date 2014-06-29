@@ -7,9 +7,8 @@ class BattleController < ApplicationController
 
     valid_rosters(roster,opp_roster)
 
-    team = setup_team(roster)
-    opp_team = setup_team(opp_roster)
-    all_champions =
+    the_battle = Battle.new(roster,opp_roster)
+    the_battle.battle
 
   end
 

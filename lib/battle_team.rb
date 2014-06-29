@@ -51,11 +51,11 @@ class BattleTeam
 	end
 
 	def physical_attack(ad,defender)
-		@champions[defender].take_physical_damage(ad)
+		damage = @champions[defender].take_physical_damage(ad)
 	end
 
 	def magic_attack(ap,defender)
-		@champions[defender].take_magic_damage(ap)
+		damage = @champions[defender].take_magic_damage(ap)
 	end
 
 	# Returns an array of size 5 of bool
