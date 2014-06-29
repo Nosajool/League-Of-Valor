@@ -16,35 +16,39 @@ class Battle
 			@champ_speeds.each do |x|
 				# x is @team's champions
 				if(x < 5)
+					target = @team.champions[x].attack(@opp_team.targets,x)
 					# Ability power attack
 					if(cooldown == 0)
-						target = @team.champions[x].attack(@opp_team.targets,x)
 						unless(target == 10)
 							# Handle ability attack
+							champ_ap = @team.get_ap(x)
+							@opp_team.magic_attack(champ_ap,target)
 						end
 						break if check_battle_end
 					else
-						
-						target = @team.champions[x].attack(@opp_team.targets,x)
 						unless(target == 10)
-							# attack was successful
-							# TODO Handle an auto attack
+							# Handle physical attack
+							champ_ad = @team.get_ad(x)
+							@opp_team.physical_attack(champ_ad,target)
 						end
 						break if check_battle_end
 					end
 
 				else
+					target = @opp_team.champions[x-5].attack(@team.targets,x-5)
 					if(cooldown == 0)
-						target = @opp_team.champions[x-5].attack(@team.targets,x-5)
 						unless(target == 10)
 							# Handle ability attack
+							champ_ap = @opp_team.get_ap(x-5)
+							@team.magic_attack(champ_ap,target)
 						end
 						break if check_battle_end
 					else
 						# x is @opp_team's champions
-						target = @opp_team.champions[x-5].attack(@team.targets,x-5)
 						unless(target == 10)
 							# Handle auto attack
+							champ_ad = @opp_team.get_ad(x-5)
+							@team.physical_attack(champ_ad,target)
 						end
 						break if check_battle_end
 					end

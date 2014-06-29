@@ -30,10 +30,12 @@ class BattleChampion
 		end
 
 		def take_physical_damage(opp_ad)
-			
+			multiplier = 100 / (100 + @armor)
+			@health = @health - (multiplier * opp_ad).ceil
 		end
 
 		def take_magic_damage(opp_ap)
-			
+			multiplier = 100 / (100 + @mr)
+			@health = @health - (multiplier * opp_ap).ceil
 		end
 end
