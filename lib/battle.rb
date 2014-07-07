@@ -1,8 +1,17 @@
 class Battle
 
 	def initialize(roster,opp_roster)
-		@team = BattleTeam.new(roster)
-		@opp_team = BattleTeam.new(opp_roster)
+		@team = Array.new
+		@opp_team = Array.new
+
+		roster.each do |champ|
+			@team << BattleChampion.new(champ)
+		end
+		opp_roster.each do |champ|
+			@opp_team << BattleChampion.new(champ)
+		end
+
+
 		@champ_speeds = speed_order
 		@battle_end = false
 		create_battle_record(roster,opp_roster)
@@ -69,12 +78,10 @@ class Battle
 	private
 		# Returns an array of size 10 with values ranging from 0-9
 		def speed_order
-			speed_array = @team.team_speed.concat(@opp_team.team_speed)
+			all_champions = @team.concat(@opp_team)
 			speed_hash = Hash.new
-			x = 0
-			speed_array.each do |speed|
-				@speed_hash[x] = speed
-				x = x + 1
+			for x in 0..9
+				speed_hash[x]  = all_champions[x].ms
 			end
 			sorted_speed_hash = speed_hash.sort_by{|num,speed| speed}.reverse
 			new_speed_array = Array.new
