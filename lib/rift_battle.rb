@@ -22,20 +22,23 @@ class RiftBattle
 	def battle
 		cooldown = 0
 		turn = 0
-		while(!@battle_end)
+		while(!@battle_end) do
 			log_turn_update(turn)
 			@champ_speeds.each do |x|
 				log_hp_update
 				@log[@log.size] = "#{x}'s turn to attack"
 				# x is @team's champions
 				if(x < 5)
+
 					target = rand(4)
 					@log[@log.size] = "Your #{x}'s initial target is#{target}"
-					while(@opp_team[target].is_dead){
+
+
+					while(@opp_team[target].is_dead) do
 						@log[@log.size] = "#{target} is already dead. Rerolling"
 						target = rand(4)
 						@log[@log.size] = "new roll is #{target}"
-					}
+					end
 
 					# Ability power attack
 					if(cooldown == 0)
@@ -45,7 +48,6 @@ class RiftBattle
 						@log[@log.size] = "Your #{x}'s ap is: #{champ_ap}"
 						damage = @opp_team[target].take_magic_damage(champ_ap)
 						@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"
-						break if check_battle_end
 					else
 						@log[@log.size] = "Your #{x}'s Attack Damage attack"
 						# Handle physical attack
@@ -53,35 +55,37 @@ class RiftBattle
 						@log[@log.size] = "Your #{x}'s ad is: #{champ_ad}"
 						damage = @opp_team[target].take_physical_damage(champ_ad)
 						@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"
-						break if check_battle_end
 					end
 
-				else
+				else # x > 5
 					# x is @opp_team's champions
 					target = rand(4)
 					@log[@log.size] = "Your Opponents #{x}'s initial target is#{target}"
-					while(@team[target].is_dead){
+
+
+					while(@team[target].is_dead) do
 						@log[@log.size] = "#{target} is already dead. Rerolling"
 						target = rand(4)
 						@log[@log.size] = "new roll is #{target}"
-					}
+					end
+
+
 					if(cooldown == 0)
 						@log[@log.size] = "opponent's #{x}'s Ability Power attack"
 						champ_ap = @opp_team[x-5].ap
 						@log[@log.size] = "Opponent's #{x}'s ability power: #{champ_ap}"
 						damage = @team[target].take_magic_damage(champ_ap)
 						@log[@log.size] = "Opponent's #{x} dealt #{damage} to #{target}"
-						break if check_battle_end
 					else
 						@log[@log.size] = "Opponent's #{x}'s Attack damage atttack"
 						champ_ad = @opp_team[x-5].ad
 						@log[@log.size] = "Opponent's #{x} attack damage is: #{champ_ad}"
 						damage = @team[target].take_physical_damage(champ_ad)
 						@log[@log.size] = "Opponent #{x} dealt #{damage} to #{target}"
-						break if check_battle_end
 					end
+
+
 				end
-				break if check_battle_end
 			end
 			turn = turn + 1
 			cooldown = cooldown + 1
@@ -109,7 +113,7 @@ class RiftBattle
 			# end
 			new_speed_array = Array.new
 			(0..9).each do |x|
-				new_speed_array << end
+				new_speed_array << x
 			end
 			new_speed_array
 		end
@@ -133,7 +137,7 @@ class RiftBattle
 			team.each do |champ|
 				dead_array << champ.is_dead
 				if champ.is_dead
-					count++
+					count += 1
 				end
 			end
 			dead_array << count
