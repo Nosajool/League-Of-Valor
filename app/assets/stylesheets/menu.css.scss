@@ -58,6 +58,18 @@ textarea {
   }
 }
 
+
+.patch-area {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+.patches {
+  display: table-cell;
+  height: 100%;
+  float: none;
+}
+
 /* Overrides negative margins until I can figure out how to disable it */
 .row {
   margin-left: 2%;
