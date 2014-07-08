@@ -1,4 +1,6 @@
 class BattleChampion
+	include ChampionsHelper
+
 	attr_reader :hp
 	attr_reader :ad
 	attr_reader :ap
