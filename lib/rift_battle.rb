@@ -33,21 +33,12 @@ class RiftBattle
 				# x is @team's champions
 				if(x < 5)
 
-					target = rand(4)
-
-					@log[@log.size] = "Your #{x}'s initial target is#{target}"
-					Rails.logger.debug "Your #{x}'s initial target is#{target}"
-
+					target = 0
 
 					while(@opp_team[target].is_dead) do
-
-						@log[@log.size] = "#{target} is already dead. Rerolling"
-						Rails.logger.debug "#{target} is already dead. Rerolling"
-
-						target = rand(4)
-
-						@log[@log.size] = "new roll is #{target}"
-						Rails.logger.debug "new roll is #{target}"
+						@log[@log.size] = "#{target} is already dead. Shifting to #{target + 1}"
+						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
+						target += 1				
 					end
 
 					# Ability power attack
@@ -84,17 +75,13 @@ class RiftBattle
 
 				else # x > 5
 					# x is @opp_team's champions
-					target = rand(4)
-					@log[@log.size] = "Your Opponents #{x}'s initial target is#{target}"
-					Rails.logger.debug "Your Opponents #{x}'s initial target is#{target}"
-
+					
+					target = 0
 
 					while(@team[target].is_dead) do
-						@log[@log.size] = "#{target} is already dead. Rerolling"
-						Rails.logger.debug "#{target} is already dead. Rerolling"
-						target = rand(4)
-						@log[@log.size] = "new roll is #{target}"
-						Rails.logger.debug "new roll is #{target}"
+						@log[@log.size] = "#{target} is already dead. Shifting to #{target + 1}"
+						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
+						target += 1
 					end
 
 
@@ -128,6 +115,7 @@ class RiftBattle
 
 
 				end
+				break if check_battle_end
 			end
 			turn = turn + 1
 			cooldown = cooldown + 1
