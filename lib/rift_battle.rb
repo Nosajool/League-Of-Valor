@@ -124,6 +124,15 @@ class RiftBattle
 		end
 	end
 
+	def victory?
+		a = team_dead(@team)
+		if(a[5] == 5)
+			return false
+		else
+			return true
+		end
+	end
+
 	private
 		# Returns an array of size 10 with values ranging from 0-9
 		def speed_order
@@ -152,7 +161,7 @@ class RiftBattle
 		def check_battle_end
 			a = team_dead(@team)
 			b = team_dead(@opp_team)
-			@log[@log.size] = "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{4} 5:#{5}"
+			@log[@log.size] = "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{a[4]} 5:#{5}"
 			Rails.logger.debug "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{4} 5:#{5}"
 
 			@log[@log.size] = "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"

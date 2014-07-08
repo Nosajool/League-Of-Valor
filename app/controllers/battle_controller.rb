@@ -11,6 +11,7 @@ class BattleController < ApplicationController
       the_battle = RiftBattle.new(roster,opp_roster)
       the_battle.battle
       @log = the_battle.log
+      @win = the_battle.victory?
     end
 
     def setup
