@@ -211,13 +211,13 @@ class RiftBattle
 		def log_hp_update
 			@log[@log.size] = "Your Team's information:"
 			@team.each do |champ|
-				@log[@log.size] = "#{champ.name} Level: #{champ.level} hp:#{champ.hp} ad:#{champ.ad} dead: #{champ.is_dead}"
-				Rails.logger.debug "#{champ.name} Level: #{champ.level} hp:#{champ.hp} ad:#{champ.ad} dead: #{champ.is_dead}"
+				@log[@log.size] = "#{champ.name} Level: #{champ.level} hp:#{champ.hp}"
+				Rails.logger.debug "#{champ.name} Level: #{champ.level} hp:#{champ.hp}"
 			end
 			@log[@log.size] = "Your Opponent's Team's information:"
 			@opp_team.each do |champ|
-				@log[@log.size] = "#{champ.name} Level: #{champ.level} hp:#{champ.hp} ad:#{champ.ad} dead: #{champ.is_dead}"
-				Rails.logger.debug "#{champ.name} Level: #{champ.level} hp:#{champ.hp} ad:#{champ.ad} dead: #{champ.is_dead}"
+				@log[@log.size] = "#{champ.name} Level: #{champ.level} hp:#{champ.hp}"
+				Rails.logger.debug "#{champ.name} Level: #{champ.level} hp:#{champ.hp}"
 			end
 		end
 

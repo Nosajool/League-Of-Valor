@@ -28,7 +28,10 @@ class BattleChampion
 		end
 
 		def is_dead
-			@dead = true if @hp <= 0
+			if @hp <= 0
+				@hp = 0
+				@dead = true
+			end
 			@dead
 		end
 
