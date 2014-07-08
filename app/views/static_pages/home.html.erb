@@ -1,25 +1,23 @@
-<div class="jumbotron text-center">
-  <div class="page-header">
+<div class="mainArea text-center">
+  <div class="page-header row">
     <h1>Welcome to League of Valor</h1>
   </div>
-
-
   <h2>
   	New project that evolved from <%= link_to "Vion Gensis", "http://ex5thgen.comyr.com" %>
   </h2>
   <%= link_to "Log in!", signin_path, class: "btn btn-large btn-primary" %>
+  &nbsp
   <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-success" %>
+  <br /><br />
 </div>
 
-<div class="row">
-  <div class="col-xs-6">
-    <div class="jumbotron">
-      <%= render 'static_pages/curpatch' %>
-    </div>
+<br />
+
+<div class="patch-area">
+  <div class="mainArea patches col-xs-12 col-sm-6 col-md-6">
+    <%= render 'static_pages/curpatch' %>
   </div>
-  <div class="col-xs-6">
-    <div class="jumbotron">
-      <%= render 'static_pages/pastpatch' %>
-    </div>
+  <div class="mainArea patches col-xs-12 col-sm-6 col-md-6">
+    <%= render 'static_pages/pastpatch' %>
   </div>
 </div>
