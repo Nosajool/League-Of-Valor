@@ -26,62 +26,104 @@ class RiftBattle
 			log_turn_update(turn)
 			@champ_speeds.each do |x|
 				log_hp_update
+
 				@log[@log.size] = "#{x}'s turn to attack"
+				Rails.logger.debug "#{x}'s turn to attack"
+
 				# x is @team's champions
 				if(x < 5)
 
 					target = rand(4)
+
 					@log[@log.size] = "Your #{x}'s initial target is#{target}"
+					Rails.logger.debug "Your #{x}'s initial target is#{target}"
 
 
 					while(@opp_team[target].is_dead) do
+
 						@log[@log.size] = "#{target} is already dead. Rerolling"
+						Rails.logger.debug "#{target} is already dead. Rerolling"
+
 						target = rand(4)
+
 						@log[@log.size] = "new roll is #{target}"
+						Rails.logger.debug "new roll is #{target}"
 					end
 
 					# Ability power attack
 					if(cooldown == 0)
+
 						@log[@log.size] = "Your #{x}'s ability power attack"
+						Rails.logger.debug"Your #{x}'s ability power attack"
+
 						# Handle ability attack
 						champ_ap = @team[x].ap
+
 						@log[@log.size] = "Your #{x}'s ap is: #{champ_ap}"
+						Rails.logger.debug "Your #{x}'s ap is: #{champ_ap}"
+
 						damage = @opp_team[target].take_magic_damage(champ_ap)
+
 						@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"
+						Rails.logger.debug "Your #{x} dealt #{damage} to #{target}"
 					else
 						@log[@log.size] = "Your #{x}'s Attack Damage attack"
+						Rails.logger.debug "Your #{x}'s Attack Damage attack"
+
 						# Handle physical attack
 						champ_ad = @team[x].ad
+
 						@log[@log.size] = "Your #{x}'s ad is: #{champ_ad}"
+						Rails.logger.debug "Your #{x}'s ad is: #{champ_ad}"
+
 						damage = @opp_team[target].take_physical_damage(champ_ad)
+
 						@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"
+						Rails.logger.debug "Your #{x} dealt #{damage} to #{target}"
 					end
 
 				else # x > 5
 					# x is @opp_team's champions
 					target = rand(4)
 					@log[@log.size] = "Your Opponents #{x}'s initial target is#{target}"
+					Rails.logger.debug "Your Opponents #{x}'s initial target is#{target}"
 
 
 					while(@team[target].is_dead) do
 						@log[@log.size] = "#{target} is already dead. Rerolling"
+						Rails.logger.debug "#{target} is already dead. Rerolling"
 						target = rand(4)
 						@log[@log.size] = "new roll is #{target}"
+						Rails.logger.debug "new roll is #{target}"
 					end
 
 
 					if(cooldown == 0)
 						@log[@log.size] = "opponent's #{x}'s Ability Power attack"
+						Rails.logger.debug "opponent's #{x}'s Ability Power attack"
+
 						champ_ap = @opp_team[x-5].ap
+
 						@log[@log.size] = "Opponent's #{x}'s ability power: #{champ_ap}"
+						Rails.logger.debug "Opponent's #{x}'s ability power: #{champ_ap}"
+
 						damage = @team[target].take_magic_damage(champ_ap)
+
 						@log[@log.size] = "Opponent's #{x} dealt #{damage} to #{target}"
+						Rails.logger.debug "Opponent's #{x} dealt #{damage} to #{target}"
 					else
 						@log[@log.size] = "Opponent's #{x}'s Attack damage atttack"
+						Rails.logger.debug "Opponent's #{x}'s Attack damage atttack"
+
 						champ_ad = @opp_team[x-5].ad
+
 						@log[@log.size] = "Opponent's #{x} attack damage is: #{champ_ad}"
+						Rails.logger.debug "Opponent's #{x} attack damage is: #{champ_ad}"
+
 						damage = @team[target].take_physical_damage(champ_ad)
+
 						@log[@log.size] = "Opponent #{x} dealt #{damage} to #{target}"
+						Rails.logger.debug "Opponent #{x} dealt #{damage} to #{target}"
 					end
 
 
@@ -123,11 +165,18 @@ class RiftBattle
 			a = team_dead(@team)
 			b = team_dead(@opp_team)
 			@log[@log.size] = "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{4} 5:#{5}"
+			Rails.logger.debug "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{4} 5:#{5}"
+
 			@log[@log.size] = "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"
+			Rails.logger.debug "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"
+
 			if(a[5] == 5 || b[5] == 5)
 				@battle_end = true
 			end
+
 			@log[@log.size] = "Checked battle end result: #{@battle_end}"
+			Rails.logger.debug "Checked battle end result: #{@battle_end}"
+
 			@battle_end
 		end
 
@@ -166,14 +215,17 @@ class RiftBattle
 			@log[@log.size] = "Your Team's information:"
 			@team.each do |champ|
 				@log[@log.size] = "#{champ.name} Level: #{champ.level} hp:#{champ.hp} ad:#{champ.ad} dead: #{champ.is_dead}"
+				Rails.logger.debug "#{champ.name} Level: #{champ.level} hp:#{champ.hp} ad:#{champ.ad} dead: #{champ.is_dead}"
 			end
 			@log[@log.size] = "Your Opponent's Team's information:"
 			@opp_team.each do |champ|
 				@log[@log.size] = "#{champ.name} Level: #{champ.level} hp:#{champ.hp} ad:#{champ.ad} dead: #{champ.is_dead}"
+				Rails.logger.debug "#{champ.name} Level: #{champ.level} hp:#{champ.hp} ad:#{champ.ad} dead: #{champ.is_dead}"
 			end
 		end
 
 		def log_turn_update(turn)
 			@log[@log.size] = "Turn ##{turn}"
+			Rails.logger.debug "Turn ##{turn}"
 		end
 end
