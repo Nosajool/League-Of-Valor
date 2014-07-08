@@ -45,7 +45,7 @@ namespace :db do
                                position: 0,
                                level: 1 + rand(200),
                                skin: 1000000000,
-                               active_skin: rand(9) ) }
+                               active_skin: rand(2) ) }
     end
   end
 end
