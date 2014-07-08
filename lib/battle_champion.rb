@@ -1,5 +1,6 @@
 class BattleChampion
 	include ChampionsHelper
+	include SkinsHelper
 
 	attr_reader :hp
 	attr_reader :ad
@@ -37,8 +38,10 @@ class BattleChampion
 			#damage =  (multiplier * opp_ad).ceil
 			
 			# Simplified Battle
+			Rails.logger.debug "opp_ad: #{opp_ad} type: #{opp_ad.class}"
 			damage = opp_ad
-			@health = @health - damage
+			Rails.logger.debug "health: #{@hp} type: #{@hp.class}"
+			@hp = @hp - damage
 			return damage
 		end
 
@@ -48,7 +51,10 @@ class BattleChampion
 			# damage = (multiplier * opp_ap).ceil
 			
 			# Simplified Battle 
-			@health = @health - damage
+			Rails.logger.debug "opp_ap: #{opp_ap} type: #{opp_ap.class}"
+			damage = opp_ap
+			Rails.logger.debug "health: #{@hp} type: #{@hp.class}"
+			@hp = (@hp - damage).round
 			return damage
 		end
 end

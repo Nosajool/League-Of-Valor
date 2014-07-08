@@ -16,7 +16,7 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 		</tr>
 		<tr>
 			<% @roster.each do |roster| %>
-				<td class="roster"><%= roster.table_champion.name %></td>
+				<td class="roster"><%= skin_title(roster) %></td>
 			<% end %>
 		</tr>
 		<tr>
@@ -39,7 +39,7 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 		</tr>
 		<tr>
 			<% @opp_roster.each do |roster| %>
-				<td class="roster"><%= roster.table_champion.name %></td>
+				<td class="roster"><%= skin_title(roster) %></td>
 			<% end %>
 		</tr>
 		<tr>

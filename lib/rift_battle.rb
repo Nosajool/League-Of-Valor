@@ -51,7 +51,7 @@ class RiftBattle
 					else
 						@log[@log.size] = "Your #{x}'s Attack Damage attack"
 						# Handle physical attack
-						champ_ad = @team[x]
+						champ_ad = @team[x].ad
 						@log[@log.size] = "Your #{x}'s ad is: #{champ_ad}"
 						damage = @opp_team[target].take_physical_damage(champ_ad)
 						@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"

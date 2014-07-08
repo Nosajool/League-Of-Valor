@@ -43,7 +43,7 @@ module ChampionsHelper
 		f_per = f_role(champion).hp_per
 		s_per = s_role(champion).hp_per
 		health = base + f_base + s_base + level
-		health = health * (per + f_per + s_per)
+		health = (health * (per + f_per + s_per)).round
 	end
 
 	def champ_ad(champion)
@@ -54,8 +54,8 @@ module ChampionsHelper
 		per = 1
 		f_per = f_role(champion).ad_per
 		s_per = s_role(champion).ad_per
-		health = base + f_base + s_base + level
-		health = health * (per + f_per + s_per)
+		ad = base + f_base + s_base + level
+		ad = (ad * (per + f_per + s_per)).round
 	end
 
 	def champ_ap(champion)
@@ -67,8 +67,8 @@ module ChampionsHelper
 		per = 1
 		f_per = f_role(champion).ap_per
 		s_per = s_role(champion).ap_per
-		health = base + f_base + s_base + level
-		health = health * (per + f_per + s_per)		
+		ap = base + f_base + s_base + level
+		ap = (ap * (per + f_per + s_per)).round	
 	end
 
 
