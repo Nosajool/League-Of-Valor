@@ -26,10 +26,11 @@ module ChampionsHelper
 		image_tag("champions/#{key}/#{key}_#{champion.active_skin}.jpg")
 	end
 
-	def champ_img_splash(champion)
-		key = champion.table_champion.key
-		image_tag("champions/#{key}/#{key}_Splash_#{champion.active_skin}.jpg", class: "champion_banner")
-	end
+	# Depreciated
+	# def champ_img_splash(champion)
+	# 	key = champion.table_champion.key
+	# 	image_tag("champions/#{key}/#{key}_Splash_#{champion.active_skin}.jpg", class: "champion_banner")
+	# end
 
 
 	# Champion Statistics. Will calculate all stat boost (pros, buffs, roles) using the following methods
