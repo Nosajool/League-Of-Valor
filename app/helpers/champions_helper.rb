@@ -43,7 +43,7 @@ module ChampionsHelper
 		f_per = f_role(champion).hp_per
 		s_per = s_role(champion).hp_per
 		health = base + f_base + s_base + level
-		health = health * (per + f_per + s_per)
+		health = (health * (per + f_per + s_per)).round
 	end
 
 	def champ_ad(champion)
@@ -54,8 +54,8 @@ module ChampionsHelper
 		per = 1
 		f_per = f_role(champion).ad_per
 		s_per = s_role(champion).ad_per
-		health = base + f_base + s_base + level
-		health = health * (per + f_per + s_per)
+		ad = base + f_base + s_base + level
+		ad = (ad * (per + f_per + s_per)).round
 	end
 
 	def champ_ap(champion)
@@ -67,8 +67,8 @@ module ChampionsHelper
 		per = 1
 		f_per = f_role(champion).ap_per
 		s_per = s_role(champion).ap_per
-		health = base + f_base + s_base + level
-		health = health * (per + f_per + s_per)		
+		ap = base + f_base + s_base + level
+		ap = (ap * (per + f_per + s_per)).round	
 	end
 
 
@@ -81,8 +81,8 @@ module ChampionsHelper
 		per = 1
 		f_per = f_role(champion).ar_per
 		s_per = s_role(champion).ar_per
-		health = base + f_base + s_base + level
-		health = health * (per + f_per + s_per)
+		armor = base + f_base + s_base + level
+		armor = armor * (per + f_per + s_per)
 	end
 
 	def champ_mr(champion)
@@ -93,8 +93,8 @@ module ChampionsHelper
 		per = 1
 		f_per = f_role(champion).mr_per
 		s_per = s_role(champion).mr_per
-		health = base + f_base + s_base + level
-		health = health * (per + f_per + s_per)	
+		mr = base + f_base + s_base + level
+		mr = mr * (per + f_per + s_per)	
 	end
 
 	def champ_ms(champion)
@@ -104,16 +104,41 @@ module ChampionsHelper
 		per = 1
 		f_per = f_role(champion).ms_per
 		s_per = s_role(champion).ms_per
-		health = base + f_base + s_base
-		health = health * (per + f_per + s_per)
+		ms = base + f_base + s_base
+		ms = ms * (per + f_per + s_per)
+	end
+
+	def champ_range(champion)
+		case champion.table_champion.attack_range
+		when 125
+			return 1
+		when 150, 175
+			return 2
+		when 425, 450, 475, 480
+			return 3
+		when 500, 525
+			return 4
+		when 550
+			return 5
+		when 575, 600, 625, 650
+			return 6
+		else
+			return 1
+		end
 	end
 
 	private
 		def f_role(champion)
-			Role.where(name: champion.table_champion.f_role).first
+			Rails.logger.debug "Checking Primary role for: #{champion.table_champion.name}"
+			role = Role.where(name: champion.table_champion.f_role).first
 		end
 
 		def s_role(champion)
-			Role.where(name: champion.table_champion.s_role).first
+			Rails.logger.debug "Checking Secondary role for: #{champion.table_champion.name}"
+			if champion.table_champion.s_role.nil?
+				role = Role.where(name: "None").first
+			else
+				role = Role.where(name: champion.table_champion.s_role).first
+			end
 		end
 end

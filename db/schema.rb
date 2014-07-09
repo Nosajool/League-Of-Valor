@@ -11,10 +11,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140625015755) do
+ActiveRecord::Schema.define(version: 20140705192629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "battle_logs", force: true do |t|
+    t.integer  "battle_id"
+    t.text     "event"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+    t.float    "champ1"
+    t.float    "champ2"
+    t.float    "champ3"
+    t.float    "champ4"
+    t.float    "champ5"
+    t.float    "ochamp1"
+    t.float    "ochamp2"
+    t.float    "ochamp3"
+    t.float    "ochamp4"
+    t.float    "ochamp5"
+    t.float    "extra"
+  end
+
+  add_index "battle_logs", ["battle_id"], name: "index_battle_logs_on_battle_id", using: :btree
+
+  create_table "battles", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "opp_id"
+    t.integer  "champ1"
+    t.integer  "champ2"
+    t.integer  "champ3"
+    t.integer  "champ4"
+    t.integer  "champ5"
+    t.integer  "champ6"
+    t.integer  "champ7"
+    t.integer  "champ8"
+    t.integer  "champ9"
+    t.integer  "champ10"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "champions", force: true do |t|
     t.integer  "table_champion_id"

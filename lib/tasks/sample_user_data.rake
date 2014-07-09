@@ -28,7 +28,7 @@ namespace :db do
         user.champions.create!(table_champion_id: rand_id,
                                experience: 1 + rand(200),
                                position: x,
-                               level: 1 + rand(200),
+                               level: 1,
                                skin: 1000000000,
                                active_skin: 0) }
     end
@@ -45,7 +45,7 @@ namespace :db do
                                position: 0,
                                level: 1 + rand(200),
                                skin: 1000000000,
-                               active_skin: rand(9) ) }
+                               active_skin: rand(2) ) }
     end
   end
 end

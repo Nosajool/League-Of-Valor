@@ -30,5 +30,8 @@ module LeagueOfValor
     config.i18n.enforce_available_locales = true
     # Precompile images
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+
+    # Autoload lib/ folder including all subdirectories (ie.battle)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
   end
 end
