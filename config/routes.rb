@@ -1,29 +1,53 @@
 LeagueOfValor::Application.routes.draw do
-  get "table_champions/show"
-  resources :users
-  resources :sessions, only: [:new, :create, :destroy]
 
   root 'static_pages#home'
 
-  # match 'link',            to: 'controller#action',             via: 'http method'
-  match '/signup',           to: 'users#new',                     via: 'get'
-     
-  match '/signin',           to: 'sessions#new',                  via: 'get'
-  match '/signout',          to: 'sessions#destroy',              via: 'delete'
-   
-  match '/help',             to: 'static_pages#help',             via: 'get'
-  match '/about',            to: 'static_pages#about',            via: 'get'
-  match '/contact',          to: 'static_pages#contact',          via: 'get'
+  # match 'link',                 to: 'controller#action',             via: 'http method'
+  resources :users
+  get '/change_password/:id',         to: 'users#change_password',        as: 'change_password'
+  patch '/change_password_update/:id', to: 'users#change_password_update'
+  get '/signup',                  to: 'users#new'
+  
+  resources :sessions, only: [:new, :create, :destroy]      
+  get '/signin',                  to: 'sessions#new'
+  match '/signout',               to: 'sessions#destroy',              via: 'delete'
+        
+  get '/help',                    to: 'static_pages#help'
+  get '/about',                   to: 'static_pages#about'
+  get '/contact',                 to: 'static_pages#contact'
 
   # as: 'champions' lets us use champions_path for link_to
-  match '/champions',        to: 'table_champions#index',         via: 'get',              as: 'champions'
+  resources :champion_stats, controller: 'table_champions', only: :show
+  # #show is now: champion_stat_path(table_champion.id)
+  get '/champions',               to: 'table_champions#index',         as: 'champions'
+      
+  resources :champions, only: :show
+  get   '/roster',                to: 'champions#edit',                as: 'roster'
+  post '/change_roster',          to: 'champions#change_roster',       as: 'change_roster'
+  get '/bench',                   to: 'champions#bench',               as: 'bench'
+  get '/spawn_champion',          to: 'champions#spawn_page',          as: 'spawn_champion'
+  post '/spawn_champion_action',  to: 'champions#spawn'
+  get '/rankings_champions',      to: 'champions#rankings',            as: 'champion_ranking'
+
+  resources :maps, only: [:index, :show]
+  post '/catch',                  to: 'maps#catch'
+
+  post '/battle',                 to: 'battle#battle',                 as: 'battle'
+  get '/champion_select/:opp_id', to: 'battle#setup',                  as: 'champ_select' #champ_select_path(23)
+  # Redirect /champion_select to view a profile
+
+  resources :roles, only: [:index, :show]
 
 
-  match '/roster',           to: 'champions#edit',                via: 'get',              as: 'roster'
-  match '/change_roster',    to: 'champions#change_roster',       via: 'post',             as: 'change_roster'
-  match '/bench',            to: 'champions#bench',               via: 'get',              as: 'bench'
-  match '/spawn_champion',   to: 'champions#spawn_champion_page', via: 'get',              as: 'spawn_champion'
-  match '/spawn_champion_action', to: 'champions#spawn_champion', via: 'post'
+
+
+
+
+
+
+
+  # match '/maps',             to: 'maps#index',                    via: 'get',              as: 'maps'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

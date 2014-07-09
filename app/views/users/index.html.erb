@@ -1,10 +1,26 @@
 <% provide(:title, 'All users') %>
+
 <h1>All users</h1>
 
 <%= will_paginate %>
 
-<ul class="users">
-  <%= render @users %>
-</ul>
+<div class="row">
+	<% if @users.any? %>
+		<table class="table table-hover table-condensed">
+			<tr class = "dark-hover">
+				<th>Picture</th>
+				<th>Username</th>
+			</tr>
+			<% @users.each do |user| %>
+				<tr class ="dark-hover">
+					<td><%= link_to(icon_for(user, size:"s"), user) %></td>
+					<td><%= link_to(user.username, user) %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<h3>There are no champions in the game.</h3>
+	<% end %>
+</div>
 
 <%= will_paginate %>

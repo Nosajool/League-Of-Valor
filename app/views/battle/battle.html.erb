@@ -1,0 +1,12 @@
+<% provide(:title, "Post Battle") %>
+<h1>Post Battle Result</h1>
+
+<% if @win %>
+	<h2>Congratulations, you won the battle!</h2>
+<% else %>
+	<h2>Sorry, you lost the battle</h2>
+<% end %>
+
+<% @log.each do |event| %>
+	<%= event %><br>
+<% end %>

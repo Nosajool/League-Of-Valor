@@ -35,10 +35,10 @@ describe "Champion Pages" do
 
 			it { should have_title('Edit Roster') }
 			it { should have_content('Current Roster') }
-			# Table Champion ID 7 = Morgana
-			it { should have_content('Morgana') }
+			# Table Champion ID 7 = Ryze
+			it { should have_content('Ryze') }
 			# Since there are 4 swaps, shoud have empty champions
-			it { should have_content('No Champion') }
+			it { should have_content('Empty') }
 		end
 		describe "not signed in" do
 			before { visit roster_path }

@@ -1,0 +1,28 @@
+<% provide(:title, "Champion Rankings") %>
+
+<h1>Rankings</h1>
+
+<%= will_paginate %>
+
+<div class="row">
+	<% if @champions.any? %>
+		<table class="table table-hover table-condensed">
+			<tr class = "dark-hover">
+				<th>Champion</th>
+				<th>Level</th>
+				<th>Summoner</th>
+			</tr>
+			<% @champions.each do |champ| %>
+				<tr class ="dark-hover">
+					<td><%= link_to(champ.table_champion.name, champ) %></td>
+					<td><%= champ.level %></td>
+					<td><%= link_to(champ.user.username, champ.user) %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<h3>There are no champions in the game.</h3>
+	<% end %>
+</div>
+
+<%= will_paginate %>

@@ -2,13 +2,17 @@
 
 /* mixins, variables, etc. */
 
-$grayMediumLight: #eaeaea;
-$maroon: #800000;
-$contentCol: #5e5e5e; // Gray
+$backgroundCol: #0d1721;
+$contentCol: #0b2a48;
+$contentTextCol: #eeeeec;
+$sidebarTitleCol: #0b2a48;
+$sidebarLinkHoverCol: #060e1f;
+$footerTextCol: #555753; //another gray
+$footerTextHighlightCol: #eeeeec;
 $grayLighter: #d3d3d3;
 $grayDarker: #a9a9a9;
-$titleCol: #BB0000; // Kind of Red
-$linkCol: #181818; //Another Gray
+
+$linkCol: #70B8FF; //Another Gray
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -24,7 +28,7 @@ html {
 
 body {
   padding-top: 60px;
-  background-color: $maroon;
+  background-color: $backgroundCol;
 }
 
 section {
@@ -43,15 +47,34 @@ textarea {
 }
 
 
-.jumbotron {
+.mainArea {
   border-style:solid;
-  border-width: 0.5em;
+  border-width: 0.1em;
   border-color: black;
   background-color: $contentCol;
-  color: white;
+  color: $contentTextCol;
   input{
     color: black;
   }
+}
+
+
+.patch-area {
+  display: table;
+  width: 100%;
+  height: 100%;
+}
+.patches {
+  display: table-cell;
+  height: 100%;
+  float: none;
+}
+
+/* Overrides negative margins until I can figure out how to disable it */
+.row {
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-bottom: 2em;
 }
 
 /* typography */
@@ -91,9 +114,9 @@ p {
   color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
-  padding-top: 9px;
+  position: absolute;
+  top: 8px;
   font-weight: bold;
-  line-height: 1;
   &:hover {
     color: white;
     text-decoration: none;
@@ -101,16 +124,14 @@ p {
 }
 
 /* Left/Right Menus */
-// Screw you jumbotron paddingpriorities
+/* Screw you jumbotron padding priorities */
 .sidebar{
   text-align: center;
-  padding: 0em       !important;
-  margin: 0em        !important;
   font-size: 0.85em; 
   font-weight: bold;
   li{
     a{
-      // Finally got the link padding issue sorted out
+      /* Finally got the link padding issue sorted out */
       padding: 0em;
     }
   }
@@ -120,14 +141,14 @@ p {
   }
 
   a:hover {
-    color: $maroon;
+    color: $sidebarLinkHoverCol;
     text-decoration: underline;
   }
   div{
-    background-color: $titleCol;
+    background-color: $sidebarTitleCol;
     border-bottom-style: solid;
-    border-width: 0.5em;
-    border-color: black;
+    border-width: 0.3em;
+    border-color: $backgroundCol;
   }
 }
 
@@ -143,7 +164,6 @@ p {
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid $grayMediumLight;
   color: $grayLighter;
   a {
     color: gray;
@@ -164,6 +184,18 @@ footer {
   }
 }
 
+.riot-notice {
+  color: $footerTextCol;
+  font-size: 0.8em;
+  margin-top: 0.5em;
+}
+
+#total-users {
+  color: $footerTextHighlightCol;
+  font-size: 1.2em;
+  margin-top: 0.7em;
+}
+
 /* miscellaneous */
 
 .debug_dump {
@@ -173,33 +205,6 @@ footer {
   margin-top: 45px;
   @include box_sizing;
 }
-
-/* sidebar */
-
-aside {
-  section {
-    padding: 10px 0;
-    border-top: 1px solid $grayLighter;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
-}
-
-
 
 .stats {
   overflow: auto;
@@ -228,6 +233,10 @@ aside {
   .gravatar {
     margin: 1px 1px;
   }
+}
+
+.mapImage {
+  width: 100%;
 }
 
 /* forms */
@@ -261,10 +270,8 @@ input {
 
 .users {
   list-style: none;
-  margin: 0;
   li {
     overflow: auto;
-    padding: 10px 0;
     border-top: 1px solid $grayLighter;
     &:last-child {
       border-bottom: 1px solid $grayLighter;
@@ -306,6 +313,13 @@ aside {
   margin-right: 10px;
 }
 
-.champion_face {
-  
+.black_text {
+  color: black;
 }
+
+// Pagination
+
+.pagination {
+  margin-left: 2%;
+}
+

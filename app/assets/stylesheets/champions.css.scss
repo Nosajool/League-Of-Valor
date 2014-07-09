@@ -14,6 +14,29 @@
 #champ_name {
 	text-align: center;
 }
+
+.champion_face {
+	width: 100%;
+}
+
+.champion_banner {
+	width: 100%;
+}
+
+.champion_profile_picture {
+	margin-left: auto;
+	margin-right: auto;
+	width: 25%;
+	min-width: 120px;
+}
+
+.champion_banner_picture {
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	min-width: 240px;
+}
+
 .champ_stats {
 	padding-left: 1em;
 }

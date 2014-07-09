@@ -10,22 +10,22 @@
 				<th>Champion</th>
 				<th>Level</th>
 				<th>Attack Damage</th>
-				<th>Ability Power</th>
 				<th>Armor</th>
 				<th>Magic Resist</th>
 				<th>Range</th>
-				<th>Role</th>
+				<th>Role 1</th>
+				<th>Role 2</th>
 			</tr>
 			<% @roster.each do |champ| %>
 				<tr class ="dark-hover">
-					<td><%= champ.table_champion.champ_name %></td>
+					<td><%= link_to(champ.table_champion.name, champ) %></td>
 					<td><%= champ.level %></td>
 					<td><%= champ.table_champion.attack_damage %></td>
-					<td><%= champ.table_champion.ability_power %></td>
 					<td><%= champ.table_champion.armor %></td>
 					<td><%= champ.table_champion.magic_resist %></td>
-					<td><%= champ.table_champion.range %></td>
-					<td><%= champ.table_champion.role %></td>
+					<td><%= champ.table_champion.attack_range %></td>
+					<td><%= champ.table_champion.f_role %></td>
+					<td><%= champ.table_champion.s_role %></td>
 				</tr>
 			<% end %>
 		</table>
@@ -42,22 +42,22 @@
 				<th>Champion</th>
 				<th>Level</th>
 				<th>Attack Damage</th>
-				<th>Ability Power</th>
 				<th>Armor</th>
 				<th>Magic Resist</th>
 				<th>Range</th>
-				<th>Role</th>
+				<th>Role 1</th>
+				<th>Role 2</th>
 			</tr>
 			<% @bench.each do |champ| %>
 				<tr class ="dark-hover">
-					<td><%= champ.table_champion.champ_name %></td>
+					<td><%= link_to(champ.table_champion.name, champ) %></td>
 					<td><%= champ.level %></td>
 					<td><%= champ.table_champion.attack_damage %></td>
-					<td><%= champ.table_champion.ability_power %></td>
 					<td><%= champ.table_champion.armor %></td>
 					<td><%= champ.table_champion.magic_resist %></td>
-					<td><%= champ.table_champion.range %></td>
-					<td><%= champ.table_champion.role %></td>
+					<td><%= champ.table_champion.attack_range %></td>
+					<td><%= champ.table_champion.f_role %></td>
+					<td><%= champ.table_champion.s_role %></td>
 				</tr>
 			<% end %>
 		</table>

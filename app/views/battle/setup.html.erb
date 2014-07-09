@@ -1,0 +1,58 @@
+<% provide(:title, "Champion Select") %>
+<h1>Champion Select</h1>
+Would you like to make a <%= link_to("Roster Change?", roster_path) %>
+<br>
+
+<%= "On Summoner's Rift, #{current_user.username} and #{@opponent.username} came to battle." %>
+
+<h3>
+	<%= current_user.username %>
+</h3>
+<div class="roster-table">
+	<table class="roster-table">
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="roster"><%= champ_img_battle(roster) %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="roster"><%= skin_title(roster) %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @roster.each do |roster| %>
+				<td class="roster">Level: <%= roster.level %></td>
+			<% end %>		
+		</tr>
+	</table>
+</div>
+
+<h3>
+	<%= @opponent.username %>
+</h3>
+<div class="roster-table">
+	<table class="roster-table">
+		<tr>
+			<% @opp_roster.each do |roster| %>
+				<td class="roster"><%= champ_img_battle(roster) %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @opp_roster.each do |roster| %>
+				<td class="roster"><%= skin_title(roster) %></td>
+			<% end %>
+		</tr>
+		<tr>
+			<% @opp_roster.each do |roster| %>
+				<td class="roster">Level: <%= roster.level %></td>
+			<% end %>		
+		</tr>
+	</table>
+</div>
+
+
+<%= form_tag url_for(:controller => 'battle', :action => 'battle'), :method => "post"  do %>
+  	<%= hidden_field_tag(:opp_id, @opponent.id) %>
+	<%= submit_tag("Enter the Rift", class: "btn btn-success") %>
+<% end %>

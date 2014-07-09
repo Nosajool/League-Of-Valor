@@ -30,7 +30,7 @@
     <%= render 'layouts/header' %>
 
 
-    <div class="container">
+    <div class="container-fluid">
       <!-- Flash Error messages -->
       <% flash.each do |key, value| %>
         <div class="alert alert-<%= key %>"><%= value %></div>
@@ -41,29 +41,16 @@
           <%= yield %>
 
         <% else %>
-          <!-- For signed in users, they get to see the 3 columns with an auto jumbotron for the middle -->
-
-          <!-- The Left Menu  -->
-          <div class="col-xs-2">
-            <div class="jumbotron sidebar">
-             <%= render 'layouts/left' %>                
-            </div>
-          </div>
 
           <!-- Center where the page content is -->
-          <div class="col-xs-8">
-            <div class="jumbotron">
+          <div class="col-sm-12">
+            <div class="mainArea">
                 <%= yield %>
             </div>
           </div>
 
-          <!-- The Right Menu -->
-          <div class="col-xs-2">
-            <div class="jumbotron sidebar">
-              <%= render 'layouts/right' %>
-            </div>
-          </div>
         <% end %>
+
 
       <!-- End of row -->
       </div>
@@ -71,15 +58,11 @@
 
     <%= render 'layouts/footer' %>
   <!-- Add some break lines so that bottom image doesn't get cut off -->
-  <br><br><br><br>
+  <br><br>
 
 
-
-  <div class="container">
+  <div class="container-fluid">
     <%= debug(params) if Rails.env.development? %>
   </div>
   </body>
-
-
-
 </html>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-	before_action :signed_in_user, only: [:show, :index, :edit, :update]
-	before_action :correct_user,   only: [:edit, :update]
+	before_action :signed_in_user, only: [:show, :index, :edit, :update, :change_password, :change_password_update]
+	before_action :correct_user,   only: [:edit, :update, :change_password, :change_password_update]
 
 	def index
 		@users = User.paginate(page: params[:page])
@@ -13,10 +13,10 @@ class UsersController < ApplicationController
 		@roster = []
 		# Fill @roster array with empty champions
 		for x in 0..4
-			if @user.champions.where("position = #{x+1}").exists?
+			if @user.champions.where(position: (x+1)).exists?
 				# So it turns out that .where() returns an array of ActiveRecord::Relation).
 				# In order to get the single object, must use .first
-				@roster << @user.champions.where("position = #{x+1}").first
+				@roster << @user.champions.where(position: (x+1)).first
 			else
 				@roster << Champion.new(:table_champion_id=>999,
 											 :experience=>0, 
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 		@user.icon = 1
 		if @user.save
 			sign_in @user
-			flash[:success] = "Welcome to Vion Genesis"
+			flash[:success] = "Welcome to League of Valor"
 			redirect_to @user
 		else
 			render 'new'
@@ -47,7 +47,7 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if @user.update_attributes(user_params)
+		if @user.update_attributes(update_params)
 			flash[:success] = "Profile updated"
 			redirect_to @user
 		else
@@ -55,10 +55,30 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def change_password
+	end
+
+	def change_password_update
+		if @user.update_attributes(change_password_params)
+			flash[:success] = "Password changed"
+			redirect_to @user
+		else
+			render 'change_password', id: @user.id
+		end
+	end
+
 
 	private
 		def user_params
 			params.require(:user).permit(:username, :email, :password, :password_confirmation)
+		end
+
+		def update_params
+			params.require(:user).permit(:icon)
+		end
+
+		def change_password_params
+			params.require(:user).permit(:password, :password_confirmation)
 		end
 
 		# Before Filters 

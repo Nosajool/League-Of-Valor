@@ -5,12 +5,12 @@
 	<table class="roster-table">
 		<tr>
 			<% @roster.each do |roster| %>
-				<td class="roster"><%= champ_face_for(roster.table_champion.id, size: "m") %></td>
+				<td class="roster"><%= champ_img_square(roster) %></td>
 			<% end %>
 		</tr>
 		<tr>
 			<% @roster.each do |roster| %>
-				<td id="champ_name" class="roster"><strong><%= roster.table_champion.champ_name %></strong></td>
+				<td id="champ_name" class="roster"><strong><%= roster.table_champion.name %></strong></td>
 			<% end %>
 		</tr>
 		<!-- Stupid space between the champ name and the stats -->
@@ -18,11 +18,6 @@
 		<tr>
 			<% @roster.each do |roster| %>
 				<td class="champ_stats roster">Level: <%= roster.level %></td>
-			<% end %>		
-		</tr>
-		<tr>
-			<% @roster.each do |roster| %>
-				<td class="champ_stats roster">Role: <%= roster.table_champion.role %></td>
 			<% end %>		
 		</tr>
 	    <% if Rails.env.development? %>

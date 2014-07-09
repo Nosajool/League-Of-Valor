@@ -34,6 +34,13 @@ module SessionsHelper
 		end
 	end
 
+	def admin_user
+		unless Rails.env.development?
+			flash[:danger] = "An error has occured"
+			redirect_to current_user
+		end
+	end
+
 	def sign_out
 		current_user.update_attribute(:remember_token, User.digest(User.new_remember_token))
 		cookies.delete(:remember_token)

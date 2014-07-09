@@ -1,28 +1,39 @@
 class TableChampion < ActiveRecord::Base
 	has_many :champions
-	validates(:champ_name, 				 presence: true)
+	has_many :skins
 
-	validates(:health,                   presence: true,
-					                     inclusion: { in: 0..255 } )
+	validates(:name, 					 presence: true)
+	validates(:riot_id,       		     presence: true)
+	validates(:key,                      presence: true)
+	validates(:title,                    presence: true)
+	validates(:lore,                     presence: true)
+
+	validates(:hp,             		     presence: true,
+										 inclusion: { in: 0..500 } )
+	validates(:hp_per_level,             presence: true)
 
 	validates(:attack_damage, 			 presence: true,
-							             inclusion: { in: 0..255 } )
-
-	validates(:ability_power, 			 presence: true,
-							             inclusion: { in: 0..255 } )
+										 inclusion: { in: 0..60} )
+	validates(:attack_damage_per_level,  presence: true)
 
 	validates(:armor, 					 presence: true,
-							             inclusion: { in: 0..255 } )
+										 inclusion: { in: 0..30 } )
+	validates(:armor_per_level,          presence: true)
 
 	validates(:magic_resist, 			 presence: true,
-							             inclusion: { in: 0..255 } )
+										 inclusion: { in: 0..30 } )
+	validates(:magic_resist_per_level,   presence: true)
 
-	validates(:role, 					 presence: true,
-							             inclusion: { in: %w(Marksman Mage Support Assasin Fighter Tank),
+	validates(:attack_range,             presence: true,
+									     inclusion: { in: 0..700 } )
+	validates(:movespeed,                presence: true,
+									     inclusion: { in: 0..360 } )
+
+	validates(:f_role, 					 presence: true,
+										 inclusion: { in: %w(Marksman Mage Support Assassin Fighter Tank None),
 							             			  message: "%{value} is not a valid role" } )
 
-	validates(:catch_rate, 				 presence: true )
+	# validates(:s_role, presence: true)
 
-	validates(:range,                    presence: true,
-										 inclusion: { in: 1..10 } )
+
 end
