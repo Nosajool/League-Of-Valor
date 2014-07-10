@@ -1,2 +1,0 @@
-class SkinsController < ApplicationController
-end

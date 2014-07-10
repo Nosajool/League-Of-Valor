@@ -1,7 +1,0 @@
-[{"role":"Marksman","hp_base":0,"hp_per":0,"ad_base":30,"ad_per":2,"ap_base":0,"ap_per":0,"ar_base":0,"ar_per":0,"mr_base":0,"mr_per":0,"ms_base":0,"ms_per":0},
-{"role":"Mage","hp_base":0,"hp_per":0,"ad_base":0,"ad_per":0,"ap_base":0,"ap_per":5,"ar_base":0,"ar_per":0,"mr_base":0,"mr_per":0,"ms_base":0,"ms_per":0},
-{"role":"Support","hp_base":5,"hp_per":0.1,"ad_base":5,"ad_per":0.1,"ap_base":5,"ap_per":0.1,"ar_base":5,"ar_per":0.1,"mr_base":5,"mr_per":0.1,"ms_base":5,"ms_per":0.1},
-{"role":"Assassin","hp_base":-10,"hp_per":-0.2,"ad_base":50,"ad_per":5,"ap_base":50,"ap_per":5,"ar_base":-10,"ar_per":-0.3,"mr_base":-10,"mr_per":-0.3,"ms_base":10,"ms_per":0.2},
-{"role":"Fighter","hp_base":5,"hp_per":0.5,"ad_base":5,"ad_per":0.5,"ap_base":0,"ap_per":0.5,"ar_base":5,"ar_per":1,"mr_base":5,"mr_per":1,"ms_base":0,"ms_per":0},
-{"role":"Tank","hp_base":20,"hp_per":2,"ad_base":0,"ad_per":0,"ap_base":0,"ap_per":0,"ar_base":10,"ar_per":2,"mr_base":10,"mr_per":2,"ms_base":-10,"ms_per":-0.1},
-{"role":"None","hp_base":0,"hp_per":0,"ad_base":0,"ad_per":0,"ap_base":0,"ap_per":0,"ar_base":0,"ar_per":0,"mr_base":0,"mr_per":0,"ms_base":0,"ms_per":0}]
