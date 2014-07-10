@@ -18,17 +18,17 @@ module ChampionsHelper
 	# Images
 	def champ_img_square(champion)
 		key = champion.table_champion.key
-		image_tag("champions/#{key}/#{key}_Square_0.png", alt: "Champion Face", class: "champion_face")		
+		image_tag("#{pre_image_url}champions/#{key}/#{key}_Square_0.png", alt: "Champion Face", class: "champion_face")		
 	end
 
 	def champ_img_battle(champion)
 		key = champion.table_champion.key
-		image_tag("champions/#{key}/#{key}_#{champion.active_skin}.jpg")
+		image_tag("#{pre_image_url}champions/#{key}/#{key}_#{champion.active_skin}.jpg")
 	end
 
 	def champ_img_splash(champion)
 		key = champion.table_champion.key
-		image_tag("champions/#{key}/#{key}_Splash_#{champion.active_skin}.jpg", class: "champion_banner")
+		image_tag("#{pre_image_url}champions/#{key}/#{key}_Splash_#{champion.active_skin}.jpg", class: "champion_banner")
 	end
 
 
@@ -140,5 +140,9 @@ module ChampionsHelper
 			else
 				role = Role.where(name: champion.table_champion.s_role).first
 			end
+		end
+
+		def pre_image_url
+			"https://raw.githubusercontent.com/Nosajool/League-Of-Valor/images/"
 		end
 end
