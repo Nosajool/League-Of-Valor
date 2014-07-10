@@ -7,8 +7,6 @@ module UsersHelper
 	end
 
 	def icon_hash
-		icon_path = (Rails.root.join('app', 'assets', 'images', 'icons', 'icons_m')).to_s
-		num_icons = Dir.glob(File.join(icon_path, '**', '*')).select { |file| File.file?(file) }.count
 		icon_hash = Hash.new
 		for x in 1..num_icons
 			icon_hash["##{x}"] = x
@@ -19,6 +17,10 @@ module UsersHelper
 	private
 		def pre_image_url
 			"https://raw.githubusercontent.com/Nosajool/League-Of-Valor/images/"
+		end
+
+		def num_icons
+			30
 		end
 
 end
