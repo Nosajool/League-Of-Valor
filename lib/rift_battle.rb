@@ -24,9 +24,8 @@ class RiftBattle
 		cooldown = 0
 		turn = 0
 		while(!@battle_end) do
-			log_turn_update(turn)
+			create_turn_update_record(turn)
 			@champ_speeds.each do |x|
-				log_hp_update
 				create_hp_update_record
 				create_champion_turn_record(x)
 
@@ -34,7 +33,6 @@ class RiftBattle
 				if(x < 5)
 
 					target = 0
-
 					while(@opp_team[target].is_dead) do
 						@log[@log.size] = "#{target} is already dead. Shifting to #{target + 1}"
 						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
@@ -99,17 +97,18 @@ class RiftBattle
 
 
 				end
-				break if check_battle_end
+				break if create_battle_end_record
 			end
 			turn = turn + 1
 			cooldown = cooldown + 1
 			cooldown = 0 if cooldown == 3
-			break if check_battle_end
+			break if create_battle_end_record
 		end
 	end
 
 	def victory?
 		a = team_dead(@team)
+		create_hp_update_record
 		if(a[5] == 5)
 			return false
 		else
@@ -118,62 +117,7 @@ class RiftBattle
 	end
 
 	private
-		# Returns an array of size 10 with values ranging from 0-9
-		def speed_order
-			# all_champions = @team.concat(@opp_team)
-			# speed_hash = Hash.new
-			# for x in 0..9
-			# 	speed_hash[x]  = all_champions[x].ms
-			# end
-			# sorted_speed_hash = speed_hash.sort_by{|num,speed| speed}.reverse
-			# new_speed_array = Array.new
-			# sorted_speed_hash.each do |num, speed|
-			# 	new_speed_array << num
-			# end
-			# @log[@log.size] = "Speed Order:"
-			# new_speed_array.each do |speed|
-			# 	@log[@log.size] = speed
-			# end
-			new_speed_array = Array.new
-			(0..9).each do |x|
-				new_speed_array << x
-			end
-			new_speed_array
-		end
-
-		# Returns a bool
-		def check_battle_end
-			a = team_dead(@team)
-			b = team_dead(@opp_team)
-			@log[@log.size] = "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{a[4]} 5:#{5}"
-			Rails.logger.debug "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{4} 5:#{5}"
-
-			@log[@log.size] = "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"
-			Rails.logger.debug "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"
-
-			if(a[5] == 5 || b[5] == 5)
-				@battle_end = true
-			end
-
-			@log[@log.size] = "Checked battle end result: #{@battle_end}"
-			Rails.logger.debug "Checked battle end result: #{@battle_end}"
-
-			@battle_end
-		end
-
-		def team_dead(team)
-			dead_array = Array.new
-			count = 0
-			team.each do |champ|
-				dead_array << champ.is_dead
-				if champ.is_dead
-					count += 1
-				end
-			end
-			dead_array << count
-			dead_array
-		end
-
+		# Logging
 		def create_battle_record(roster,opp_roster)
 			x = Battle.create!({
 			    user_id: roster[0].user.id,
@@ -270,7 +214,102 @@ class RiftBattle
 			})
 			@event_num += 1
 		end
-			
+
+		def create_turn_update_record(turn)
+			@log[@log.size] = "Turn ##{turn}"
+			Rails.logger.debug "Turn ##{turn}"
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "turn",
+				extra: turn
+			})	
+			@event_num += 1	
+		end
+
+		def create_battle_end_record
+			a = team_dead(@team)
+			b = team_dead(@opp_team)
+			for x in 0..4
+				if a[x] == true
+					a[x] = 1
+				else
+					a[x] = 0
+				end
+				if b[x] == true
+					b[x] = 1
+				else
+					b[x] = 0
+				end
+			end
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "battle end check",
+				champ1: a[0],
+				champ2: a[1],
+				champ3: a[2],
+				champ4: a[3],
+				champ5: a[4],
+				ochamp1: b[0],
+				ochamp2: b[1],
+				ochamp3: b[2],
+				ochamp4: b[3],
+				ochamp5: b[4]				
+			})
+			@log[@log.size] = "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{a[4]} 5:#{5}"
+			Rails.logger.debug "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{4} 5:#{5}"
+
+			@log[@log.size] = "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"
+			Rails.logger.debug "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"
+
+			if(a[5] == 5 || b[5] == 5)
+				@battle_end = true
+			end
+
+			@log[@log.size] = "Checked battle end result: #{@battle_end}"
+			Rails.logger.debug "Checked battle end result: #{@battle_end}"
+
+			@battle_end
+		end
+		# Returns an array of size 10 with values ranging from 0-9
+		def speed_order
+			# all_champions = @team.concat(@opp_team)
+			# speed_hash = Hash.new
+			# for x in 0..9
+			# 	speed_hash[x]  = all_champions[x].ms
+			# end
+			# sorted_speed_hash = speed_hash.sort_by{|num,speed| speed}.reverse
+			# new_speed_array = Array.new
+			# sorted_speed_hash.each do |num, speed|
+			# 	new_speed_array << num
+			# end
+			# @log[@log.size] = "Speed Order:"
+			# new_speed_array.each do |speed|
+			# 	@log[@log.size] = speed
+			# end
+			new_speed_array = Array.new
+			(0..9).each do |x|
+				new_speed_array << x
+			end
+			new_speed_array
+		end
+
+		# Returns a bool
+
+		def team_dead(team)
+			dead_array = Array.new
+			count = 0
+			team.each do |champ|
+				dead_array << champ.is_dead
+				if champ.is_dead
+					count += 1
+				end
+			end
+			dead_array << count
+			dead_array
+		end
+
 		def convert_x_to_id(x)
 			id = 0
 			if(x < 5)
@@ -279,23 +318,5 @@ class RiftBattle
 				id = @opp_team[x-5].id
 			end
 			return id
-		end
-
-		def log_hp_update
-			@log[@log.size] = "Your Team's information:"
-			@team.each do |champ|
-				@log[@log.size] = "#{champ.name} Level: #{champ.level} hp:#{champ.hp}"
-				Rails.logger.debug "#{champ.name} Level: #{champ.level} hp:#{champ.hp}"
-			end
-			@log[@log.size] = "Your Opponent's Team's information:"
-			@opp_team.each do |champ|
-				@log[@log.size] = "#{champ.name} Level: #{champ.level} hp:#{champ.hp}"
-				Rails.logger.debug "#{champ.name} Level: #{champ.level} hp:#{champ.hp}"
-			end
-		end
-
-		def log_turn_update(turn)
-			@log[@log.size] = "Turn ##{turn}"
-			Rails.logger.debug "Turn ##{turn}"
 		end
 end
