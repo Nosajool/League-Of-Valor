@@ -26,6 +26,7 @@ class RiftBattle
 			log_turn_update(turn)
 			@champ_speeds.each do |x|
 				log_hp_update
+				create_hp_update_record
 
 				@log[@log.size] = "#{x}'s turn to attack"
 				Rails.logger.debug "#{x}'s turn to attack"
@@ -208,6 +209,23 @@ class RiftBattle
 			@battle_id = x.id
 			@log[@log.size] = "Battle log id: #{@battle_id}"
 			Rails.logger.debug "Battle log id: #{@battle_id}"			
+		end
+
+		def create_hp_update_record
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event: "health update",
+				champ1: @team[0].hp,
+				champ2: @team[1].hp,
+				champ3: @team[2].hp,
+				champ4: @team[3].hp,
+				champ5: @team[4].hp,
+				ochamp1: @opp_team[0].hp,
+				ochamp2: @opp_team[1].hp,
+				ochamp3: @opp_team[2].hp,
+				ochamp4: @opp_team[3].hp,
+				ochamp5: @opp_team[4].hp
+			})
 		end
 
 		def log_hp_update
