@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705192629) do
+ActiveRecord::Schema.define(version: 20140712031102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20140705192629) do
     t.float    "ochamp4"
     t.float    "ochamp5"
     t.float    "extra"
+    t.integer  "champion_id"
+    t.integer  "event_num"
   end
 
   add_index "battle_logs", ["battle_id"], name: "index_battle_logs_on_battle_id", using: :btree

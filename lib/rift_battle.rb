@@ -4,6 +4,7 @@ class RiftBattle
 	def initialize(roster,opp_roster)
 		@log = []
 		@team = Array.new
+		@event_num = 0
 		@opp_team = Array.new
 
 		roster.each do |champ|
@@ -27,9 +28,7 @@ class RiftBattle
 			@champ_speeds.each do |x|
 				log_hp_update
 				create_hp_update_record
-
-				@log[@log.size] = "#{x}'s turn to attack"
-				Rails.logger.debug "#{x}'s turn to attack"
+				create_champion_turn_record(x)
 
 				# x is @team's champions
 				if(x < 5)
@@ -224,8 +223,29 @@ class RiftBattle
 				ochamp2: @opp_team[1].hp,
 				ochamp3: @opp_team[2].hp,
 				ochamp4: @opp_team[3].hp,
-				ochamp5: @opp_team[4].hp
+				ochamp5: @opp_team[4].hp,
+				event_num: @event_num
 			})
+			@event_num += 1
+		end
+
+		def create_champion_turn_record(x)
+			id = 0
+			if(x < 5)
+				id = @team[x].id
+			else
+				id = @opp_team[x-5].id
+			end
+			@log[@log.size] = "#{x}'s turn to attack"
+			Rails.logger.debug "#{x}'s turn to attack"
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event: "target selection",
+				champion_id: id,
+				extra: x,
+				event_num: @event_num
+			})
+			@event_num += 1
 		end
 
 		def log_hp_update
