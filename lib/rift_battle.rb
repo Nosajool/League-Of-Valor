@@ -15,7 +15,7 @@ class RiftBattle
 
 		@champ_speeds = speed_order
 		@battle_end = false
-		# create_battle_record(roster,opp_roster)
+		create_battle_record(roster,opp_roster)
 	end
 
 	# Does not return anyting
@@ -190,23 +190,25 @@ class RiftBattle
 			dead_array
 		end
 
-		# def create_battle_record
-		# 	x = Battle.create!({
-		# 	    user_id: roster[0].user.id,
-		# 	    opp_id: opp_roster[0].user.id,
-		# 	    champ1: roster[0].id,
-		# 	    champ2: roster[1].id,
-		# 	    champ3: roster[2].id,
-		# 	    champ4: roster[3].id,
-		# 	    champ5: roster[4].id,
-		# 	    champ6: opp_roster[0].id,
-		# 	    champ7: opp_roster[1].id,
-		# 	    champ8: opp_roster[2].id,
-		# 	    champ9: opp_roster[3].id,
-		# 	    champ10: opp_roster[4].id
-		# 	})
-		# 	@battle_id = x.id		
-		# end
+		def create_battle_record(roster,opp_roster)
+			x = Battle.create!({
+			    user_id: roster[0].user.id,
+			    opp_id: opp_roster[0].user.id,
+			    champ1: roster[0].id,
+			    champ2: roster[1].id,
+			    champ3: roster[2].id,
+			    champ4: roster[3].id,
+			    champ5: roster[4].id,
+			    champ6: opp_roster[0].id,
+			    champ7: opp_roster[1].id,
+			    champ8: opp_roster[2].id,
+			    champ9: opp_roster[3].id,
+			    champ10: opp_roster[4].id
+			})
+			@battle_id = x.id
+			@log[@log.size] = "Battle log id: #{@battle_id}"
+			Rails.logger.debug "Battle log id: #{@battle_id}"			
+		end
 
 		def log_hp_update
 			@log[@log.size] = "Your Team's information:"
