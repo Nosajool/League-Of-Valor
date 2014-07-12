@@ -44,33 +44,24 @@ class RiftBattle
 					# Ability power attack
 					if(cooldown == 0)
 
-						@log[@log.size] = "Your #{x}'s ability power attack"
-						Rails.logger.debug"Your #{x}'s ability power attack"
-
 						# Handle ability attack
 						champ_ap = @team[x].ap
 
-						@log[@log.size] = "Your #{x}'s ap is: #{champ_ap}"
-						Rails.logger.debug "Your #{x}'s ap is: #{champ_ap}"
+						create_ability_power_record(x,champ_ap)
 
 						damage = @opp_team[target].take_magic_damage(champ_ap)
 
-						@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"
-						Rails.logger.debug "Your #{x} dealt #{damage} to #{target}"
+						create_damage_record(x,damage,target)
 					else
-						@log[@log.size] = "Your #{x}'s Attack Damage attack"
-						Rails.logger.debug "Your #{x}'s Attack Damage attack"
 
 						# Handle physical attack
 						champ_ad = @team[x].ad
 
-						@log[@log.size] = "Your #{x}'s ad is: #{champ_ad}"
-						Rails.logger.debug "Your #{x}'s ad is: #{champ_ad}"
+						create_attack_damage_record(x,champ_ad)
 
 						damage = @opp_team[target].take_physical_damage(champ_ad)
 
-						@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"
-						Rails.logger.debug "Your #{x} dealt #{damage} to #{target}"
+						create_damage_record(x,damage,target)
 					end
 
 				else # x > 5
@@ -86,8 +77,6 @@ class RiftBattle
 
 
 					if(cooldown == 0)
-						@log[@log.size] = "opponent's #{x}'s Ability Power attack"
-						Rails.logger.debug "opponent's #{x}'s Ability Power attack"
 
 						champ_ap = @opp_team[x-5].ap
 
@@ -96,12 +85,8 @@ class RiftBattle
 
 						damage = @team[target].take_magic_damage(champ_ap)
 
-						@log[@log.size] = "Opponent's #{x} dealt #{damage} to #{target}"
-						Rails.logger.debug "Opponent's #{x} dealt #{damage} to #{target}"
+						create_damage_record(x,damage,target)
 					else
-						@log[@log.size] = "Opponent's #{x}'s Attack damage atttack"
-						Rails.logger.debug "Opponent's #{x}'s Attack damage atttack"
-
 						champ_ad = @opp_team[x-5].ad
 
 						@log[@log.size] = "Opponent's #{x} attack damage is: #{champ_ad}"
@@ -109,8 +94,7 @@ class RiftBattle
 
 						damage = @team[target].take_physical_damage(champ_ad)
 
-						@log[@log.size] = "Opponent #{x} dealt #{damage} to #{target}"
-						Rails.logger.debug "Opponent #{x} dealt #{damage} to #{target}"
+						create_damage_record(x,damage,target)
 					end
 
 
@@ -213,6 +197,7 @@ class RiftBattle
 		def create_hp_update_record
 			BattleLog.create!({
 				battle_id: @battle_id,
+				event_num: @event_num,
 				event: "health update",
 				champ1: @team[0].hp,
 				champ2: @team[1].hp,
@@ -223,29 +208,77 @@ class RiftBattle
 				ochamp2: @opp_team[1].hp,
 				ochamp3: @opp_team[2].hp,
 				ochamp4: @opp_team[3].hp,
-				ochamp5: @opp_team[4].hp,
-				event_num: @event_num
+				ochamp5: @opp_team[4].hp
 			})
 			@event_num += 1
 		end
 
 		def create_champion_turn_record(x)
+			id = convert_x_to_id(x)
+			@log[@log.size] = "#{x}'s turn to attack"
+			Rails.logger.debug "#{x}'s turn to attack"
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "target selection",
+				champion_id: id,
+				extra: x
+			})
+			@event_num += 1
+		end
+
+		def create_ability_power_record(x,ap)
+			id = convert_x_to_id(x)
+			@log[@log.size] = "Your #{x}'s ap is: #{ap}"
+			Rails.logger.debug "Your #{x}'s ap is: #{ap}"
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "ability power",
+				champion_id: id,
+				extra: ap
+			})
+			@event_num += 1
+		end
+
+		def create_attack_damage_record(x,ad)
+			id = convert_x_to_id(x)
+			@log[@log.size] = "Your #{x}'s ad is: #{ad}"
+			Rails.logger.debug "Your #{x}'s ad is: #{ad}"
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "attack damage",
+				champion_id: id,
+				extra: ad
+			})
+			@event_num += 1
+		end
+
+		def create_damage_record(x,damage,target)
+			id = convert_x_to_id(x)
+			target_id = convert_x_to_id(target)
+			@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"
+			Rails.logger.debug "Your #{x} dealt #{damage} to #{target}"
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "damage",
+				champion_id: id,
+				other_champion_id: target_id,
+				extra: damage
+			})
+			@event_num += 1
+		end
+			
+		def convert_x_to_id(x)
 			id = 0
 			if(x < 5)
 				id = @team[x].id
 			else
 				id = @opp_team[x-5].id
 			end
-			@log[@log.size] = "#{x}'s turn to attack"
-			Rails.logger.debug "#{x}'s turn to attack"
-			BattleLog.create!({
-				battle_id: @battle_id,
-				event: "target selection",
-				champion_id: id,
-				extra: x,
-				event_num: @event_num
-			})
-			@event_num += 1
+			return id
 		end
 
 		def log_hp_update
