@@ -12,6 +12,10 @@ module BattleHelper
 			return log_ap(log,battle,champions)
 		when "attack damage"
 			return log_ad(log,battle,champions)
+		when "magic resist"
+			return log_mr(log,battle,champions)
+		when "armor"
+			return log_armor(log,battle,champions)
 		when "damage"
 			return log_damage(log,battle,champions)
 		when "battle end check"
@@ -46,33 +50,33 @@ module BattleHelper
 			html += "<table border="">"
 
 			html += "<tr><td>"
-			html += "#{champions[0].table_champion.name}: #{log.champ1}"
+			html += "#{champions[0].table_champion.name}: #{log.champ1.round}"
 			html += "</td><td>"
-			html += "#{champions[5].table_champion.name}: #{log.ochamp1}"
+			html += "#{champions[5].table_champion.name}: #{log.ochamp1.round}"
 			html += "</td></tr>"
 
 			html += "<tr><td>"
-			html += "#{champions[1].table_champion.name}: #{log.champ2}"
+			html += "#{champions[1].table_champion.name}: #{log.champ2.round}"
 			html += "</td><td>"
-			html += "#{champions[6].table_champion.name}: #{log.ochamp2}"
+			html += "#{champions[6].table_champion.name}: #{log.ochamp2.round}"
 			html += "</td></tr>"
 
 			html += "<tr><td>"
-			html += "#{champions[2].table_champion.name}: #{log.champ3}"
+			html += "#{champions[2].table_champion.name}: #{log.champ3.round}"
 			html += "</td><td>"
-			html += "#{champions[7].table_champion.name}: #{log.ochamp3}"
+			html += "#{champions[7].table_champion.name}: #{log.ochamp3.round}"
 			html += "</td></tr>"
 
 			html += "<tr><td>"
-			html += "#{champions[3].table_champion.name}: #{log.champ4}"
+			html += "#{champions[3].table_champion.name}: #{log.champ4.round}"
 			html += "</td><td>"
-			html += "#{champions[8].table_champion.name}: #{log.ochamp4}"
+			html += "#{champions[8].table_champion.name}: #{log.ochamp4.round}"
 			html += "</td></tr>"
 
 			html += "<tr><td>"
-			html += "#{champions[4].table_champion.name}: #{log.champ5}"
+			html += "#{champions[4].table_champion.name}: #{log.champ5.round}"
 			html += "</td><td>"
-			html += "#{champions[9].table_champion.name}: #{log.ochamp5}"
+			html += "#{champions[9].table_champion.name}: #{log.ochamp5.round}"
 			html += "</td></tr>"
 
 
@@ -93,7 +97,15 @@ module BattleHelper
 		end
 
 		def log_damage(log,battle,champions)
-			return "#{champions[log.champion_id].table_champion.name} dealt #{log.extra.round} damage to #{champions[log.other_champion_id].table_champion.name}<br><br>"
+			return "#{champions[log.champion_id].table_champion.name} dealt <b>#{log.extra.round}</b> damage to #{champions[log.other_champion_id].table_champion.name}<br><br>"
+		end
+
+		def log_mr(log,battle,champions)
+			return "#{champions[log.champion_id].table_champion.name}'s magic resist is #{log.extra.round}<br>"
+		end
+
+		def log_armor(log,battle,champions)
+			return "#{champions[log.champion_id].table_champion.name}'s armor is #{log.extra.round}<br>"
 		end
 
 		def log_battle_end_check(log,battle,champions)

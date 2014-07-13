@@ -68,12 +68,10 @@ class BattleChampion
 
 		def take_physical_damage(opp_ad)
 			# Actual Battle
-			# multiplier = 100 / (100 + @armor)
-			#damage =  (multiplier * opp_ad).ceil
+			multiplier = 100 / (100 + @armor)
+			damage =  (multiplier * opp_ad).ceil
 			
-			# Simplified Battle
 			Rails.logger.debug "opp_ad: #{opp_ad} type: #{opp_ad.class}"
-			damage = opp_ad
 			Rails.logger.debug "health: #{@hp} type: #{@hp.class}"
 			@hp = @hp - damage
 			return damage
@@ -81,12 +79,10 @@ class BattleChampion
 
 		def take_magic_damage(opp_ap)
 			# Actual Battle
-			# multiplier = 100 / (100 + @mr)
-			# damage = (multiplier * opp_ap).ceil
+			multiplier = 100 / (100 + @mr)
+			damage = (multiplier * opp_ap).ceil
 			
-			# Simplified Battle 
 			Rails.logger.debug "opp_ap: #{opp_ap} type: #{opp_ap.class}"
-			damage = opp_ap
 			Rails.logger.debug "health: #{@hp} type: #{@hp.class}"
 			@hp = (@hp - damage).round
 			return damage

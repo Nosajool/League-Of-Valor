@@ -4,6 +4,14 @@
 
 <div class="row">
 	<% if @logs.any? %>
+		<% @logs.each do |log| %>
+			<%= render_log(log,@battle,@champions).html_safe %>
+		<% end %>
+	<% else %>
+		<h3>This battle does not exist.</h3>
+	<% end %>
+
+	<% if @logs.any? && Rails.env.development? %>
 		<table class="table table-hover table-condensed">
 			<tr class = "dark-hover">
 				<th>event</th>
@@ -48,11 +56,5 @@
 		<h3>This battle does not exist.</h3>
 	<% end %>
 
-	<% if @logs.any? %>
-		<% @logs.each do |log| %>
-			<%= render_log(log,@battle,@champions).html_safe %>
-		<% end %>
-	<% else %>
-		<h3>This battle does not exist.</h3>
-	<% end %>
+
 </div>

@@ -36,7 +36,6 @@ class RiftBattle
 					target = 0
 
 					while(@opp_team[target].is_dead) do
-						@log[@log.size] = "#{target} is already dead. Shifting to #{target + 1}"
 						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
 						target += 1				
 					end
@@ -48,21 +47,23 @@ class RiftBattle
 
 						# Handle ability attack
 						champ_ap = @team[x].ap
-
 						create_ability_power_record(x,champ_ap)
 
-						damage = @opp_team[target].take_magic_damage(champ_ap)
+						champ_mr = @opp_team[target].mr
+						create_mr_record(champ_mr,target + 5)
 
+						damage = @opp_team[target].take_magic_damage(champ_ap)
 						create_damage_record(x,damage,target + 5)
 					else
 
 						# Handle physical attack
 						champ_ad = @team[x].ad
-
 						create_attack_damage_record(x,champ_ad)
 
-						damage = @opp_team[target].take_physical_damage(champ_ad)
+						champ_ar = @opp_team[target].armor
+						create_armor_record(champ_ar, target + 5)
 
+						damage = @opp_team[target].take_physical_damage(champ_ad)
 						create_damage_record(x,damage,target + 5)
 					end
 
@@ -72,7 +73,6 @@ class RiftBattle
 					target = 0
 
 					while(@team[target].is_dead) do
-						@log[@log.size] = "#{target} is already dead. Shifting to #{target + 1}"
 						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
 						target += 1
 					end
@@ -82,21 +82,22 @@ class RiftBattle
 					if(cooldown == 0)
 
 						champ_ap = @opp_team[x-5].ap
+						create_ability_power_record(x,champ_ap)
 
-						@log[@log.size] = "Opponent's #{x}'s ability power: #{champ_ap}"
-						Rails.logger.debug "Opponent's #{x}'s ability power: #{champ_ap}"
+						champ_mr = @team[target].mr
+						create_mr_record(champ_mr,target)
 
 						damage = @team[target].take_magic_damage(champ_ap)
-
 						create_damage_record(x,damage,target)
+
 					else
 						champ_ad = @opp_team[x-5].ad
+						create_attack_damage_record(x,champ_ad)
 
-						@log[@log.size] = "Opponent's #{x} attack damage is: #{champ_ad}"
-						Rails.logger.debug "Opponent's #{x} attack damage is: #{champ_ad}"
+						champ_ar = @team[target].armor
+						create_armor_record(champ_ar, target)
 
 						damage = @team[target].take_physical_damage(champ_ad)
-
 						create_damage_record(x,damage,target)
 					end
 
@@ -214,6 +215,28 @@ class RiftBattle
 				extra: damage
 			})
 			@event_num += 1
+		end
+
+		def create_mr_record(mr,target)
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "magic resist",
+				champion_id: target,
+				extra: mr
+			})
+			@event_num += 1			
+		end
+
+		def create_armor_record(armor,target)
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "armor",
+				champion_id: target,
+				extra: armor
+			})
+			@event_num += 1				
 		end
 
 		def create_turn_update_record(turn)
