@@ -1,0 +1,50 @@
+<% provide(:title, "Battle ##{@logs[0].battle_id}") %>
+
+<h1>Battle #<%= @logs[0].battle_id %></h1>
+
+<div class="row">
+	<% if @logs.any? %>
+		<table class="table table-hover table-condensed">
+			<tr class = "dark-hover">
+				<th>event</th>
+				<th>description</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>o1</th>
+				<th>o2</th>
+				<th>o3</th>
+				<th>o4</th>
+				<th>o5</th>
+				<th>extra</th>
+				<th>champ id</th>
+				<th>event num</th>
+				<th>ochamp id</th>
+			</tr>
+			<% @logs.each do |log| %>
+				<tr class ="dark-hover">
+					<td><%= log.event %></td>
+					<td><%= log.description %></td>
+					<td><%= log.champ1 %></td>
+					<td><%= log.champ2 %></td>
+					<td><%= log.champ3 %></td>
+					<td><%= log.champ4 %></td>
+					<td><%= log.champ5 %></td>
+					<td><%= log.ochamp1 %></td>
+					<td><%= log.ochamp2 %></td>
+					<td><%= log.ochamp3 %></td>
+					<td><%= log.ochamp4 %></td>
+					<td><%= log.ochamp5 %></td>
+					<td><%= log.extra %></td>
+					<td><%= log.champion_id %></td>
+					<td><%= log.event_num %></td>
+					<td><%= log.other_champion_id %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<h3>This battle does not exist.</h3>
+	<% end %>
+</div>

@@ -12,6 +12,7 @@ class BattleController < ApplicationController
       the_battle.battle
       @win = the_battle.victory?
       @log = the_battle.log
+      redirect_to battle_log_path(the_battle.battle_id)
     end
 
     def setup
@@ -20,6 +21,10 @@ class BattleController < ApplicationController
     		@opp_roster = getRoster(@opponent)
     		@roster = getRoster(current_user)
     	end
+    end
+
+    def show
+      @logs = BattleLog.where(battle_id: params[:id]).order(created_at: :asc)
     end
 
     private

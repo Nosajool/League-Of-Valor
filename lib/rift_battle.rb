@@ -1,5 +1,6 @@
 class RiftBattle
 	attr_reader :log
+	attr_reader :battle_id
 
 	def initialize(roster,opp_roster)
 		@log = []
