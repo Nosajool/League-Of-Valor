@@ -32,7 +32,8 @@ LeagueOfValor::Application.routes.draw do
   resources :maps, only: [:index, :show]
   post '/catch',                  to: 'maps#catch'
 
-  get '/battle_log/:id',          to: 'battle#show',                    as: 'battle_log' #battle_log_path(2)
+  get '/recent_battles',          to: 'battle#index',                  as: 'battle_logs'
+  get '/battle_log/:id',          to: 'battle#show',                   as: 'battle_log' #battle_log_path(2)
   post '/battle',                 to: 'battle#battle',                 as: 'battle'
   get '/champion_select/:opp_id', to: 'battle#setup',                  as: 'champ_select' #champ_select_path(23)
   # Redirect /champion_select to view a profile

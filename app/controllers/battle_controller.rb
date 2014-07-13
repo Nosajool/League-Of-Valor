@@ -27,6 +27,10 @@ class BattleController < ApplicationController
       @logs = BattleLog.where(battle_id: params[:id]).order(created_at: :asc)
     end
 
+    def index
+      @battles = Battle.all
+    end
+
     private
       def getRoster(user)
         roster = []
