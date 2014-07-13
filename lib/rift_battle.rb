@@ -53,7 +53,7 @@ class RiftBattle
 
 						damage = @opp_team[target].take_magic_damage(champ_ap)
 
-						create_damage_record(x,damage,target)
+						create_damage_record(x,damage,target + 5)
 					else
 
 						# Handle physical attack
@@ -63,7 +63,7 @@ class RiftBattle
 
 						damage = @opp_team[target].take_physical_damage(champ_ad)
 
-						create_damage_record(x,damage,target)
+						create_damage_record(x,damage,target + 5)
 					end
 
 				else # x > 5
@@ -210,7 +210,7 @@ class RiftBattle
 				event_num: @event_num,
 				event: "damage",
 				champion_id: x,
-				other_champion_id: x,
+				other_champion_id: target,
 				extra: damage
 			})
 			@event_num += 1

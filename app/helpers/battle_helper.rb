@@ -85,15 +85,15 @@ module BattleHelper
 		end
 
 		def log_ap(log,battle,champions)
-			"ap"
+			return "#{champions[log.champion_id].table_champion.name}'s ability power is #{log.extra.round}"
 		end
 
 		def log_ad(log,battle,champions)
-			"ad"
+			return "#{champions[log.champion_id].table_champion.name}'s attack damage is #{log.extra.round}"
 		end
 
 		def log_damage(log,battle,champions)
-			"dmg"
+			return "#{champions[log.champion_id].table_champion.name} dealt #{log.extra.round} damage to #{champions[log.other_champion_id].table_champion.name}"
 		end
 
 		def log_battle_end_check(log,battle,champions)
