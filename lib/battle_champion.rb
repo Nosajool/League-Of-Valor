@@ -91,6 +91,10 @@ class BattleChampion
 			return damage
 		end
 
+		def update_champion_stats(event_num)
+			update_exp_level(event_num)			
+		end
+
 		private
 			def update_level(event_num)
 				new_level = Math.cbrt(@experience)
@@ -126,5 +130,27 @@ class BattleChampion
 					})
 					Rails.logger.debug "#{@name} did not grow a level"					
 				end
+			end
+
+			def update_exp_level(event_num)
+					@champion = Champion.find(@id)
+					BattleLog.create!({
+						battle_id: @battle_id,
+						event_num: event_num,
+						event: "post exp",
+						champion_id: @id,
+						extra: @experience
+					})
+					@champion.experience = @experience
+					event_num += 1
+					BattleLog.create!({
+						battle_id: @battle_id,
+						event_num: event_num,
+						event: "post level",
+						champion_id: @id,
+						extra: @level
+					})
+					@champion.level = @level
+					@champion.save
 			end
 end

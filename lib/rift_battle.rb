@@ -339,5 +339,9 @@ class RiftBattle
 					end
 				end
 			end
+			@team.each do |champ|
+				champ.update_champion_stats(@event_num)
+				@event_num += 2
+			end
 		end
 end
