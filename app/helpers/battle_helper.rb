@@ -81,50 +81,50 @@ module BattleHelper
 		end
 
 		def log_target(log,battle,champions)
-			return "#{champions[log.champion_id].table_champion.name}'s target is #{champions[log.extra.round].table_champion.name}"
+			return "#{champions[log.champion_id].table_champion.name}'s target is #{champions[log.extra.round].table_champion.name}<br>"
 		end
 
 		def log_ap(log,battle,champions)
-			return "#{champions[log.champion_id].table_champion.name}'s ability power is #{log.extra.round}"
+			return "#{champions[log.champion_id].table_champion.name}'s ability power is #{log.extra.round}<br>"
 		end
 
 		def log_ad(log,battle,champions)
-			return "#{champions[log.champion_id].table_champion.name}'s attack damage is #{log.extra.round}"
+			return "#{champions[log.champion_id].table_champion.name}'s attack damage is #{log.extra.round}<br>"
 		end
 
 		def log_damage(log,battle,champions)
-			return "#{champions[log.champion_id].table_champion.name} dealt #{log.extra.round} damage to #{champions[log.other_champion_id].table_champion.name}"
+			return "#{champions[log.champion_id].table_champion.name} dealt #{log.extra.round} damage to #{champions[log.other_champion_id].table_champion.name}<br><br>"
 		end
 
 		def log_battle_end_check(log,battle,champions)
-			"end"
+			return ""
 		end
 
 		def log_determine_exp(log,battle,champions)
-			"det exp"
+			return ""
 		end
 
 		def log_level_compare(log,battle,champions)
-			"level compare"
+			return ""
 		end
 
 		def log_exp_gain(log,battle,champions)
-			"exp gain"
+			return "#{champions[log.champion_id].table_champion.name} gained #{log.champ2.round} experience from #{log.champ1.round}-->#{log.extra.round}<br>"
 		end
 
 		def log_levelled_up(log,battle,champions)
-			"levelled up"
+			return "#{champions[log.champion_id].table_champion.name} levelled from #{log.champ1.round}-->#{log.extra.round}<br>"
 		end
 
 		def log_did_not_level_up(log,battle,champions)
-			"not levelled up"
+			return ""
 		end
 
 		def log_post_level(log,battle,champions)
-			"post level"
+			return ""
 		end
 
 		def log_post_exp(log,battle,champions)
-			"post exp"
+			return ""
 		end
 end

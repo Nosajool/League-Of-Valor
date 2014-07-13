@@ -329,16 +329,16 @@ class RiftBattle
 			b = team_dead(@opp_team)
 			for i in 0..4
 				if(b[i])
-					exp = @opp_team[i].exp_reward(@event_num)
+					exp = @opp_team[i].exp_reward(@event_num, i + 5)
 					@event_num += 1
-					@team.each do |champ|
-						champ.gain_exp(exp,@event_num)
+					for x in 0..4 do
+						@team[x].gain_exp(exp,@event_num,x)
 						@event_num += 3
 					end
 				end
 			end
-			@team.each do |champ|
-				champ.update_champion_stats(@event_num)
+			for x in 0..4 do
+				@team[x].update_champion_stats(@event_num,x)
 				@event_num += 2
 			end
 		end

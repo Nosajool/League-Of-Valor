@@ -38,31 +38,32 @@ class BattleChampion
 			@dead
 		end
 
-		def exp_reward(event_num)
+		def exp_reward(event_num,x)
 			reward = ((@hp + @ad + @ap + @armor + @mr) /5).round
 			BattleLog.create!({
 				battle_id: @battle_id,
 				event_num: event_num,
 				event: "determine exp",
-				champion_id: @id,
+				champion_id: x,
 				extra: reward
 			})
 			return reward
 		end
 
-		def gain_exp(exp,event_num)
+		def gain_exp(exp,event_num,x)
 			old_exp = @experience
 			@experience += exp
 			BattleLog.create!({
 				battle_id: @battle_id,
 				event_num: event_num,
 				event: "exp gain",
-				champion_id: @id,
+				champion_id: x,
 				extra: @experience,
-				champ1: old_exp
+				champ1: old_exp,
+				champ2: exp
 			})
 			event_num += 1
-			update_level(event_num)
+			update_level(event_num,x)
 		end
 
 		def take_physical_damage(opp_ad)
@@ -91,19 +92,19 @@ class BattleChampion
 			return damage
 		end
 
-		def update_champion_stats(event_num)
-			update_exp_level(event_num)			
+		def update_champion_stats(event_num,x)
+			update_exp_level(event_num,x)			
 		end
 
 		private
-			def update_level(event_num)
+			def update_level(event_num,x)
 				new_level = Math.cbrt(@experience)
 				Rails.logger.debug "Name: #{@name} Update Level Check: #{new_level.round} from level #{@level}"
 				BattleLog.create!({
 					battle_id: @battle_id,
 					event_num: event_num,
 					event: "level compare",
-					champion_id: @id,
+					champion_id: x,
 					extra: new_level,
 					champ1: @level
 				})
@@ -114,7 +115,7 @@ class BattleChampion
 						battle_id: @battle_id,
 						event_num: event_num,
 						event: "grow level",
-						champion_id: @id,
+						champion_id: x,
 						extra: new_level.round,
 						champ1: @level
 					})
@@ -124,7 +125,7 @@ class BattleChampion
 						battle_id: @battle_id,
 						event_num: event_num,
 						event: "did not grow level",
-						champion_id: @id,
+						champion_id: x,
 						extra: new_level.round,
 						champ1: @level
 					})
@@ -132,13 +133,13 @@ class BattleChampion
 				end
 			end
 
-			def update_exp_level(event_num)
+			def update_exp_level(event_num,x)
 					@champion = Champion.find(@id)
 					BattleLog.create!({
 						battle_id: @battle_id,
 						event_num: event_num,
 						event: "post exp",
-						champion_id: @id,
+						champion_id: x,
 						extra: @experience
 					})
 					@champion.experience = @experience
@@ -147,7 +148,7 @@ class BattleChampion
 						battle_id: @battle_id,
 						event_num: event_num,
 						event: "post level",
-						champion_id: @id,
+						champion_id: x,
 						extra: @level
 					})
 					@champion.level = @level
