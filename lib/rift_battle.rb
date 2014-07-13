@@ -7,16 +7,17 @@ class RiftBattle
 		@event_num = 0
 		@opp_team = Array.new
 
+		create_battle_record(roster,opp_roster)
+
 		roster.each do |champ|
-			@team << BattleChampion.new(champ)
+			@team << BattleChampion.new(champ,@battle_id)
 		end
 		opp_roster.each do |champ|
-			@opp_team << BattleChampion.new(champ)
+			@opp_team << BattleChampion.new(champ,@battle_id)
 		end
 
 		@champ_speeds = speed_order
 		@battle_end = false
-		create_battle_record(roster,opp_roster)
 	end
 
 	# Does not return anyting
@@ -108,6 +109,7 @@ class RiftBattle
 
 	def victory?
 		a = team_dead(@team)
+		post_battle
 		create_hp_update_record
 		if(a[5] == 5)
 			return false
@@ -257,6 +259,7 @@ class RiftBattle
 				ochamp4: b[3],
 				ochamp5: b[4]				
 			})
+			@event_num += 1
 			@log[@log.size] = "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{a[4]} 5:#{5}"
 			Rails.logger.debug "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{4} 5:#{5}"
 
@@ -318,5 +321,22 @@ class RiftBattle
 				id = @opp_team[x-5].id
 			end
 			return id
+		end
+
+
+
+
+		def post_battle
+			b = team_dead(@opp_team)
+			for i in 0..4
+				if(b[i])
+					exp = @opp_team[i].exp_reward(@event_num)
+					@event_num += 1
+					@team.each do |champ|
+						champ.gain_exp(exp,@event_num)
+						@event_num += 3
+					end
+				end
+			end
 		end
 end

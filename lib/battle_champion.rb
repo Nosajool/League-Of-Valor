@@ -14,7 +14,7 @@ class BattleChampion
 	attr_reader :range
 	attr_reader :id
 
-		def initialize(champion)
+		def initialize(champion,battle_id)
 			@hp = champ_hp(champion)
 			@ad = champ_ad(champion)
 			@ap = champ_ap(champion)
@@ -27,6 +27,7 @@ class BattleChampion
 			@experience = champion.experience
 			@name = skin_title(champion)
 			@range = champ_range(champion)
+			@battle_id = battle_id
 		end
 
 		def is_dead
@@ -35,6 +36,33 @@ class BattleChampion
 				@dead = true
 			end
 			@dead
+		end
+
+		def exp_reward(event_num)
+			reward = ((@hp + @ad + @ap + @armor + @mr) /5).round
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: event_num,
+				event: "determine exp",
+				champion_id: @id,
+				extra: reward
+			})
+			return reward
+		end
+
+		def gain_exp(exp,event_num)
+			old_exp = @experience
+			@experience += exp
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: event_num,
+				event: "exp gain",
+				champion_id: @id,
+				extra: @experience,
+				champ1: old_exp
+			})
+			event_num += 1
+			update_level(event_num)
 		end
 
 		def take_physical_damage(opp_ad)
@@ -62,4 +90,41 @@ class BattleChampion
 			@hp = (@hp - damage).round
 			return damage
 		end
+
+		private
+			def update_level(event_num)
+				new_level = Math.cbrt(@experience)
+				Rails.logger.debug "Name: #{@name} Update Level Check: #{new_level.round} from level #{@level}"
+				BattleLog.create!({
+					battle_id: @battle_id,
+					event_num: event_num,
+					event: "level compare",
+					champion_id: @id,
+					extra: new_level,
+					champ1: @level
+				})
+				event_num += 1
+				if(new_level.round != @level)
+					Rails.logger.debug "Name: #{@name} grew to #{new_level.round} from level #{@level}"
+					BattleLog.create!({
+						battle_id: @battle_id,
+						event_num: event_num,
+						event: "grow level",
+						champion_id: @id,
+						extra: new_level.round,
+						champ1: @level
+					})
+					@level = new_level.round
+				else
+					BattleLog.create!({
+						battle_id: @battle_id,
+						event_num: event_num,
+						event: "did not grow level",
+						champion_id: @id,
+						extra: new_level.round,
+						champ1: @level
+					})
+					Rails.logger.debug "#{@name} did not grow a level"					
+				end
+			end
 end
