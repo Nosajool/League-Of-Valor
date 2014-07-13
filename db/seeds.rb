@@ -1,11 +1,22 @@
 require 'csv'
 require 'json'
 
+def fix_riot_typos(role)
+    if role == "Suppport"
+        role = "Support"
+    elsif role == "Figher"
+        role = "Fighter"
+    end
+    return role
+end
+
 puts "Inputting Table Champion Data and Skin Data"
 champion_stats_data = 'app/data/champion_stats.json'
 file = File.read(champion_stats_data)
 champions = JSON.parse(file)["data"]
 champions.each do |key,val|
+    temp = val["tags"][1]
+    val["tags"][1] = fix_riot_typos(temp)
     x = TableChampion.create!({
         name: val["name"],
         hp: val["stats"]["hp"],
@@ -113,3 +124,5 @@ roles.each do |role|
     })
     puts "#{role["role"]} added to the Role Table"
 end
+
+

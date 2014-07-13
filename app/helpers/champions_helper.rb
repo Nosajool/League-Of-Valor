@@ -35,6 +35,7 @@ module ChampionsHelper
 	# Champion Statistics. Will calculate all stat boost (pros, buffs, roles) using the following methods
 
 	def champ_hp(champion)
+		Rails.logger.debug "Finding hp for: #{champion.table_champion.name}"
 		base = champion.table_champion.hp
 		f_base = f_role(champion).hp_base
 		s_base = s_role(champion).hp_base
@@ -47,6 +48,7 @@ module ChampionsHelper
 	end
 
 	def champ_ad(champion)
+		Rails.logger.debug "Finding ad for: #{champion.table_champion.name}"
 		base = champion.table_champion.attack_damage
 		f_base = f_role(champion).ad_base
 		s_base = s_role(champion).ad_base
@@ -59,6 +61,7 @@ module ChampionsHelper
 	end
 
 	def champ_ap(champion)
+		Rails.logger.debug "Finding ap for: #{champion.table_champion.name}"
 		# Ability power uses the same base attack damage
 		base = champion.table_champion.attack_damage
 		f_base = f_role(champion).ap_base
@@ -74,6 +77,7 @@ module ChampionsHelper
 
 
 	def champ_armor(champion)
+		Rails.logger.debug "Finding armor for: #{champion.table_champion.name}"
 		base = champion.table_champion.armor
 		f_base = f_role(champion).ar_base
 		s_base = s_role(champion).ar_base
@@ -86,6 +90,7 @@ module ChampionsHelper
 	end
 
 	def champ_mr(champion)
+		Rails.logger.debug "Finding magic resist for: #{champion.table_champion.name}"
 		base = champion.table_champion.magic_resist
 		f_base = f_role(champion).mr_base
 		s_base = s_role(champion).mr_base
@@ -98,6 +103,7 @@ module ChampionsHelper
 	end
 
 	def champ_ms(champion)
+		Rails.logger.debug "Finding movespeed for: #{champion.table_champion.name}"
 		base = champion.table_champion.movespeed
 		f_base = f_role(champion).ms_base
 		s_base = s_role(champion).ms_base
