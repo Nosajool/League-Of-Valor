@@ -25,6 +25,18 @@ class BattleController < ApplicationController
 
     def show
       @logs = BattleLog.where(battle_id: params[:id]).order(created_at: :asc)
+      @champions = Array.new
+      @battle = Battle.find(params[:id])
+      @champions << Champion.find(@battle.champ1)
+      @champions << Champion.find(@battle.champ2)
+      @champions << Champion.find(@battle.champ3)
+      @champions << Champion.find(@battle.champ4)
+      @champions << Champion.find(@battle.champ5)
+      @champions << Champion.find(@battle.champ6)
+      @champions << Champion.find(@battle.champ7)
+      @champions << Champion.find(@battle.champ8)
+      @champions << Champion.find(@battle.champ9)
+      @champions << Champion.find(@battle.champ10)
     end
 
     def index

@@ -47,4 +47,13 @@
 	<% else %>
 		<h3>This battle does not exist.</h3>
 	<% end %>
+
+	<% if @logs.any? %>
+		<% @logs.each do |log| %>
+			<%= render_log(log,@battle,@champions).html_safe %>
+			<br>
+		<% end %>
+	<% else %>
+		<h3>This battle does not exist.</h3>
+	<% end %>
 </div>
