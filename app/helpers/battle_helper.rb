@@ -10,8 +10,12 @@ module BattleHelper
 			return log_movespeed(log,battle,champions)
 		when "attack order"
 			return log_attack_order(log,battle,champions)
+		when "range"
+			return log_range(log,battle,champions)
 		when "target selection"
 			return log_target(log,battle,champions)
+		when "out of range"
+			return log_out_of_range(log,battle,champions)
 		when "ability power"
 			return log_ap(log,battle,champions)
 		when "attack damage"
@@ -106,8 +110,26 @@ module BattleHelper
 			html += "#{champions[log.ochamp5.round].table_champion.name}<br>"
 		end
 
+		def log_range(log,battle,champions)
+			html = "<strong>Attack Ranges:</strong><br>"
+			html += "#{champions[0].table_champion.name}: #{log.champ1.round}<br>"
+			html += "#{champions[1].table_champion.name}: #{log.champ2.round}<br>"
+			html += "#{champions[2].table_champion.name}: #{log.champ3.round}<br>"
+			html += "#{champions[3].table_champion.name}: #{log.champ4.round}<br>"
+			html += "#{champions[4].table_champion.name}: #{log.champ5.round}<br>"
+			html += "#{champions[5].table_champion.name}: #{log.ochamp1.round}<br>"
+			html += "#{champions[6].table_champion.name}: #{log.ochamp2.round}<br>"
+			html += "#{champions[7].table_champion.name}: #{log.ochamp3.round}<br>"
+			html += "#{champions[8].table_champion.name}: #{log.ochamp4.round}<br>"
+			html += "#{champions[9].table_champion.name}: #{log.ochamp5.round}<br>"
+		end
+
 		def log_target(log,battle,champions)
 			return "#{champions[log.champion_id].table_champion.name}'s target is #{champions[log.extra.round].table_champion.name}<br>"
+		end
+
+		def log_out_of_range(log,battle,champions)
+			return "#{champions[log.champion_id].table_champion.name}'s range is #{log.extra.round}. There are #{log.other_champion_id.round} allys in front of him so he can't hit anyone.<br>"
 		end
 
 		def log_ap(log,battle,champions)

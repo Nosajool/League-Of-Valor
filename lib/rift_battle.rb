@@ -18,6 +18,7 @@ class RiftBattle
 		end
 
 		@champ_speeds = speed_order
+		create_range_record
 		@battle_end = false
 	end
 
@@ -32,73 +33,88 @@ class RiftBattle
 
 				# x is @team's champions
 				if(x < 5)
-
 					target = 0
+					in_front = team_dead(@team)
+					alive_in_front = in_front[0...x].count(false)
+					Rails.logger.debug "Alive in front for #{@team[x].name}: #{alive_in_front} Range: #{@team[x].range}"
 
 					while(@opp_team[target].is_dead) do
 						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
 						target += 1				
 					end
 
-					create_champion_turn_record(x,target + 5)
-
-					# Ability power attack
-					if(cooldown == 0)
-
-						# Handle ability attack
-						champ_ap = @team[x].ap
-						create_ability_power_record(x,champ_ap)
-
-						champ_mr = @opp_team[target].mr
-						create_mr_record(champ_mr,target + 5)
-
-						damage = @opp_team[target].take_magic_damage(champ_ap)
-						create_damage_record(x,damage,target + 5)
+					if @team[x].range < alive_in_front
+						create_nothing_in_range_record(x,@team[x].range,alive_in_front)
 					else
+						create_champion_turn_record(x,target + 5)
+						# Ability power attack
+						if(cooldown == 0)
 
-						# Handle physical attack
-						champ_ad = @team[x].ad
-						create_attack_damage_record(x,champ_ad)
+							# Handle ability attack
+							champ_ap = @team[x].ap
+							create_ability_power_record(x,champ_ap)
 
-						champ_ar = @opp_team[target].armor
-						create_armor_record(champ_ar, target + 5)
+							champ_mr = @opp_team[target].mr
+							create_mr_record(champ_mr,target + 5)
 
-						damage = @opp_team[target].take_physical_damage(champ_ad)
-						create_damage_record(x,damage,target + 5)
+							damage = @opp_team[target].take_magic_damage(champ_ap)
+							create_damage_record(x,damage,target + 5)
+						else
+
+							# Handle physical attack
+							champ_ad = @team[x].ad
+							create_attack_damage_record(x,champ_ad)
+
+							champ_ar = @opp_team[target].armor
+							create_armor_record(champ_ar, target + 5)
+
+							damage = @opp_team[target].take_physical_damage(champ_ad)
+							create_damage_record(x,damage,target + 5)
+						end				
 					end
+
+					
 
 				else # x > 5
 					# x is @opp_team's champions
 					
 					target = 0
+					in_front = team_dead(@opp_team)
+					alive_in_front = in_front[0...(x-5)].count(false)
+					Rails.logger.debug "Alive in front for #{@opp_team[x-5].name}: #{alive_in_front} Range: #{@opp_team[x-5].range}"
 
 					while(@team[target].is_dead) do
 						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
 						target += 1
 					end
 
-					create_champion_turn_record(x,target)
-
-					if(cooldown == 0)
-
-						champ_ap = @opp_team[x-5].ap
-						create_ability_power_record(x,champ_ap)
-
-						champ_mr = @team[target].mr
-						create_mr_record(champ_mr,target)
-
-						damage = @team[target].take_magic_damage(champ_ap)
-						create_damage_record(x,damage,target)
-
+					if @opp_team[x-5].range < alive_in_front
+						create_nothing_in_range_record(x,@opp_team[x-5].range,alive_in_front)
 					else
-						champ_ad = @opp_team[x-5].ad
-						create_attack_damage_record(x,champ_ad)
 
-						champ_ar = @team[target].armor
-						create_armor_record(champ_ar, target)
+						create_champion_turn_record(x,target)
 
-						damage = @team[target].take_physical_damage(champ_ad)
-						create_damage_record(x,damage,target)
+						if(cooldown == 0)
+
+							champ_ap = @opp_team[x-5].ap
+							create_ability_power_record(x,champ_ap)
+
+							champ_mr = @team[target].mr
+							create_mr_record(champ_mr,target)
+
+							damage = @team[target].take_magic_damage(champ_ap)
+							create_damage_record(x,damage,target)
+
+						else
+							champ_ad = @opp_team[x-5].ad
+							create_attack_damage_record(x,champ_ad)
+
+							champ_ar = @team[target].armor
+							create_armor_record(champ_ar, target)
+
+							damage = @team[target].take_physical_damage(champ_ad)
+							create_damage_record(x,damage,target)
+						end
 					end
 
 
@@ -251,6 +267,18 @@ class RiftBattle
 			@event_num += 1	
 		end
 
+		def create_nothing_in_range_record(x,range,num_in_front)
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "out of range",
+				champion_id: x,
+				extra: range,
+				other_champion_id: num_in_front
+			})	
+			@event_num += 1				
+		end
+
 		def create_battle_end_record
 			a = team_dead(@team)
 			b = team_dead(@opp_team)
@@ -326,6 +354,25 @@ class RiftBattle
 				ochamp5: speed_array[9]
 			})
 			@event_num += 1			
+		end
+
+		def create_range_record
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "range",
+				champ1: @team[0].range,
+				champ2: @team[1].range,
+				champ3: @team[2].range,
+				champ4: @team[3].range,
+				champ5: @team[4].range,
+				ochamp1: @opp_team[0].range,
+				ochamp2: @opp_team[1].range,
+				ochamp3: @opp_team[2].range,
+				ochamp4: @opp_team[3].range,
+				ochamp5: @opp_team[4].range
+			})
+			@event_num += 1				
 		end
 		# Returns an array of size 10 with values ranging from 0-9
 		def speed_order
