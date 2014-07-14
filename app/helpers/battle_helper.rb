@@ -6,6 +6,10 @@ module BattleHelper
 			return log_turn(log,battle,champions)
 		when "health update"
 			return log_hp_update(log,battle,champions)
+		when "movespeed"
+			return log_movespeed(log,battle,champions)
+		when "attack order"
+			return log_attack_order(log,battle,champions)
 		when "target selection"
 			return log_target(log,battle,champions)
 		when "ability power"
@@ -82,6 +86,24 @@ module BattleHelper
 
 			html += "</table>"
 
+		end
+
+		def log_movespeed(log,battle,champions)
+			return "#{champions[log.champion_id].table_champion.name}'s movespeed is #{log.extra.round}<br>"
+		end
+
+		def log_attack_order(log,battle,champions)
+			html = "<strong>Thus, the attack order is: </strong><br>"
+			html += "#{champions[log.champ1.round].table_champion.name}<br>"
+			html += "#{champions[log.champ2.round].table_champion.name}<br>"
+			html += "#{champions[log.champ3.round].table_champion.name}<br>"
+			html += "#{champions[log.champ4.round].table_champion.name}<br>"
+			html += "#{champions[log.champ5.round].table_champion.name}<br>"
+			html += "#{champions[log.ochamp1.round].table_champion.name}<br>"
+			html += "#{champions[log.ochamp2.round].table_champion.name}<br>"
+			html += "#{champions[log.ochamp3.round].table_champion.name}<br>"
+			html += "#{champions[log.ochamp4.round].table_champion.name}<br>"
+			html += "#{champions[log.ochamp5.round].table_champion.name}<br>"
 		end
 
 		def log_target(log,battle,champions)

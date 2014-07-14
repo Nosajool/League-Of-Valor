@@ -297,26 +297,50 @@ class RiftBattle
 
 			@battle_end
 		end
+
+		def create_speed_record(x,ms)
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "movespeed",
+				champion_id: x,
+				extra: ms
+			})
+			@event_num += 1				
+		end
+
+		def create_order_record(speed_array)
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "attack order",
+				champ1: speed_array[0],
+				champ2: speed_array[1],
+				champ3: speed_array[2],
+				champ4: speed_array[3],
+				champ5: speed_array[4],
+				ochamp1: speed_array[5],
+				ochamp2: speed_array[6],
+				ochamp3: speed_array[7],
+				ochamp4: speed_array[8],
+				ochamp5: speed_array[9]
+			})
+			@event_num += 1			
+		end
 		# Returns an array of size 10 with values ranging from 0-9
 		def speed_order
-			# all_champions = @team.concat(@opp_team)
-			# speed_hash = Hash.new
-			# for x in 0..9
-			# 	speed_hash[x]  = all_champions[x].ms
-			# end
-			# sorted_speed_hash = speed_hash.sort_by{|num,speed| speed}.reverse
-			# new_speed_array = Array.new
-			# sorted_speed_hash.each do |num, speed|
-			# 	new_speed_array << num
-			# end
-			# @log[@log.size] = "Speed Order:"
-			# new_speed_array.each do |speed|
-			# 	@log[@log.size] = speed
-			# end
-			new_speed_array = Array.new
-			(0..9).each do |x|
-				new_speed_array << x
+			all_champions = @team.concat(@opp_team)
+			speed_hash = Hash.new
+			for x in 0..9
+				speed_hash[x]  = all_champions[x].ms
+				create_speed_record(x,all_champions[x].ms)
 			end
+			sorted_speed_hash = speed_hash.sort_by{|num,speed| speed}.reverse
+			new_speed_array = Array.new
+			sorted_speed_hash.each do |num, speed|
+				new_speed_array << num
+			end
+			create_order_record(new_speed_array)
 			new_speed_array
 		end
 
