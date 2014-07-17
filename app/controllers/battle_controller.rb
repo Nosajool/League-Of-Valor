@@ -11,7 +11,6 @@ class BattleController < ApplicationController
       the_battle = RiftBattle.new(roster,opp_roster)
       the_battle.battle
       @win = the_battle.victory?
-      @log = the_battle.log
       redirect_to battle_log_path(the_battle.battle_id)
     end
 

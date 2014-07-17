@@ -3,7 +3,6 @@ class RiftBattle
 	attr_reader :battle_id
 
 	def initialize(roster,opp_roster)
-		@log = []
 		@team = Array.new
 		@event_num = 0
 		@opp_team = Array.new
@@ -33,19 +32,42 @@ class RiftBattle
 
 				# x is @team's champions
 				if(x < 5)
-					target = 0
 					in_front = team_dead(@team)
-					alive_in_front = in_front[0...x].count(false)
-					Rails.logger.debug "Alive in front for #{@team[x].name}: #{alive_in_front} Range: #{@team[x].range}"
+					num_alive_in_front = in_front[0...x].count(false)
+					Rails.logger.debug "Alive in front on team for #{@team[x].name}: #{num_alive_in_front} Range: #{@team[x].range}"
 
-					while(@opp_team[target].is_dead) do
-						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
-						target += 1				
-					end
-
-					if @team[x].range <= alive_in_front
-						create_nothing_in_range_record(x,@team[x].range,alive_in_front)
+					if @team[x].range <= num_alive_in_front
+						Rails.logger.debug "Nothing in range for #{@team[x].name}"
+						create_nothing_in_range_record(x,@team[x].range,num_alive_in_front)
 					else
+						opp_in_front = team_dead(@opp_team)
+						range_left = @team[x].range - num_alive_in_front
+						Rails.logger.debug "Range: #{@team[x].range} Range Left: #{range_left}"
+						num_opp_alive = opp_in_front.count(false)
+						Rails.logger.debug "Number of opponents alive: #{num_opp_alive}"
+						if range_left <= num_opp_alive
+							num_opp_alive = range_left
+							Rails.logger.debug "Targets for randomming decreased from #{num_opp_alive} to the range: #{range_left}"
+						end
+
+						random_target = randomized_target(num_opp_alive)
+						Rails.logger.debug "Random Target: #{random_target}"
+
+						target = -1
+						temp = -1
+						for y in 0..4
+							if (!opp_in_front[y])
+								temp += 1
+								Rails.logger.debug "#{@opp_team[y].name} is alive in front of #{@team[x].name}"
+							end
+							if(temp == random_target)
+								target = y
+								Rails.logger.debug "temp: #{temp} y: #{y} random_target: #{random_target}"
+								break
+							end
+						end
+						Rails.logger.debug "Thus the target is: #{@opp_team[target].name} at position: #{target}"
+
 						create_champion_turn_record(x,target + 5)
 						# Ability power attack
 						if(cooldown == 0)
@@ -78,18 +100,18 @@ class RiftBattle
 				else # x > 5
 					# x is @opp_team's champions
 					
-					target = 0
 					in_front = team_dead(@opp_team)
-					alive_in_front = in_front[0...(x-5)].count(false)
-					Rails.logger.debug "Alive in front for #{@opp_team[x-5].name}: #{alive_in_front} Range: #{@opp_team[x-5].range}"
+					num_alive_in_front = in_front[0...(x-5)].count(false)
+					Rails.logger.debug "Alive in front for #{@opp_team[x-5].name}: #{num_alive_in_front} Range: #{@opp_team[x-5].range}"
 
 					while(@team[target].is_dead) do
 						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
 						target += 1
 					end
 
-					if @opp_team[x-5].range <= alive_in_front
-						create_nothing_in_range_record(x,@opp_team[x-5].range,alive_in_front)
+					if @opp_team[x-5].range <= num_alive_in_front
+						Rails.logger.debug "Nothing in range for #{@opp_team[x-5].name}"
+						create_nothing_in_range_record(x,@opp_team[x-5].range,num_alive_in_front)
 					else
 
 						create_champion_turn_record(x,target)
@@ -157,7 +179,6 @@ class RiftBattle
 			    champ10: opp_roster[4].id
 			})
 			@battle_id = x.id
-			@log[@log.size] = "Battle log id: #{@battle_id}"
 			Rails.logger.debug "Battle log id: #{@battle_id}"			
 		end
 
@@ -181,7 +202,6 @@ class RiftBattle
 		end
 
 		def create_champion_turn_record(x,target)
-			@log[@log.size] = "#{x}'s turn to attack"
 			Rails.logger.debug "#{x}'s turn to attack"
 			BattleLog.create!({
 				battle_id: @battle_id,
@@ -194,7 +214,6 @@ class RiftBattle
 		end
 
 		def create_ability_power_record(x,ap)
-			@log[@log.size] = "Your #{x}'s ap is: #{ap}"
 			Rails.logger.debug "Your #{x}'s ap is: #{ap}"
 			BattleLog.create!({
 				battle_id: @battle_id,
@@ -207,7 +226,6 @@ class RiftBattle
 		end
 
 		def create_attack_damage_record(x,ad)
-			@log[@log.size] = "Your #{x}'s ad is: #{ad}"
 			Rails.logger.debug "Your #{x}'s ad is: #{ad}"
 			BattleLog.create!({
 				battle_id: @battle_id,
@@ -220,7 +238,6 @@ class RiftBattle
 		end
 
 		def create_damage_record(x,damage,target)
-			@log[@log.size] = "Your #{x} dealt #{damage} to #{target}"
 			Rails.logger.debug "Your #{x} dealt #{damage} to #{target}"
 			BattleLog.create!({
 				battle_id: @battle_id,
@@ -256,7 +273,6 @@ class RiftBattle
 		end
 
 		def create_turn_update_record(turn)
-			@log[@log.size] = "Turn ##{turn}"
 			Rails.logger.debug "Turn ##{turn}"
 			BattleLog.create!({
 				battle_id: @battle_id,
@@ -282,18 +298,24 @@ class RiftBattle
 		def create_battle_end_record
 			a = team_dead(@team)
 			b = team_dead(@opp_team)
+			a_count = 0
+			b_count = 0
 			for x in 0..4
 				if a[x] == true
 					a[x] = 1
+					a_count += 1
 				else
 					a[x] = 0
 				end
 				if b[x] == true
 					b[x] = 1
+					b_count += 1
 				else
 					b[x] = 0
 				end
 			end
+			a[5] = a_count
+			b[5] = b_count
 			BattleLog.create!({
 				battle_id: @battle_id,
 				event_num: @event_num,
@@ -310,17 +332,14 @@ class RiftBattle
 				ochamp5: b[4]				
 			})
 			@event_num += 1
-			@log[@log.size] = "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{a[4]} 5:#{5}"
-			Rails.logger.debug "Team death: 0:#{a[0]} 1:#{a[1]} 2: 3:#{a[3]} 4:#{4} 5:#{5}"
+			Rails.logger.debug "Team death: #{@team[0].name}:#{a[0]} #{@team[1].name}:#{a[1]} #{@team[2].name}:#{a[2]} #{@team[3].name}:#{a[3]} #{@team[4].name}:#{a[4]} Dead Count:#{a[5]}"
 
-			@log[@log.size] = "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"
-			Rails.logger.debug "Opp Team death: 0:#{b[0]} 1:#{b[1]} 2: 3:#{b[3]} 4:#{b[4]} 5:#{b[5]}"
+			Rails.logger.debug "Opp Team death: #{@opp_team[0].name}:#{b[0]} #{@opp_team[1].name}:#{b[1]} #{@opp_team[2].name}:#{b[2]} #{@opp_team[3].name}:#{b[3]} #{@opp_team[4].name}:#{b[4]} Dead Count:#{b[5]}"
 
 			if(a[5] == 5 || b[5] == 5)
 				@battle_end = true
 			end
 
-			@log[@log.size] = "Checked battle end result: #{@battle_end}"
 			Rails.logger.debug "Checked battle end result: #{@battle_end}"
 
 			@battle_end
@@ -434,6 +453,50 @@ class RiftBattle
 			for x in 0..4 do
 				@team[x].update_champion_stats(@event_num,x)
 				@event_num += 2
+			end
+		end
+
+		def randomized_target(target_size)
+			x = 1 + rand(100)
+			case target_size
+			when 1
+				return 0
+			when 2
+				if (x <= 70)
+					return 0
+				else
+					return 1
+				end
+			when 3
+				if(x <= 55)
+					return 0
+				elsif(x <= 85)
+					return 1
+				else
+					return 2
+				end
+			when 4
+				if(x <= 50)
+					return 0
+				elsif(x <= 70)
+					return 1
+				elsif(x <= 80)
+					return 2
+				else
+					return 3
+				end
+			when 5
+				if(x <= 50)
+					return 0
+				elsif(x <= 75)
+					return 1
+				elsif(x <= 90)
+					return 2
+				elsif(x <= 98)
+					return 3
+				else
+					return 4
+				end					
 			end
 		end
 end
