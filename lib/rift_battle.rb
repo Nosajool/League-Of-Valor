@@ -34,15 +34,17 @@ class RiftBattle
 				if(x < 5)
 					in_front = team_dead(@team)
 					num_alive_in_front = in_front[0...x].count(false)
-					Rails.logger.debug "Alive in front on team for #{@team[x].name}: #{num_alive_in_front} Range: #{@team[x].range}"
+					range = @team[x].range
+					name = @team[x].name
+					Rails.logger.debug "Alive in front on team for #{name}: #{num_alive_in_front} Range: #{range}}"
 
-					if @team[x].range <= num_alive_in_front
-						Rails.logger.debug "Nothing in range for #{@team[x].name}"
-						create_nothing_in_range_record(x,@team[x].range,num_alive_in_front)
+					if range <= num_alive_in_front
+						Rails.logger.debug "Nothing in range for #{name}"
+						create_nothing_in_range_record(x,range,num_alive_in_front)
 					else
 						opp_in_front = team_dead(@opp_team)
-						range_left = @team[x].range - num_alive_in_front
-						Rails.logger.debug "Range: #{@team[x].range} Range Left: #{range_left}"
+						range_left = range - num_alive_in_front
+						Rails.logger.debug "Range: #{range} Range Left: #{range_left}"
 						num_opp_alive = opp_in_front.count(false)
 						Rails.logger.debug "Number of opponents alive: #{num_opp_alive}"
 						if range_left <= num_opp_alive
@@ -58,7 +60,7 @@ class RiftBattle
 						for y in 0..4
 							if (!opp_in_front[y])
 								temp += 1
-								Rails.logger.debug "#{@opp_team[y].name} is alive in front of #{@team[x].name}"
+								Rails.logger.debug "#{@opp_team[y].name} is alive in front of #{name}"
 							end
 							if(temp == random_target)
 								target = y
@@ -102,17 +104,42 @@ class RiftBattle
 					
 					in_front = team_dead(@opp_team)
 					num_alive_in_front = in_front[0...(x-5)].count(false)
-					Rails.logger.debug "Alive in front for #{@opp_team[x-5].name}: #{num_alive_in_front} Range: #{@opp_team[x-5].range}"
+					range = @opp_team[x-5].range
+					name = @opp_team[x-5].name
+					Rails.logger.debug "Alive in front for #{name}: #{num_alive_in_front} Range: #{range}"
 
-					while(@team[target].is_dead) do
-						Rails.logger.debug "#{target} is already dead. Shifting to #{target + 1}"
-						target += 1
-					end
-
-					if @opp_team[x-5].range <= num_alive_in_front
-						Rails.logger.debug "Nothing in range for #{@opp_team[x-5].name}"
-						create_nothing_in_range_record(x,@opp_team[x-5].range,num_alive_in_front)
+					if range <= num_alive_in_front
+						Rails.logger.debug "Nothing in range for #{name}"
+						create_nothing_in_range_record(x,range,num_alive_in_front)
 					else
+						opp_in_front = team_dead(@team)
+						range_left = @opp_team[x-5].range - num_alive_in_front
+						Rails.logger.debug "Range: #{range} Range Left: #{range_left}"
+						num_opp_alive = opp_in_front.count(false)
+						Rails.logger.debug "Number team alive: #{num_opp_alive}"
+						if range_left <= num_opp_alive
+							num_opp_alive = range_left
+							Rails.logger.debug "Targets for randomming decreased from #{num_opp_alive} to #{range_left}"
+						end
+
+						random_target = randomized_target(num_opp_alive)
+						Rails.logger.debug "Random Target: #{random_target}"
+
+						target = -1
+						temp = -1
+						for y in 0..4
+							if (!opp_in_front[y])
+								temp += 1
+								Rails.logger.debug "#{@team[y].name} is alive in front of #{name}"
+							end
+							if(temp == random_target)
+								target = y
+								Rails.logger.debug "temp: #{temp} y: #{y} random_target: #{random_target}"
+								break
+							end
+						end
+						Rails.logger.debug "Thus the target is: #{@team[target].name} at position: #{target}"
+
 
 						create_champion_turn_record(x,target)
 
