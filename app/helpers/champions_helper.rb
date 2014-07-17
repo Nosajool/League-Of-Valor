@@ -23,7 +23,7 @@ module ChampionsHelper
 
 	def champ_img_battle(champion)
 		key = champion.table_champion.key
-		image_tag("#{pre_image_url}champions/#{key}/#{key}_#{champion.active_skin}.jpg")
+		image_tag("#{pre_image_url}champions/#{key}/#{key}_#{champion.active_skin}.jpg", class: "champion_battle")
 	end
 
 	def champ_img_splash(champion)
