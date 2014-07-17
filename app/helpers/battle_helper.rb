@@ -42,6 +42,8 @@ module BattleHelper
 			return log_post_level(log,battle,champions)
 		when "post exp"
 			return log_post_level(log,battle,champions)
+		when "just died"
+			return log_just_died(log,battle,champions)
 		end
 	end
 
@@ -55,7 +57,7 @@ module BattleHelper
 		def log_hp_update(log,battle,champions)
 			# battle = Battle.find(log.battle_id)
 			html = "<strong>Health Update:</strong><br>"
-			html += "<table border="">"
+			html += "<table style=\"width: 300px\">"
 
 			html += "<tr><td>"
 			html += "#{champions[0].table_champion.name}: #{log.champ1.round}"
@@ -141,7 +143,7 @@ module BattleHelper
 		end
 
 		def log_damage(log,battle,champions)
-			return "#{champions[log.champion_id].table_champion.name} dealt <b>#{log.extra.round}</b> damage to #{champions[log.other_champion_id].table_champion.name}<br><br>"
+			return "#{champions[log.champion_id].table_champion.name} dealt <b>#{log.extra.round}</b> damage to #{champions[log.other_champion_id].table_champion.name}<br>"
 		end
 
 		def log_mr(log,battle,champions)
@@ -153,7 +155,7 @@ module BattleHelper
 		end
 
 		def log_battle_end_check(log,battle,champions)
-			return ""
+			return "<br><br>"
 		end
 
 		def log_determine_exp(log,battle,champions)
@@ -182,5 +184,9 @@ module BattleHelper
 
 		def log_post_exp(log,battle,champions)
 			return ""
+		end
+
+		def log_just_died(log,battle,champions)
+			return "#{champions[log.champion_id].table_champion.name} has slain #{champions[log.other_champion_id].table_champion.name}.<br>"
 		end
 end

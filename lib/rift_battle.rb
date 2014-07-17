@@ -83,6 +83,7 @@ class RiftBattle
 
 							damage = @opp_team[target].take_magic_damage(champ_ap)
 							create_damage_record(x,damage,target + 5)
+							create_just_dead_record(x,target + 5) if @opp_team[target].just_died?
 						else
 
 							# Handle physical attack
@@ -94,6 +95,7 @@ class RiftBattle
 
 							damage = @opp_team[target].take_physical_damage(champ_ad)
 							create_damage_record(x,damage,target + 5)
+							create_just_dead_record(x,target + 5) if @opp_team[target].just_died?
 						end				
 					end
 
@@ -153,6 +155,7 @@ class RiftBattle
 
 							damage = @team[target].take_magic_damage(champ_ap)
 							create_damage_record(x,damage,target)
+							create_just_dead_record(x,target) if @team[target].just_died?
 
 						else
 							champ_ad = @opp_team[x-5].ad
@@ -163,6 +166,7 @@ class RiftBattle
 
 							damage = @team[target].take_physical_damage(champ_ad)
 							create_damage_record(x,damage,target)
+							create_just_dead_record(x,target) if @team[target].just_died?
 						end
 					end
 
@@ -320,6 +324,17 @@ class RiftBattle
 				other_champion_id: num_in_front
 			})	
 			@event_num += 1				
+		end
+
+		def create_just_dead_record(x,target)
+			BattleLog.create!({
+				battle_id: @battle_id,
+				event_num: @event_num,
+				event: "just died",
+				champion_id: x,
+				other_champion_id: target
+			})
+			@event_num += 1
 		end
 
 		def create_battle_end_record

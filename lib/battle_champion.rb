@@ -28,6 +28,7 @@ class BattleChampion
 			@name = skin_title(champion)
 			@range = champ_range(champion)
 			@battle_id = battle_id
+			@dead_log = false
 		end
 
 		def is_dead
@@ -36,6 +37,15 @@ class BattleChampion
 				@dead = true
 			end
 			@dead
+		end 
+
+		def just_died?
+			if !@dead_log && @hp <= 0
+				@dead_log = true
+				return true
+			else
+				return false
+			end
 		end
 
 		def exp_reward(event_num,x)
