@@ -117,17 +117,21 @@ module ChampionsHelper
 	def champ_range(champion)
 		case champion.table_champion.attack_range
 		when 125
-			return 1
-		when 150, 175
 			return 2
-		when 425, 450, 475, 480
+		when 150, 175
 			return 3
-		when 500, 525
+		when 425, 450
 			return 4
-		when 550
+		when 475, 480
 			return 5
-		when 575, 600, 625, 650
+		when 500, 525
 			return 6
+		when 550
+			return 7
+		when 575, 600
+			return 8
+		when 625, 650
+			return 9
 		else
 			return 1
 		end
