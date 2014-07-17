@@ -43,7 +43,7 @@ class RiftBattle
 						target += 1				
 					end
 
-					if @team[x].range < alive_in_front
+					if @team[x].range <= alive_in_front
 						create_nothing_in_range_record(x,@team[x].range,alive_in_front)
 					else
 						create_champion_turn_record(x,target + 5)
@@ -88,7 +88,7 @@ class RiftBattle
 						target += 1
 					end
 
-					if @opp_team[x-5].range < alive_in_front
+					if @opp_team[x-5].range <= alive_in_front
 						create_nothing_in_range_record(x,@opp_team[x-5].range,alive_in_front)
 					else
 
