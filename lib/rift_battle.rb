@@ -185,7 +185,7 @@ class RiftBattle
 		a = team_dead(@team)
 		post_battle
 		@turn = @turn + 1
-		create_turn_update_record(@turn)
+		create_end_turn_update_record(@turn,a[5])
 		if(a[5] == 5)
 			return false
 		else
@@ -313,6 +313,34 @@ class RiftBattle
 				ochamp4: @opp_team[3].hp,
 				ochamp5: @opp_team[4].hp,
 				extra: @turn
+			})	
+			@event_num += 1	
+		end
+		def create_end_turn_update_record(turn,numdead)
+			Rails.logger.debug "End Turn ##{turn}"
+			a = 0
+			b = 0
+			if(numdead == 5)
+				b = 1
+			else
+				a = 1
+			end
+			@battle_record.battle_logs.create!({
+				event_num: @event_num,
+				event: "end turn",
+				champ1: @team[0].hp,
+				champ2: @team[1].hp,
+				champ3: @team[2].hp,
+				champ4: @team[3].hp,
+				champ5: @team[4].hp,
+				ochamp1: @opp_team[0].hp,
+				ochamp2: @opp_team[1].hp,
+				ochamp3: @opp_team[2].hp,
+				ochamp4: @opp_team[3].hp,
+				ochamp5: @opp_team[4].hp,
+				extra: @turn,
+				champion_id: a,
+				other_champion_id: b
 			})	
 			@event_num += 1	
 		end

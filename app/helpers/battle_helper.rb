@@ -4,6 +4,8 @@ module BattleHelper
 		case event
 		when "turn"
 			return log_turn(log,battle,champions)
+		when "end turn"
+			return log_end_turn(log,battle,champions)
 		when "health update"
 			return log_hp_update(log,battle,champions)
 		when "movespeed"
@@ -52,6 +54,10 @@ module BattleHelper
 	private
 		def log_turn(log,battle,champions)
 			return "<h2>Turn ##{log.extra.round}</h2>"
+		end
+
+		def log_end_turn(log,battle,champions)
+			return ""		
 		end
 
 		def log_hp_update(log,battle,champions)
