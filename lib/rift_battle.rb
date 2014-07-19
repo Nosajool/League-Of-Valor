@@ -185,7 +185,7 @@ class RiftBattle
 		a = team_dead(@team)
 		post_battle
 		@turn = @turn + 1
-		create_turn_update_record
+		create_turn_update_record(@turn)
 		if(a[5] == 5)
 			return false
 		else
