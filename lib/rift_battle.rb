@@ -195,7 +195,7 @@ class RiftBattle
 	private
 		# Logging
 		def create_battle_record(roster,opp_roster)
-			x = Battle.create!({
+			@battle_record = Battle.create!({
 			    user_id: roster[0].user.id,
 			    opp_id: opp_roster[0].user.id,
 			    champ1: roster[0].id,
@@ -209,13 +209,12 @@ class RiftBattle
 			    champ9: opp_roster[3].id,
 			    champ10: opp_roster[4].id
 			})
-			@battle_id = x.id
+			@battle_id = @battle_record.id
 			Rails.logger.debug "Battle log id: #{@battle_id}"			
 		end
 
 		def create_hp_update_record
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "health update",
 				champ1: @team[0].hp,
@@ -234,8 +233,7 @@ class RiftBattle
 
 		def create_champion_turn_record(x,target)
 			Rails.logger.debug "#{x}'s turn to attack"
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "target selection",
 				champion_id: x,
@@ -246,8 +244,7 @@ class RiftBattle
 
 		def create_ability_power_record(x,ap)
 			Rails.logger.debug "Your #{x}'s ap is: #{ap}"
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "ability power",
 				champion_id: x,
@@ -258,8 +255,7 @@ class RiftBattle
 
 		def create_attack_damage_record(x,ad)
 			Rails.logger.debug "Your #{x}'s ad is: #{ad}"
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "attack damage",
 				champion_id: x,
@@ -270,8 +266,7 @@ class RiftBattle
 
 		def create_damage_record(x,damage,target)
 			Rails.logger.debug "Your #{x} dealt #{damage} to #{target}"
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "damage",
 				champion_id: x,
@@ -282,8 +277,7 @@ class RiftBattle
 		end
 
 		def create_mr_record(mr,target)
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "magic resist",
 				champion_id: target,
@@ -293,8 +287,7 @@ class RiftBattle
 		end
 
 		def create_armor_record(armor,target)
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "armor",
 				champion_id: target,
@@ -305,8 +298,7 @@ class RiftBattle
 
 		def create_turn_update_record(turn)
 			Rails.logger.debug "Turn ##{turn}"
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "turn",
 				extra: turn
@@ -315,8 +307,7 @@ class RiftBattle
 		end
 
 		def create_nothing_in_range_record(x,range,num_in_front)
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "out of range",
 				champion_id: x,
@@ -327,7 +318,7 @@ class RiftBattle
 		end
 
 		def create_just_dead_record(x,target)
-			BattleLog.create!({
+			@battle_record.battle_logs.create!({
 				battle_id: @battle_id,
 				event_num: @event_num,
 				event: "just died",
@@ -358,8 +349,7 @@ class RiftBattle
 			end
 			a[5] = a_count
 			b[5] = b_count
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "battle end check",
 				champ1: a[0],
@@ -388,8 +378,7 @@ class RiftBattle
 		end
 
 		def create_speed_record(x,ms)
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "movespeed",
 				champion_id: x,
@@ -399,7 +388,7 @@ class RiftBattle
 		end
 
 		def create_order_record(speed_array)
-			BattleLog.create!({
+			@battle_record.battle_logs.create!({
 				battle_id: @battle_id,
 				event_num: @event_num,
 				event: "attack order",
@@ -418,8 +407,7 @@ class RiftBattle
 		end
 
 		def create_range_record
-			BattleLog.create!({
-				battle_id: @battle_id,
+			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "range",
 				champ1: @team[0].range,
