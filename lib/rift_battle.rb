@@ -6,6 +6,7 @@ class RiftBattle
 		@team = Array.new
 		@event_num = 0
 		@opp_team = Array.new
+		@turn = 0
 
 		create_battle_record(roster,opp_roster)
 
@@ -24,9 +25,8 @@ class RiftBattle
 	# Does not return anyting
 	def battle
 		cooldown = 0
-		turn = 0
 		while(!@battle_end) do
-			create_turn_update_record(turn)
+			create_turn_update_record(@turn)
 			@champ_speeds.each do |x|
 				create_hp_update_record
 
@@ -174,7 +174,7 @@ class RiftBattle
 				end
 				break if create_battle_end_record
 			end
-			turn = turn + 1
+			@turn = @turn + 1
 			cooldown = cooldown + 1
 			cooldown = 0 if cooldown == 3
 			break if create_battle_end_record
@@ -184,7 +184,8 @@ class RiftBattle
 	def victory?
 		a = team_dead(@team)
 		post_battle
-		create_hp_update_record
+		@turn = @turn + 1
+		create_turn_update_record
 		if(a[5] == 5)
 			return false
 		else
@@ -301,7 +302,17 @@ class RiftBattle
 			@battle_record.battle_logs.create!({
 				event_num: @event_num,
 				event: "turn",
-				extra: turn
+				champ1: @team[0].hp,
+				champ2: @team[1].hp,
+				champ3: @team[2].hp,
+				champ4: @team[3].hp,
+				champ5: @team[4].hp,
+				ochamp1: @opp_team[0].hp,
+				ochamp2: @opp_team[1].hp,
+				ochamp3: @opp_team[2].hp,
+				ochamp4: @opp_team[3].hp,
+				ochamp5: @opp_team[4].hp,
+				extra: @turn
 			})	
 			@event_num += 1	
 		end
