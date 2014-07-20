@@ -13,7 +13,8 @@
       	<%= link_to("Battle #{@user.username}", champ_select_path(@user.id), class:"btn btn-warning btn-lg") %>
       <% end %>
       <% if @user.buff %>
-      	<%= @user.buff.title %> holder
+      	<%= link_to(@user.buff.title,@user.buff) %> holder
+      	<%= buff_img(@user.buff) %>
       <% end %>
     </section>
   </aside>
