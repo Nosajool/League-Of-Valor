@@ -1,5 +1,6 @@
 LeagueOfValor::Application.routes.draw do
 
+
   root 'static_pages#home'
 
   # match 'link',                 to: 'controller#action',             via: 'http method'
@@ -40,6 +41,7 @@ LeagueOfValor::Application.routes.draw do
 
   resources :roles, only: [:index, :show]
 
+  resources :buffs, only: [:index, :show]
 
 
 
