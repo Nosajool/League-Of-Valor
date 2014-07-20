@@ -1,7 +1,7 @@
 class RolesController < ApplicationController
 	before_action :signed_in_user
 	def index
-		@roles = Role.all
+		@roles = Role.where.not(name: "None")
 	end
 
 	def show

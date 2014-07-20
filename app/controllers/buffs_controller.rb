@@ -4,6 +4,6 @@ class BuffsController < ApplicationController
   end
 
   def index
-  	@buffs = Buff.all
+  	@buffs = Buff.where.not(name: "None")
   end
 end
