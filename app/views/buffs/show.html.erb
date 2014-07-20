@@ -1,2 +1,6 @@
-<h1>Buffs#show</h1>
-<p>Find me in app/views/buffs/show.html.erb</p>
+<% provide(:title, @buff.title) %>
+
+<h1><%= @buff.title %></h1>
+
+
+Currently held by: <%= link_to(@buff.user.username, @buff.user) %>

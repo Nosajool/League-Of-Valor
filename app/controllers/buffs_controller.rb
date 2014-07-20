@@ -1,5 +1,6 @@
 class BuffsController < ApplicationController
   def show
+  	@buff = Buff.find(params[:id])
   end
 
   def index
