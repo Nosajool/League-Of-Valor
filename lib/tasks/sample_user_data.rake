@@ -20,7 +20,7 @@ namespace :db do
 
     users = User.all(limit: 6)
     # Set roster champions
-    for x in 1..6 do
+    for x in 1..5 do
       users.each do |user|
         rand_id = TableChampion.order("RANDOM()").first.id
         while rand_id == 999 do
