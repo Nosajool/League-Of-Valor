@@ -9,6 +9,7 @@
 			<th>Name</th>
 			<th>Title</th>
 			<th>Holder</th>
+			<th>Battle Now</th>
 			<th>Health</th>
 			<th>AD</th>
 			<th>AP</th>
@@ -20,7 +21,8 @@
 			<tr class ="dark-hover">
 				<td><%= link_to(buff.name, buff) %></td>
 				<td><%= buff.title %></td>
-				<td><%= link_to(buff.user.username, buff.user) %></td>
+				<td><%= link_to("#{buff.user.username}'s profile", buff.user) %></td>
+				<td><%= link_to("Battle #{buff.user.username}", champ_select_path(buff.user.id)) %></td>
 				<td><%= buff.hp_base %></td>
 				<td><%= buff.ad_base %></td>
 				<td><%= buff.ap_base %></td>
@@ -40,6 +42,7 @@
 			<th>Name</th>
 			<th>Title</th>
 			<th>Holder</th>
+			<th>Battle Now</th>
 			<th>Health</th>
 			<th>AD</th>
 			<th>AP</th>
@@ -51,7 +54,8 @@
 			<tr class ="dark-hover">
 				<td><%= link_to(buff.name, buff) %></td>
 				<td><%= buff.title %></td>
-				<td><%= link_to(buff.user.username, buff.user) %></td>
+				<td><%= link_to("#{buff.user.username}'s profile", buff.user) %></td>
+				<td><%= link_to("Battle #{buff.user.username}", champ_select_path(buff.user.id)) %></td>
 				<td><%= buff.hp_per %></td>
 				<td><%= buff.ad_per %></td>
 				<td><%= buff.ap_per %></td>
