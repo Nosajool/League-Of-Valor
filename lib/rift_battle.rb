@@ -599,7 +599,18 @@ class RiftBattle
 				if @defender.buff.nil?
 					Rails.logger.debug "Attacker has the #{@attacker.buff.title} but the defender has no buff"
 				else
-					Rails.logger.debug "Both players had buffs. Handle this case"
+					Rails.logger.debug "Both the attacker and defender have buffs. Buff exchange!!!!"
+					new_buff = @defender.buff
+					old_buff = @attacker.buff
+					new_buff.user_id = @attacker.id
+					new_buff.save
+					create_buff_acquire_record(@attacker.id, @defender.id, new_buff.id)
+					Rails.logger.debug "#{new_buff.title} transfered from #{@defender.username} to #{@attacker.username}"
+
+					old_buff.user_id = @defender.id
+					old_buff.save
+					create_buff_acquire_record(@defender.id, @attacker.id, old_buff.id)
+					Rails.logger.debug "#{old_buff.title} transfered from #{@attacker.username} to #{@defender.username}"
 				end
 			end
 		end
