@@ -36,82 +36,112 @@ module ChampionsHelper
 
 	def champ_hp(champion)
 		Rails.logger.debug "Finding hp for: #{champion.table_champion.name}"
+
 		base = champion.table_champion.hp
 		f_base = f_role(champion).hp_base
 		s_base = s_role(champion).hp_base
+		buff_base = team_buff(champion).hp_base
+
 		level = champion.level * champion.table_champion.hp_per_level
 		per = 1
 		f_per = f_role(champion).hp_per
 		s_per = s_role(champion).hp_per
-		health = base + f_base + s_base + level
-		health = (health * (per + f_per + s_per)).round
+		buff_per = team_buff(champion).hp_per
+
+		health = base + f_base + s_base + buff_base + level
+		health = (health * (per + f_per + s_per + buff_per)).round
 	end
 
 	def champ_ad(champion)
 		Rails.logger.debug "Finding ad for: #{champion.table_champion.name}"
+
 		base = champion.table_champion.attack_damage
 		f_base = f_role(champion).ad_base
 		s_base = s_role(champion).ad_base
+		buff_base = team_buff(champion).ad_base
+
 		level = champion.level * champion.table_champion.attack_damage_per_level
 		per = 1
 		f_per = f_role(champion).ad_per
 		s_per = s_role(champion).ad_per
-		ad = base + f_base + s_base + level
-		ad = (ad * (per + f_per + s_per)).round
+		buff_per = team_buff(champion).ad_per
+
+		ad = base + f_base + s_base + buff_base + level
+		ad = (ad * (per + f_per + s_per + buff_per)).round
 	end
 
 	def champ_ap(champion)
 		Rails.logger.debug "Finding ap for: #{champion.table_champion.name}"
 		# Ability power uses the same base attack damage
+
 		base = champion.table_champion.attack_damage
 		f_base = f_role(champion).ap_base
 		s_base = s_role(champion).ap_base
+		buff_base = team_buff(champion).ap_base
+
 		level = champion.level * champion.table_champion.attack_damage_per_level
 		per = 1
 		f_per = f_role(champion).ap_per
 		s_per = s_role(champion).ap_per
-		ap = base + f_base + s_base + level
-		ap = (ap * (per + f_per + s_per)).round	
+		buff_per = team_buff(champion).ap_per
+
+		ap = base + f_base + s_base + buff_base + level
+		ap = (ap * (per + f_per + s_per + buff_per)).round	
 	end
 
 
 
 	def champ_armor(champion)
 		Rails.logger.debug "Finding armor for: #{champion.table_champion.name}"
+
 		base = champion.table_champion.armor
 		f_base = f_role(champion).ar_base
 		s_base = s_role(champion).ar_base
+		buff_base = team_buff(champion).ar_base
+
 		level = champion.level * champion.table_champion.armor_per_level
 		per = 1
 		f_per = f_role(champion).ar_per
 		s_per = s_role(champion).ar_per
-		armor = base + f_base + s_base + level
-		armor = armor * (per + f_per + s_per)
+		buff_per = team_buff(champion).ar_per
+
+		armor = base + f_base + s_base + buff_base + level
+		armor = armor * (per + f_per + s_per + buff_per)
 	end
 
 	def champ_mr(champion)
 		Rails.logger.debug "Finding magic resist for: #{champion.table_champion.name}"
+
 		base = champion.table_champion.magic_resist
 		f_base = f_role(champion).mr_base
 		s_base = s_role(champion).mr_base
+		buff_base = team_buff(champion).mr_base
+
 		level = champion.level * champion.table_champion.magic_resist_per_level
 		per = 1
 		f_per = f_role(champion).mr_per
 		s_per = s_role(champion).mr_per
-		mr = base + f_base + s_base + level
-		mr = mr * (per + f_per + s_per)	
+		buff_per = team_buff(champion).mr_per
+
+		mr = base + f_base + s_base + buff_base + level
+		mr = mr * (per + f_per + s_per + buff_per)	
 	end
 
 	def champ_ms(champion)
 		Rails.logger.debug "Finding movespeed for: #{champion.table_champion.name}"
+
 		base = champion.table_champion.movespeed
 		f_base = f_role(champion).ms_base
 		s_base = s_role(champion).ms_base
+		buff_base = team_buff(champion).ms_base
+
 		per = 1
 		f_per = f_role(champion).ms_per
 		s_per = s_role(champion).ms_per
-		ms = base + f_base + s_base
-		ms = ms * (per + f_per + s_per)
+		buff_per = team_buff(champion).ms_per
+
+		ms = base + f_base + s_base + buff_base
+		ms = ms * (per + f_per + s_per + buff_per)
 	end
 
 	def champ_range(champion)
@@ -149,6 +179,15 @@ module ChampionsHelper
 				role = Role.where(name: "None").first
 			else
 				role = Role.where(name: champion.table_champion.s_role).first
+			end
+		end
+
+		def team_buff(champion)
+			Rails.logger.debug "Checking buff for: #{champion.table_champion.name}"
+			if champion.user.buff.nil?
+				buff = Buff.where(name: "None").first
+			else
+				buff = champion.user.buff
 			end
 		end
 

@@ -1,0 +1,6 @@
+<% provide(:title, @buff.title) %>
+
+<h1><%= @buff.title %></h1>
+<%= buff_img(@buff) %>
+
+Currently held by: <%= link_to(@buff.user.username, @buff.user) %>

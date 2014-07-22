@@ -46,6 +46,8 @@ module BattleHelper
 			return log_post_level(log,battle,champions)
 		when "just died"
 			return log_just_died(log,battle,champions)
+		when "buff acquire"
+			return log_buff_acquire(log,battle,champions)
 		end
 	end
 
@@ -194,5 +196,9 @@ module BattleHelper
 
 		def log_just_died(log,battle,champions)
 			return "#{champions[log.champion_id].table_champion.name} has slain #{champions[log.other_champion_id].table_champion.name}.<br>"
+		end
+
+		def log_buff_acquire(log,battle,champions)
+			return ""
 		end
 end

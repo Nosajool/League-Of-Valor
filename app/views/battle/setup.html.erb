@@ -7,6 +7,10 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 
 <h3>
 	<%= current_user.username %>
+	<% if current_user.buff %>
+      	<%= link_to(current_user.buff.title,current_user.buff) %> holder
+      	<%= buff_img(current_user.buff) %>
+	<% end %>
 </h3>
 <div class="roster-table">
 	<table class="roster-table">
@@ -30,6 +34,10 @@ Would you like to make a <%= link_to("Roster Change?", roster_path) %>
 
 <h3>
 	<%= @opponent.username %>
+	<% if @opponent.buff %>
+      	<%= link_to(@opponent.buff.title,@opponent.buff) %> holder
+      	<%= buff_img(@opponent.buff) %>
+	<% end %>
 </h3>
 <div class="roster-table">
 	<table class="roster-table">
