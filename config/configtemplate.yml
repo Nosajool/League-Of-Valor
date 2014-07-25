@@ -1,0 +1,8 @@
+development:
+	riot_api_key: key
+
+test:
+	riot_api_key: key
+
+production:
+	riot_api_key: key

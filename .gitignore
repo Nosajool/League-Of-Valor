@@ -19,3 +19,5 @@ doc/
 .idea
 .secret
 
+# Ignore API keys
+/config/config.yml
