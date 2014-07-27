@@ -6,7 +6,24 @@
 		Sorry, there are no frequently asked questions at the moment. <br>
 		Please check again at a later time.
 	</p>
+</div>
 
-	<h2>API Test</h2>
-	<%= @loreData %>
+<h2>Challenger List</h2>
+<div class="row">
+	<table class="table table-hover table-condensed">
+		<tr class = "dark-hover">
+			<th>Name</th>
+			<th>ID</th>
+			<th>Wins</th>
+			<th>League Points</th>
+		</tr>
+		<% @challengers.each do |challenger| %>
+			<tr class ="dark-hover">
+				<td><%= challenger.player_or_team_name %></td>
+				<td><%= challenger.player_or_team_id %></td>
+				<td><%= challenger.wins %></td>
+				<td><%= challenger.league_points %></td>
+			</tr>
+		<% end %>
+	</table>
 </div>

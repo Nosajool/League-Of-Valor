@@ -7,8 +7,8 @@ class StaticPagesController < ApplicationController
   end
 
   def help
-    client = Lol::Client.new APP_CONFIG['riot_api_key'], {region: "na"}
-    @loreData = client.league.get(23032897)["23032897"][0].entries[0].player_or_team_name
+    client = get_client
+    @challengers = client.league.get(2648)["2648"][0].entries
   end
 
   def about  	
@@ -16,5 +16,10 @@ class StaticPagesController < ApplicationController
 
   def contact  	
   end
+
+  private
+    def get_client
+      Lol::Client.new APP_CONFIG['riot_api_key'], {region: "na"}
+    end
 end
  
