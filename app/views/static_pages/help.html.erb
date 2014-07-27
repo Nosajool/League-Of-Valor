@@ -27,3 +27,20 @@
 		<% end %>
 	</table>
 </div>
+
+<h2>Champion Info for Pobelter</h2>
+<div class="row">
+	<table class="table table-hover table-condensed">
+		<tr class = "dark-hover">
+			<th>Champion ID</th>
+			<th>Games Played</th>
+		</tr>
+		<% @stats.each do |stat| %>
+			<tr class ="dark-hover">
+				<td><%= stat.id %></td>
+				<td><%= stat.stats.total_sessions_played %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>
+<%= @stats %>

@@ -9,6 +9,7 @@ class StaticPagesController < ApplicationController
   def help
     client = get_client
     @challengers = client.league.get(2648)["2648"][0].entries
+    @stats = client.stats.ranked(2648).champions
   end
 
   def about  	
