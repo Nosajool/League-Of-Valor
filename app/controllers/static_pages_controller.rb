@@ -9,7 +9,22 @@ class StaticPagesController < ApplicationController
   def help
     client = get_client
     @challengers = client.league.get(2648)["2648"][0].entries
-    @stats = client.stats.ranked(2648).champions
+    @api = Array.new
+    @challengers.each do |challenger|
+      new_record = APIRecord.new
+      new_record.id = challenger.player_or_team_id
+      new_record.name = challenger.player_or_team_name
+      champions = client.stats.ranked(challenger.player_or_team_id).champions
+      champions.sort_by! do |champion|
+        champion.stats.total_sessions_played
+      end
+      champions.reverse!
+      new_record.riot_id = champions[1].id
+      new_record.champ_name = TableChampion.where(riot_id: champions[1].id).first.name
+      new_record.games = champions[1].stats.total_sessions_played
+      @api << new_record
+      sleep 1
+    end
   end
 
   def about  	
@@ -24,3 +39,10 @@ class StaticPagesController < ApplicationController
     end
 end
  
+class APIRecord
+  attr_accessor :id
+  attr_accessor :name
+  attr_accessor :riot_id
+  attr_accessor :champ_name
+  attr_accessor :games
+end
