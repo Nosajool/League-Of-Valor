@@ -1,6 +1,7 @@
 class TableChampion < ActiveRecord::Base
 	has_many :champions
 	has_many :skins
+	has_many :table_challengers
 
 	validates(:name, 					 presence: true)
 	validates(:riot_id,       		     presence: true)
