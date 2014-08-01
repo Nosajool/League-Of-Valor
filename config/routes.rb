@@ -1,6 +1,4 @@
 LeagueOfValor::Application.routes.draw do
-
-
   root 'static_pages#home'
 
   # match 'link',                 to: 'controller#action',             via: 'http method'
@@ -43,7 +41,7 @@ LeagueOfValor::Application.routes.draw do
 
   resources :buffs, only: [:index, :show]
 
-
+  get '/challenger_list',         to: 'table_challenger#index',        as: 'challenger_list'
 
 
 
