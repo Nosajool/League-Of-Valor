@@ -1,4 +1,5 @@
 LeagueOfValor::Application.routes.draw do
+  get "challengers/list"
   root 'static_pages#home'
 
   # match 'link',                 to: 'controller#action',             via: 'http method'

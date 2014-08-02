@@ -1,0 +1,2 @@
+module ChallengersHelper
+end
