@@ -4,7 +4,7 @@ class ChallengersController < ApplicationController
 		
 	end
 
-	def spawn_challenger
+	def spawn
 		@challenger = current_user.challengers.build(spawn_params)
 		if @challenger.save
 			flash[:success] = "Challenger Spirit id:#{@challenger.id} Challenger:#{@challenger.table_challenger.name} Champion: #{@challenger.table_challenger.table_champion.name}"
@@ -16,8 +16,9 @@ class ChallengersController < ApplicationController
 	end
 
 	def spawn_page
-		@challenger = current_user.champions.build		
+		@challenger = current_user.challengers.build		
 	end
+
 	private
 
 		def spawn_params
