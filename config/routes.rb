@@ -1,5 +1,5 @@
 LeagueOfValor::Application.routes.draw do
-  get "challengers/list"
+
   root 'static_pages#home'
 
   # match 'link',                 to: 'controller#action',             via: 'http method'
@@ -44,6 +44,8 @@ LeagueOfValor::Application.routes.draw do
 
   get '/challenger_list',         to: 'table_challenger#index',        as: 'challenger_list'
 
+  get "/my_players",              to: 'challengers#list',              as: 'user_challengers'
+  get '/spawn_challenger',        to: 'challengers#spawn_page',        as: 'spawn_challenger'
 
 
 

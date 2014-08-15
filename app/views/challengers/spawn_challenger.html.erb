@@ -1,0 +1,37 @@
+<% provide(:title, "Spawn Cahllenger") %>
+
+<h1>Spawn a Challenger</h1>
+
+
+<div class="row">
+	<h3>Admins only</h3>
+	<%= form_for(@challenger, :url => {:action => "spawn"}, :method => "post" ) do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<%= f.label :table_champion_id %>
+	
+		<div class="black_text">
+			<%= f.select(:table_champion_id, options_for_select(champ_list_hash)) %>
+		</div>
+	
+		<%= f.label :experience, "Experience > 0" %>
+		<%= f.text_field :experience %>
+
+		<%= f.label :position %>
+		<div class="black_text">
+			<%= f.select(:position, options_for_select((0..5).to_a.map{|pos| ["#{pos}",pos] } ) ) %>
+		</div>
+
+		<%= f.label :skin, "Skin ########## where # = 0,1" %>
+		<%= f.text_field :skin %>
+
+		<%= f.label :active_skin %>
+		<div class="black_text">
+			<%= f.select(:active_skin, options_for_select((0..9).to_a.map{|active_skin| ["#{active_skin}", active_skin] } ) ) %>
+		</div>
+
+		<%= f.label :level, "Level > 0" %>
+		<%= f.text_field :level %>
+	
+		<%= f.submit "Create Champion", class: "btn btn-large btn-primary" %>
+	<% end %>
+</div>
