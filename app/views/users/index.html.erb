@@ -2,7 +2,7 @@
 
 <h1>All users</h1>
 
-<%= will_paginate %>
+<%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
 
 <div class="row">
 	<% if @users.any? %>
@@ -23,4 +23,4 @@
 	<% end %>
 </div>
 
-<%= will_paginate %>
+<%= will_paginate @collection, renderer: BootstrapPagination::Rails %>
