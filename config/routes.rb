@@ -46,7 +46,7 @@ LeagueOfValor::Application.routes.draw do
 
   get "/my_players",              to: 'challengers#list',              as: 'user_challengers'
   get '/spawn_challenger',        to: 'challengers#spawn_page',        as: 'spawn_challenger'
-  post '/spawn_champion_action',  to: 'challengers#spawn'
+  post '/spawn_challenger_action',  to: 'challengers#spawn'
 
 
 
