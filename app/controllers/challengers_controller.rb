@@ -1,5 +1,7 @@
 class ChallengersController < ApplicationController
 	before_action :signed_in_user
+	before_action :admin_user, only: [:spawn, :spawn_page]
+	
 	def list
 		@challengers = current_user.challengers
 	end
