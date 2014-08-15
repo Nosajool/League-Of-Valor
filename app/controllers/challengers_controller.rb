@@ -1,7 +1,7 @@
 class ChallengersController < ApplicationController
 	before_action :signed_in_user
 	def list
-		
+		@challengers = current_user.challengers
 	end
 
 	def spawn
