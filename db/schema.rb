@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729060829) do
+ActiveRecord::Schema.define(version: 20140802015735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,13 @@ ActiveRecord::Schema.define(version: 20140729060829) do
   end
 
   add_index "buffs", ["user_id"], name: "index_buffs_on_user_id", using: :btree
+
+  create_table "challengers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "table_challenger_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "champions", force: true do |t|
     t.integer  "table_champion_id"

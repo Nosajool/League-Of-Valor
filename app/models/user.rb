@@ -1,6 +1,7 @@
  class User < ActiveRecord::Base
  	has_many :champions
  	has_one :buff
+ 	has_many :challengers
  	
 	# Force all emails to be lowercase when entered into the database
 	before_save { self.duser = username.downcase }

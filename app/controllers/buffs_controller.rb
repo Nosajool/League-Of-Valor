@@ -1,4 +1,5 @@
 class BuffsController < ApplicationController
+	before_action :signed_in_user
   def show
   	@buff = Buff.find(params[:id])
   end
