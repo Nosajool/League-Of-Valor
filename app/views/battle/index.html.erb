@@ -1,0 +1,43 @@
+<% provide(:title, "Battle Logs List") %>
+
+<h1>Rankings</h1>
+<div class="row">
+	<% if @battles.any? %>
+		<table class="table table-hover table-condensed">
+			<tr class = "dark-hover">
+				<th>id</th>
+				<th>attacker</th>
+				<th>defender</th>
+				<th>1</th>
+				<th>2</th>
+				<th>3</th>
+				<th>4</th>
+				<th>5</th>
+				<th>o1</th>
+				<th>o2</th>
+				<th>o3</th>
+				<th>o4</th>
+				<th>o5</th>
+			</tr>
+			<% @battles.each do |battle| %>
+				<tr class ="dark-hover">
+					<td><%= link_to(battle.id, battle_log_path(battle.id)) %></td>
+					<td><%= link_to(battle.user_id, user_path(battle.user_id)) %></td>
+					<td><%= link_to(battle.opp_id, user_path(battle.opp_id)) %></td>
+					<td><%= link_to(battle.champ1, champion_path(battle.champ1)) %></td>
+					<td><%= link_to(battle.champ2, champion_path(battle.champ2)) %></td>
+					<td><%= link_to(battle.champ3, champion_path(battle.champ3)) %></td>
+					<td><%= link_to(battle.champ4, champion_path(battle.champ4)) %></td>
+					<td><%= link_to(battle.champ5, champion_path(battle.champ5)) %></td>
+					<td><%= link_to(battle.champ6, champion_path(battle.champ6)) %></td>
+					<td><%= link_to(battle.champ7, champion_path(battle.champ7)) %></td>
+					<td><%= link_to(battle.champ8, champion_path(battle.champ8)) %></td>
+					<td><%= link_to(battle.champ9, champion_path(battle.champ9)) %></td>
+					<td><%= link_to(battle.champ10, champion_path(battle.champ10)) %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<h3>There are no battle logs in the game.</h3>
+	<% end %>
+</div>

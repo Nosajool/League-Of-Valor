@@ -1,0 +1,18 @@
+<% provide(:title, "Spawn Challenger") %>
+
+<h1>Spawn a Challenger</h1>
+
+
+<div class="row">
+	<h3>Admins only</h3>
+	<%= form_for(@challenger, :url => {:action => "spawn"}, :method => "post" ) do |f| %>
+		<%= render 'shared/error_messages', object: f.object %>
+		<%= f.label :table_challenger_id %>
+	
+		<div class="black_text">
+			<%= f.select(:table_challenger_id, options_for_select(challenger_list_hash)) %>
+		</div>
+	
+		<%= f.submit "Create Challenger", class: "btn btn-large btn-primary" %>
+	<% end %>
+</div>

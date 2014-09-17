@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705192629) do
+ActiveRecord::Schema.define(version: 20140802015735) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,9 @@ ActiveRecord::Schema.define(version: 20140705192629) do
     t.float    "ochamp4"
     t.float    "ochamp5"
     t.float    "extra"
+    t.integer  "champion_id"
+    t.integer  "event_num"
+    t.integer  "other_champion_id"
   end
 
   add_index "battle_logs", ["battle_id"], name: "index_battle_logs_on_battle_id", using: :btree
@@ -50,6 +53,36 @@ ActiveRecord::Schema.define(version: 20140705192629) do
     t.integer  "champ8"
     t.integer  "champ9"
     t.integer  "champ10"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "buffs", force: true do |t|
+    t.text     "name"
+    t.text     "title"
+    t.text     "description"
+    t.integer  "user_id"
+    t.float    "hp_base"
+    t.float    "hp_per"
+    t.float    "ad_base"
+    t.float    "ad_per"
+    t.float    "ap_base"
+    t.float    "ap_per"
+    t.float    "ar_base"
+    t.float    "ar_per"
+    t.float    "mr_base"
+    t.float    "mr_per"
+    t.float    "ms_base"
+    t.float    "ms_per"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "buffs", ["user_id"], name: "index_buffs_on_user_id", using: :btree
+
+  create_table "challengers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "table_challenger_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -107,6 +140,13 @@ ActiveRecord::Schema.define(version: 20140705192629) do
     t.integer  "table_champion_id"
     t.integer  "num"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "table_challengers", force: true do |t|
+    t.string   "name"
+    t.integer  "table_champion_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

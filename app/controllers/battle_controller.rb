@@ -10,8 +10,8 @@ class BattleController < ApplicationController
 
       the_battle = RiftBattle.new(roster,opp_roster)
       the_battle.battle
-      @log = the_battle.log
       @win = the_battle.victory?
+      redirect_to battle_log_path(the_battle.battle_id)
     end
 
     def setup
@@ -20,6 +20,26 @@ class BattleController < ApplicationController
     		@opp_roster = getRoster(@opponent)
     		@roster = getRoster(current_user)
     	end
+    end
+
+    def show
+      @logs = BattleLog.where(battle_id: params[:id]).order(created_at: :asc)
+      @champions = Array.new
+      @battle = Battle.find(params[:id])
+      @champions << Champion.find(@battle.champ1)
+      @champions << Champion.find(@battle.champ2)
+      @champions << Champion.find(@battle.champ3)
+      @champions << Champion.find(@battle.champ4)
+      @champions << Champion.find(@battle.champ5)
+      @champions << Champion.find(@battle.champ6)
+      @champions << Champion.find(@battle.champ7)
+      @champions << Champion.find(@battle.champ8)
+      @champions << Champion.find(@battle.champ9)
+      @champions << Champion.find(@battle.champ10)
+    end
+
+    def index
+      @battles = Battle.all
     end
 
     private

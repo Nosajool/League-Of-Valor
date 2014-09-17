@@ -1,0 +1,18 @@
+<% provide(:title, 'Challenger List') %>
+<h1>Challenger List</h1>
+<div class="row">
+	<table class="table table-hover table-condensed">
+		<tr class = "dark-hover">
+			<th>Rank</th>
+			<th>Summoner Name</th>
+			<th>Most Played Champion</th>
+		</tr>
+		<% @challengers.each do |challenger| %>
+			<tr class ="dark-hover">
+				<td><%= challenger.id %></td>
+				<td><%= challenger.name %></td>
+				<td><%= link_to(challenger.table_champion.name, champion_stat_path(challenger.table_champion.id)) %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>

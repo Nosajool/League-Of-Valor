@@ -1,0 +1,24 @@
+<% provide(:title, "List of Spirits") %>
+
+<h1>List of Spirits</h1>
+
+Owning a Spirit gives an x % boost to the stats of their most played champion.
+
+<div class="row">
+	<% if @challengers.any? %>
+		<table class="table table-hover table-condensed">
+			<tr class = "dark-hover">
+				<th>Name</th>
+				<th>Champion Affected</th>
+			</tr>
+			<% @challengers.each do |challenger| %>
+				<tr class ="dark-hover">
+					<td>Spirit of <%= challenger.table_challenger.name %></td>
+					<td><%= link_to(challenger.table_challenger.table_champion.name, champion_stat_path(challenger.table_challenger.table_champion.id)) %></td>
+				</tr>
+			<% end %>
+		</table>
+	<% else %>
+		<h3>You haven't found any of the Spirit of Challenger items.</h3>
+	<% end %>
+</div>

@@ -32,16 +32,21 @@ LeagueOfValor::Application.routes.draw do
   resources :maps, only: [:index, :show]
   post '/catch',                  to: 'maps#catch'
 
+  get '/recent_battles',          to: 'battle#index',                  as: 'battle_logs'
+  get '/battle_log/:id',          to: 'battle#show',                   as: 'battle_log' #battle_log_path(2)
   post '/battle',                 to: 'battle#battle',                 as: 'battle'
   get '/champion_select/:opp_id', to: 'battle#setup',                  as: 'champ_select' #champ_select_path(23)
   # Redirect /champion_select to view a profile
 
   resources :roles, only: [:index, :show]
 
+  resources :buffs, only: [:index, :show]
 
+  get '/challenger_list',         to: 'table_challenger#index',        as: 'challenger_list'
 
-
-
+  get "/spirits",              to: 'challengers#list',                 as: 'spirits'
+  get '/spawn_challenger',        to: 'challengers#spawn_page',        as: 'spawn_challenger'
+  post '/spawn_challenger_action',  to: 'challengers#spawn'
 
 
 

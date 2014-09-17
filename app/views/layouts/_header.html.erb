@@ -27,7 +27,7 @@
             <ul class="dropdown-menu">
               <li><%= link_to "Maps List",                maps_path %></li>
               <li><%= link_to "Challenge a Summoner",    '#' %></li>
-              <li><%= link_to "Buff Holders",            '#' %></li>
+              <li><%= link_to "Buff Holders",            buffs_path %></li>
               <li><%= link_to "Store",                   '#' %></li>
             </ul>
           </li>
@@ -37,7 +37,9 @@
               <li><%= link_to "Active Roster",          roster_path %></li>
               <li><%= link_to "Assign Pros",            '#' %></li>
               <li><%= link_to "Bench",                 bench_path %></li>
+              <li><%= link_to "Spirits",               spirits_path %></li>    
               <li><%= link_to "Champion Base Stats",     champions_path %></li>
+              <li><%= link_to "Challenger List",         challenger_list_path %></li>
               <li><%= link_to "Promotion Champion",      '#' %></li>
             </ul>
           </li>
@@ -51,6 +53,7 @@
               <li><%= link_to "View a Profile",          '#' %></li>
               <li><%= link_to "Updates",                 '#' %></li>
               <li><%= link_to "Statistics",              '#' %></li>
+              <li><%= link_to "Recent Battles",          battle_logs_path %></li>
               <li class="divider"></li>
               <li><%= link_to "Gem Rankings",            '#' %></li>
               <li><%= link_to "Champion Rankings",       champion_ranking_path %></li>
@@ -71,6 +74,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Admin Spawn Champion", spawn_champion_path %></li>
+                <li><%= link_to "Admin Spawn Challenger", spawn_challenger_path %></li>
               </ul>
             </li>
           <% end %>
