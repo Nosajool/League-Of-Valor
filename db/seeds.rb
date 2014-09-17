@@ -162,7 +162,13 @@ end
 
 puts
 puts "Inputting Pro Data"
-client = Lol::Client.new APP_CONFIG['riot_api_key'], {region: "na"}
+api_key = 0
+if Rails.env.production?
+    api_key = RIOT_API_KEY
+else
+    api_key = APP_CONFIG['riot_api_key']
+end
+client = Lol::Client.new(api_key,{region: "na"})
 challengers = client.league.get(2648)["2648"][0].entries
 count = 0
 challengers.sort_by! do |challenger|
