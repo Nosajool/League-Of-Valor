@@ -164,7 +164,7 @@ puts
 puts "Inputting Pro Data"
 api_key = 0
 if Rails.env.production?
-    api_key = RIOT_API_KEY
+    api_key = ENV['RIOT_API_KEY']
 else
     api_key = APP_CONFIG['riot_api_key']
 end
