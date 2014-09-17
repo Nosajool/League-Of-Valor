@@ -18,6 +18,3 @@ doc/
 .DS_Store
 .idea
 .secret
-
-# Ignore API keys
-/config/config.yml
